@@ -1,0 +1,15 @@
+defaults: &defaults
+  host: 'localhost:3000'
+  email:
+    no_reply: noreply@example.com
+    interceptor: brewster1134@gmail.com # TODO: make email generic
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  host: 'domain.com'

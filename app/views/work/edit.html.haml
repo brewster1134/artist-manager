@@ -1,0 +1,4 @@
+= simple_form_for @work do |w|
+  = render 'shared/form_errors', instance: @work
+  = render 'form_fields', work: w
+  = w.button :submit

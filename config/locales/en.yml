@@ -1,0 +1,26 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  # controllers
+  create:
+    success: "%{x} was successfully created."
+    failure: "%{x} failed to be created."
+  update:
+    success: "%{x} was successfully updated."
+    failure: "%{x} failed to be updated."
+  destroy:
+    success: "%{x} was successfully deleted."
+    failure: "%{x} failed to be deleted."
+
+  # mailers
+  user_mailer:
+    password_reset:
+      subject: Password Reset
+      
+  # forms
+  form:
+    errors:
+      header:
+        one: There was an error.
+        other: "There were %{count} errors."

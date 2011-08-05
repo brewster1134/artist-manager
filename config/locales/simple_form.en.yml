@@ -1,0 +1,29 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Some errors were found, please take a look:"
+    labels:
+      session:
+        new:
+          login: 
+    hints:
+      session:
+        new:
+          login: Username or E-mail
+      work:
+        media: e.g. Oil on Canvas
+        dimensions: e.g. 5ft x 10ft
+        for_sale: If NOT for sale, a price request form will replace the purchasing option
+        quantity: If you sell this work outside the site, remember to update this to the current quantity!
+        new:
+          title: This will also be used for the url i.e. "My New Peice" will have a url of '/work/my-new-peice'
+        edit:
+          title: The url for this work is based on the title.  If you change it, so will the URL!

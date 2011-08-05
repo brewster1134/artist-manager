@@ -1,0 +1,5 @@
+= simple_form_for :session, :url => sessions_path do |s|
+  = s.input :login
+  = s.input :password
+  = s.button :submit, "Login"
+= link_to "Forgot Password", change_password_request_path

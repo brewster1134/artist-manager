@@ -1,0 +1,10 @@
+= work.input :title
+= work.input :description, input_html: { class: "markup" }
+%div.markup_livepreview
+= work.input :video_link
+= work.input :dimensions
+= work.input :completion_year
+= work.input :for_sale
+= work.input :price
+= work.input :price_currency, collection: currency_select_array, prompt: false
+= work.input :quantity, input_html: { size: 5 }

@@ -1,0 +1,5 @@
+= simple_form_for @user, :url => change_password_path do |u|
+  = u.input :password_reset_token, :as => :hidden
+  = u.input :password
+  = u.input :password_confirmation
+  = u.button :submit, "Change Password"

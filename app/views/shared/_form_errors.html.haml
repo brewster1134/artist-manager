@@ -1,0 +1,7 @@
+- if instance.errors.any?
+  %div#form_errors
+    %div#header
+      = t 'form.errors.header', count: instance.errors.count
+    %ul#error_list
+      - instance.errors.full_messages.each do |msg|
+        %li= msg

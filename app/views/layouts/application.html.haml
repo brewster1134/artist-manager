@@ -1,0 +1,14 @@
+!!! 5
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "dir" => "ltr", "xml:lang" => "en", :lang => "en"}
+  %head
+    %title ArtistManager
+    = stylesheet_link_tag     :application
+    = include_controller_asset params[:controller], :css
+    = javascript_include_tag  :application
+    = include_controller_asset params[:controller], :js
+    = csrf_meta_tags
+  %body
+    = link_to "Logout", logout_path if current_user
+    - flash.each do |type, msg|
+      = content_tag :div, msg, :class => "flash #{type}"
+    = yield
