@@ -28,14 +28,16 @@ gem "simple_form"
 
 # Development
 group :development do
+  gem "colorize"
   gem "haml-rails"
+  gem "lorem"
 end
 
 # Testing
 gem "rspec-rails", group: [:test, :development]
+gem "factory_girl_rails", group: [:test, :development]
 group :test do
   gem "turn", :require => false
-  gem "factory_girl_rails"
   gem "capybara"
   gem "guard-rspec"
   gem 'guard-spork'

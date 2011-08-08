@@ -54,24 +54,26 @@ $.fn.wysiwym = function(markupSet, options) {
 
     // Initialize the help syntax dropdown
     this.initializeHelp = function() {
-        this.options.containerHelp = options.containerHelp;
-        if (this.options.containerHelp == undefined)
-            this.options.containerHelp = $("<div></div>").insertAfter(this.textarea);
-        this.options.containerHelp.addClass(this.HELPCLASS);
-        // Add the help table and items
-        var helpBody = $('<tbody></tbody>');
-        var helpTable = $('<table cellpadding="0" cellspacing="0" border="0"></table>').append(helpBody);
-        for (var i=0; i<this.markup.help.length; i++) {
-            var item = this.markup.help[i];
-            helpBody.append('<tr><th>'+ item.label +'</th><td>'+ item.syntax +'</td></tr>');
-        };
-        this.options.containerHelp.append(helpTable);
+        if (this.options.helpEnabled) {
+            this.options.containerHelp = options.containerHelp;
+            if (this.options.containerHelp == undefined)
+                this.options.containerHelp = $("<div></div>").insertAfter(this.textarea);
+            this.options.containerHelp.addClass(this.HELPCLASS);
+            // Add the help table and items
+            var helpBody = $('<tbody></tbody>');
+            var helpTable = $('<table cellpadding="0" cellspacing="0" border="0"></table>').append(helpBody);
+            for (var i=0; i<this.markup.help.length; i++) {
+                var item = this.markup.help[i];
+                helpBody.append('<tr><th>'+ item.label +'</th><td>'+ item.syntax +'</td></tr>');
+            };
+            this.options.containerHelp.append(helpTable);
+        }
     };
 
     // Initialize the Help Toggle Button
     this.initializeHelpToggle = function() {
         var options = this.options;
-        if (options.helpToggle) {
+        if (this.options.helpEnabled && options.helpToggle) {
             this.options.helpToggleElem = options.helpToggleElem;
             if (this.options.helpToggleElem == undefined)
                 this.options.helpToggleElem = $("<a href='#'>"+ options.helpTextShow +"</a>");

@@ -6,11 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-u = User.create!(           # CHANGE THESE!  # TODO: make email generic here and in settings.yml
-  :username =>              'brewster',
-  :email =>                 'brewster@wearemanalive.com',
-  :password =>              'password',
-  :password_confirmation => 'password'
+# CHANGE THESE!  # TODO: make email generic here and in settings.yml
+u = User.create(
+  username:              'brewster',
+  email:                 'brewster@wearemanalive.com',
+  password:              'password',
+  password_confirmation: 'password'
 )
 puts "USER CREATED:"
 puts "  #{u.username} / #{u.email}"

@@ -1,0 +1,66 @@
+// backgrounds: http://bgpatterns.com/
+// fonts:       http://www.google.com/webfonts
+
+// settings
+$site_width: 966px
+$content_padding: 15px
+$content_width: $site_width - ($content_padding * 2) 
+$default-border-radius: 15px
+$default-box-shadow-color: $grey_02
+
+body
+  background: url(bg.png)
+  
+  #container
+    width: $site_width
+    margin: 0 auto
+    position: relative
+    
+    #header
+      font-family: 'Shanti', sans-serif
+      padding: 0 15px 15px 15px
+      border-width: 0 2px 2px 2px
+      border-style: solid
+      border-color: $grey_02
+      background: $grey_09
+      margin-bottom: 30px
+      @include border-radius(0 0 $default-border-radius $default-border-radius)
+      @include single-box-shadow($grey_04, 10px, 10px)
+      
+      #menu
+        font-size: 0.8em
+        margin-bottom: 15px
+        text-align: right
+        >li
+          position: relative
+          display: inline-block
+          >a // main category
+            display: block
+            padding: 5px 10px
+            background: $grey_07
+            text-decoration: none
+            text-transform: uppercase
+            &:hover
+              color: white
+              background: $grey_03
+          >ul
+            position: absolute
+            display: none
+            top: 30px
+            >li
+              >a // sub category
+                display: block
+                padding: 3px 6px
+                background: $grey_06
+                text-decoration: none
+                &:hover
+                  color: white
+                  background: $grey_03
+    #content
+      font-family: 'Abel', sans-serif
+      padding: $content_padding
+      border: 2px solid $grey_02
+      background: $grey_09
+      margin-bottom: 30px
+      @include border-radius
+      @include single-box-shadow($grey_04, 10px, 10px)

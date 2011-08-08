@@ -1,0 +1,45 @@
+form
+  $label_width: 100px
+  div.input
+    margin-bottom: 15px
+    label
+      display: inline-block
+      min-width: $label_width
+      text-align: right
+      margin-right: 4px
+      abbr
+        float: left
+        margin-right: 4px
+    .hint
+      font-size: 0.8em
+      color: $grey_03
+      margin: 2px 0 0 $label_width + 4px
+    &.boolean
+      label
+        text-align: left
+        margin: 0 0 0 4px
+      input
+        margin-left: $label_width + 4px
+    &.text
+      label
+        vertical-align: top
+      &.markup
+        label
+          float: left
+        .wysiwym-editor
+          margin-left: $label_width + 4px
+          $editor_height: 300px
+          textarea
+            width: 49%
+            height: $editor_height
+          .markup_livepreview
+            @include markup
+            height: $editor_height
+            width: 49%
+            float: right
+  div.actions
+    margin: 5px 0
+    padding: 15px 0 15px $label_width + 4px
+    border-top: 2px solid $grey_08
+    input.button
+      display: inline

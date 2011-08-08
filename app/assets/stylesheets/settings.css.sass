@@ -1,0 +1,46 @@
+// color palette (darkest to lightest)
+$color_01: red
+$color_02: #FF5200
+$color_03: orange
+$color_04: yellow
+$color_05: #80C000
+$color_06: green
+$color_07: blue
+$color_08: #4000C0
+$color_09: purple
+
+// greyscale palette (darkest to lightest)
+$grey_01: #1A1A1A
+$grey_02: #333333
+$grey_03: #4D4D4D
+$grey_04: #666666
+$grey_05: #7F7F7F
+$grey_06: #999999
+$grey_07: #B3B3B3
+$grey_08: #CCCCCC
+$grey_09: #E5E5E5
+
+@mixin markup
+  strong
+    font-weight: bold
+  em
+    font-style: italic
+  ol
+    list-style: decimal inside none
+    margin: 10px 0 10px 10px
+    >li
+      font-size: 0.9em
+  ul
+    list-style: disc inside none
+    margin: 10px 0 10px 10px
+  blockquote
+    font-style: italic
+    margin: 10px 0 10px 10px
+    padding: 2px 2px 2px 10px
+    border-left: 2px solid $grey_05
+    font-size: 0.9em
+  pre
+    margin: 10px
+    padding: 10px
+    background-color: $grey_08
+    font-family: monospace

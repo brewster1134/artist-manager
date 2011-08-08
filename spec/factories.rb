@@ -6,5 +6,5 @@ Factory.define :user do |u|
 end
 
 Factory.define :work do |w|
-  w.sequence(:title)  { |n| "title_#{n}" }
+  w.sequence(:title)  { |n| "Title #{n}" }
 end
