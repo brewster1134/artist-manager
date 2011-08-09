@@ -10,7 +10,9 @@ ArtistManager::Application.routes.draw do
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
 
-  resources :work
+  resources :work do
+    get :autocomplete_tag_name, :on => :collection
+  end
 
   root :to => 'home#show'
   

@@ -7,6 +7,15 @@ gem "rails", "3.1.0.rc5"
 
 gem "sqlite3"
 
+gem "acts-as-taggable-on"
+gem "haml"
+gem "jquery-rails"
+gem "money"
+gem "rails3-jquery-autocomplete"
+gem "redcarpet"
+gem "settingslogic"
+gem "simple_form"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -15,13 +24,6 @@ group :assets do
   gem "uglifier"
   gem "compass", :git => "git://github.com/chriseppstein/compass.git", :branch => "rails31"
 end
-
-gem "haml"
-gem "jquery-rails"
-gem "money"
-gem "redcarpet"
-gem "settingslogic"
-gem "simple_form"
 
 # To use debugger
 # gem "ruby-debug19", :require => "ruby-debug"

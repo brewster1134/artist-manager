@@ -40,6 +40,7 @@ GEM
       activesupport (= 3.1.0.rc5)
     activesupport (3.1.0.rc5)
       multi_json (~> 1.0)
+    acts-as-taggable-on (2.0.6)
     ansi (1.3.0)
     arel (2.1.4)
     bcrypt-ruby (2.1.4)
@@ -121,6 +122,8 @@ GEM
       activesupport (= 3.1.0.rc5)
       bundler (~> 1.0)
       railties (= 3.1.0.rc5)
+    rails3-jquery-autocomplete (0.9.1)
+      rails (~> 3.0)
     railties (3.1.0.rc5)
       actionpack (= 3.1.0.rc5)
       activesupport (= 3.1.0.rc5)
@@ -184,6 +187,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   capybara
   coffee-rails (~> 3.1.0.rc)
   colorize
@@ -197,6 +201,7 @@ DEPENDENCIES
   lorem
   money
   rails (= 3.1.0.rc5)
+  rails3-jquery-autocomplete
   redcarpet
   rspec-rails
   sass-rails (~> 3.1.0.rc)

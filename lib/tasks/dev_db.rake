@@ -19,13 +19,14 @@ namespace :dev_db do
     10.times do |i|
       w = Factory(:work,
         description: Lorem::Base.new(:paragraphs, 3).output,
-        video_link: "http://www.youtube.com",
-        dimensions: "1' x 2' x 3'",
-        completion_year: 2010,
-        for_sale: true,
+        video_link: ["http://www.youtube.com", ""].sample,
+        dimensions: ["1' x 2' x 3'", ""].sample,
+        completion_year: [Date.today.year, ""].sample,
+        for_sale: [true, false].sample,
         price: 1.38,
         price_currency: "usd",
-        quantity: 1
+        quantity: (0..10).to_a.sample,
+        tag_list: ["Paintings", "Pictures", "Video", "Sculptures"].sample
       )
       puts "  #{w.title}".green
     end

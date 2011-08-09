@@ -1,5 +1,18 @@
 form
   $label_width: 100px
+  fieldset
+    +border-radius
+    padding: 15px
+    background: white
+    margin-bottom: 15px
+    legend
+      +border-radius(4px)
+      background: white
+      padding: 2px 10px
+      margin-left: 15px
+      
+    div.input:last-child
+      margin-bottom: 0
   div.input
     margin-bottom: 15px
     label
@@ -33,13 +46,18 @@ form
             width: 49%
             height: $editor_height
           .markup_livepreview
-            @include markup
+            +markup
             height: $editor_height
             width: 49%
             float: right
+            overflow: auto
   div.actions
     margin: 5px 0
     padding: 15px 0 15px $label_width + 4px
     border-top: 2px solid $grey_08
     input.button
       display: inline
+    a
+      font-size: 0.8em
+      text-decoration: none
+      margin-left: 10px

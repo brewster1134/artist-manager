@@ -13,7 +13,11 @@
       #header
         = render 'layouts/menu'
         Artist Manager
+      - if flash.present?
+        #flash
+          - flash.each do |type, msg|
+            = content_tag :div, msg, :class => type
       #content
-        - flash.each do |type, msg|
-          = content_tag :div, msg, :class => "flash #{type}"
+        - if content_for? :title
+          #title= yield :title
         = yield

@@ -14,16 +14,19 @@ en:
       session:
         new:
           login: 
+      work:
+        tag_list: Tags
     hints:
       session:
         new:
           login: Username or E-mail
       work:
+        tag_list: Any keywords or categories seperated by comma e.g. Paintings, Photography, Video 
         media: e.g. Oil on Canvas
         dimensions: e.g. 5ft x 10ft
         for_sale: If NOT for sale, a price request form will replace the purchasing option
         quantity: If you sell this work outside the site, remember to update this to the current quantity!
         new:
-          title: This will also be used for the url i.e. "My New Peice" will have a url of '/work/my-new-peice'
+          title: The title will also be used for the url i.e. "My New Peice" will have a url of '/work/my-new-peice'
         edit:
           title: The url for this work is based on the title.  If you change it, so will the URL!

@@ -1,5 +1,6 @@
 class Work < ActiveRecord::Base
-  attr_accessible :title, :description, :media, :dimensions, :completion_year, :video_link, :for_sale, :price, :price_currency, :quantity
+  acts_as_taggable
+  attr_accessible :title, :tag_list, :description, :media, :dimensions, :completion_year, :video_link, :for_sale, :price, :price_currency, :quantity
   
   validates :title,           presence:   true,
                               uniqueness: true

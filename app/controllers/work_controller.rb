@@ -1,5 +1,6 @@
 class WorkController < ApplicationController
   skip_before_filter :check_for_user, :only => [:index, :show]
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
   
   def index
     @work = Work.all

@@ -11,12 +11,19 @@ $default-box-shadow-color: $grey_02
 body
   background: url(bg.png)
   
+  a
+    color: $grey_02
+    &:hover
+      color: $grey_04
+  
   #container
     width: $site_width
     margin: 0 auto
     position: relative
     
     #header
+      +border-radius(0 0 $default-border-radius $default-border-radius)
+      +single-box-shadow($grey_04, 10px, 10px)
       font-family: 'Shanti', sans-serif
       padding: 0 15px 15px 15px
       border-width: 0 2px 2px 2px
@@ -24,22 +31,21 @@ body
       border-color: $grey_02
       background: $grey_09
       margin-bottom: 30px
-      @include border-radius(0 0 $default-border-radius $default-border-radius)
-      @include single-box-shadow($grey_04, 10px, 10px)
       
       #menu
         font-size: 0.8em
         margin-bottom: 15px
         text-align: right
         >li
+          white-space: nowrap
           position: relative
           display: inline-block
+          background: $grey_07
+          text-transform: uppercase
           >a // main category
-            display: block
             padding: 5px 10px
-            background: $grey_07
+            display: block
             text-decoration: none
-            text-transform: uppercase
             &:hover
               color: white
               background: $grey_03
@@ -50,17 +56,40 @@ body
             >li
               >a // sub category
                 display: block
-                padding: 3px 6px
+                padding: 5px 10px
                 background: $grey_06
                 text-decoration: none
                 &:hover
                   color: white
                   background: $grey_03
+    #flash
+      font-family: 'Shanti', sans-serif
+      margin: -5px 0 20px 0
+      padding: 5px 0
+      border-width: 2px 0
+      border-style: solid
+      border-color: $grey_06
+      text-align: center
+      font-weight: bold
+      >.notice
+        color: green
+      >.alert
+        color: red
     #content
+      +border-radius
+      +single-box-shadow($grey_04, 10px, 10px)
+      position: relative
       font-family: 'Abel', sans-serif
       padding: $content_padding
       border: 2px solid $grey_02
       background: $grey_09
       margin-bottom: 30px
-      @include border-radius
-      @include single-box-shadow($grey_04, 10px, 10px)
+      #title
+        position: relative
+        top: -28px
+        background: $grey_07
+        border: 2px solid $grey_02
+        margin: 0 auto
+        padding: 2px
+        width: 50%
+        text-align: center

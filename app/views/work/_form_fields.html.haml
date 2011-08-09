@@ -1,9 +1,13 @@
 = work.input :title
+= work.input :tag_list, :url => autocomplete_tag_name_work_index_path, :as => :autocomplete, :input_html => {:'data-delimiter' => ', '}
 = work.input :description, wrapper_html: { class: "markup" }
-= work.input :video_link
+= work.input :media
 = work.input :dimensions
-= work.input :completion_year
+= work.input :completion_year, :collection => (100.years.ago.year..Date.today.year).to_a.reverse, :selected => Date.today.year, :include_blank => true
+= work.input :video_link
 = work.input :for_sale
-= work.input :price
-= work.input :price_currency, collection: currency_select_array, prompt: false
-= work.input :quantity, input_html: { size: 5 }
+%fieldset#for_sale
+  %legend For Sale Options
+  = work.input :price
+  = work.input :price_currency, collection: currency_select_array, prompt: false
+  = work.input :quantity, input_html: { size: 5 }
