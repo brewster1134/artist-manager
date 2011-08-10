@@ -1,4 +1,4 @@
-//= require wysiwym
+//= require jquery.wysiwym
 //= require showdown
 # http://pushingkarma.com/projects/jquery-wysiwym/
 $ ->

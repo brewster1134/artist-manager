@@ -1,13 +1,14 @@
 defaults: &defaults
-  default_admin: # used only during seeding!
+  admin: # used only during seeding!
     username: brewster
     email: brewster1134@gmail.com
     password: password
   currency: USD
-  host: 'localhost:3000'
   email:
     no_reply: noreply@example.com
     interceptor: brewster1134@gmail.com
+  host: 'localhost:3000'
+  title: Artist Manager
 
 development:
   <<: *defaults

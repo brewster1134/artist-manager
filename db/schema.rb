@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110808234750) do
+ActiveRecord::Schema.define(:version => 20110810014541) do
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(:version => 20110808234750) do
     t.integer  "price_cents",     :default => 0
     t.string   "price_currency",  :default => "usd"
     t.integer  "quantity",        :default => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "work_images", :force => true do |t|
+    t.integer  "work_id"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

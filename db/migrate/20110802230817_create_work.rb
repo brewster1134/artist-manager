@@ -1,4 +1,4 @@
-class CreateWorks < ActiveRecord::Migration
+class CreateWork < ActiveRecord::Migration
   def change
     create_table :work do |t|
       t.string  :title

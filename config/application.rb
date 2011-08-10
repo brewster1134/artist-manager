@@ -57,7 +57,7 @@ module ArtistManager
       g.helper_specs false
       g.controller_specs false
       g.helper false
-      g.assets true
+      g.assets false
     end
   end
 end

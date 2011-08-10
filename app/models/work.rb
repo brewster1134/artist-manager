@@ -1,6 +1,6 @@
 class Work < ActiveRecord::Base
   acts_as_taggable
-  attr_accessible :title, :tag_list, :description, :media, :dimensions, :completion_year, :video_link, :for_sale, :price, :price_currency, :quantity
+  has_many :images, :class_name => "WorkImage", :dependent => :destroy
   
   validates :title,           presence:   true,
                               uniqueness: true

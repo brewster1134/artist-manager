@@ -16,6 +16,12 @@ class WorkController < ApplicationController
   
   def create
     @work = Work.new(params[:work])
+    if @work.save
+      redirect_to edit_work_path(@work), :notice => "#{@work.title} was created!  Now add some images!"
+    else
+      flash.alert = t('create.failure', :x => "Work")
+      render :new
+    end
   end
   
   def edit
@@ -27,6 +33,7 @@ class WorkController < ApplicationController
     if @work.update_attributes(params[:work])
       redirect_to work_path(@work), :notice => "#{@work.title} was successfully updated."
     else
+      flash.alert = t('update.failure', :x => "Work")
       render :edit
     end
   end

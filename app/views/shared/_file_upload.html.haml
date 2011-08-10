@@ -1,0 +1,63 @@
+%script{ :id => "template-upload", :type => "text/x-jquery-tmpl" }
+  %tr{ class: "template-upload{{if error}} ui-state-error{{/if}}" }
+    %td.preview
+    %td.name
+      ${name}
+    %td.size
+      ${sizef}
+    {{if error}}
+    %td.error{ colspan: 2 }
+      Error:
+      {{if error === 'custom_failure'}}Error!
+      {{else}}${error}
+      {{/if}}
+    {{else}}
+    %td.progress
+      %div
+    %td.start
+      %button Start
+    %td.cancel
+      %button Cancel
+    {{/if}}
+      
+%script{ :id => "template-download", :type => "text/x-jquery-tmpl" }
+  %tr{ class: "template-download{{if error}} ui-state-error{{/if}}" }
+    {{if error}}
+    %td
+    %td.name
+      ${name}
+    %td.size
+      ${sizef}
+    %td.error{ colspan: 2 }
+      {{if error === 1}}File exceeds maximum size
+      {{else}}${error}
+      {{/if}}
+    {{else}}
+    %td.preview
+      {{if thumbnail_url}}
+      %a{ href: "${url}", target: "_blank" }
+        %img{ src: "${thumbnail_url}" }
+      {{/if}}
+    %td.name
+      %a{ href: "${url}", target: "{{if thumbnail_url}}_blank{{/if}}" }
+        ${name}
+    %td.size
+      ${sizef}
+    %td{ colspan: 2 }
+    {{/if}}
+    %td.delete
+      %button.delete{ "data-type" => "${delete_type}", "data-url" => "${delete_url}" }Delete
+
+#fileupload
+  .fileupload-buttonbar
+    = form_tag path, :html => { :multipart => true } do
+      %label.fileinput-button
+        %span
+          = "Add #{label}"
+          = file_field_tag :image, multiple: true
+      %button.start{ type: "submit" }= "Upload #{label}"
+      %button.cancel{ type: "reset" }Cancel Uploads
+      -# %button.delete{ type: "button" }= "Delete All #{label}"
+  .fileupload-content
+    %table.files
+    .fileupload-progressbar

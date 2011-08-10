@@ -1,3 +1,6 @@
+- content_for :title do
+  = @work.title
+= link_to "Edit", edit_work_path(@work)
 = @work.title
 = @work.tags
 = markup(@work.description)

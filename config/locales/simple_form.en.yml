@@ -16,6 +16,8 @@ en:
           login: 
       work:
         tag_list: Tags
+      work_image:
+        image: Upload Images
     hints:
       session:
         new:
