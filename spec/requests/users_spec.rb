@@ -21,12 +21,12 @@ describe "Users" do
       fill_in "Login", :with => user.email
       fill_in "Password", :with => user.password
       click_button "Login"
-      current_path.should == root_path
+      current_path.should == home_path
       page.should have_content("Logged in")
 
       #logs out
       visit logout_path
-      current_path.should == root_path
+      current_path.should == home_path
       page.should have_content("Logged out")
       visit login_path
 
@@ -34,7 +34,7 @@ describe "Users" do
       fill_in "Login", :with => user.username
       fill_in "Password", :with => user.password
       click_button "Login"
-      current_path.should == root_path
+      current_path.should == home_path
       page.should have_content("Logged in")
     end
     
@@ -70,7 +70,7 @@ describe "Users" do
       fill_in "Password", :with => "newpassword"
       fill_in "Password confirmation", :with => "newpassword"
       click_button "Change Password"
-      current_path.should == root_path
+      current_path.should == home_path
       page.should have_content("Password is changed")
       User.find(user.id).password_reset_token.should be_nil
     end

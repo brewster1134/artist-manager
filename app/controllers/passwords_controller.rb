@@ -35,7 +35,7 @@ class PasswordsController < ApplicationController
       session[:user_id] = @user.id
       @user.password_reset_token = nil
       @user.save!
-      redirect_to root_path, :notice => "Password is changed and you are now logged in."
+      redirect_to home_path, :notice => "Password is changed and you are now logged in."
     else
       render :edit
     end

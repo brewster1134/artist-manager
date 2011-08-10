@@ -9,6 +9,7 @@ gem "sqlite3"
 
 gem "acts-as-taggable-on"
 gem "carrierwave"
+gem "gcal4ruby"
 gem "haml"
 gem "jquery-rails"
 gem "mini_magick"

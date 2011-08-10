@@ -1,3 +1,4 @@
+- show_files ||= false
 %script{ :id => "template-upload", :type => "text/x-jquery-tmpl" }
   %tr{ class: "template-upload{{if error}} ui-state-error{{/if}}" }
     %td.preview
@@ -51,13 +52,15 @@
 #fileupload
   .fileupload-buttonbar
     = form_tag path, :html => { :multipart => true } do
+      %button.start.toggle_files.show{ style: "display: #{show_files ? 'none' : 'inline'}" }= "Show #{label}"
+      %button.start.toggle_files.hide{ style: "display: #{show_files ? 'inline' : 'none'}" }= "Hide #{label}"
       %label.fileinput-button
         %span
-          = "Add #{label}"
+          = "Upload #{label}"
           = file_field_tag :image, multiple: true
-      %button.start{ type: "submit" }= "Upload #{label}"
-      %button.cancel{ type: "reset" }Cancel Uploads
+      -# %button.start{ type: "submit" }= "Upload #{label}"
+      -# %button.cancel{ type: "reset" }Cancel Uploads
       -# %button.delete{ type: "button" }= "Delete All #{label}"
-  .fileupload-content
+  .fileupload-content{ style: "display: #{show_files ? 'block' : 'none'}" }
     %table.files
     .fileupload-progressbar

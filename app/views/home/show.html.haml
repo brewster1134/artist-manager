@@ -1,2 +1,5 @@
-%h1 Home#show
-%p Find me in app/views/home/show.html.haml
+%hr
+- @events.each do |e|
+  = e.start_time
+  = e.title
+  %hr

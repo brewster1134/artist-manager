@@ -2,9 +2,7 @@
   = "Edit #{@work.title}"
 
 %fieldset
-  %legend
-    Manage Images
-    = link_to_function "Show Images", nil, id: "toggle_images"
+  %legend Manage Images
   = render "shared/file_upload", :path => work_images_path(@work), :label => "Images"
 
 = simple_form_for @work do |w|
