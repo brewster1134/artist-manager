@@ -9,6 +9,7 @@ defaults: &defaults
     interceptor: brewster1134@gmail.com
   host: 'localhost:3000'
   title: Artist Manager
+  splash_page: true
 
 development:
   <<: *defaults

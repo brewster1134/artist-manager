@@ -6,6 +6,8 @@ ArtistManager::Application.routes.draw do
   get   "change_password" => "passwords#edit"
   put   "change_password" => "passwords#update"
 
+  resources :series, :only => [:show, :new, :create, :edit, :update, :destroy]
+
   resources :sessions, :only => [:create]
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
@@ -15,7 +17,8 @@ ArtistManager::Application.routes.draw do
     resources :work_images, :shallow => true, :only => [:index, :create, :destroy], :as => :images
   end
 
-  root :to => 'home#show'
+  get 'home' => 'home#show'
+  root :to => 'home#splash'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -5,6 +5,10 @@ Factory.define :user do |u|
   u.password_confirmation { |u| u.password }
 end
 
+Factory.define :series do |w|
+  w.sequence(:title)  { |n| "Series #{n}" }
+end
+
 Factory.define :work do |w|
   w.sequence(:title)  { |n| "Title #{n}" }
 end

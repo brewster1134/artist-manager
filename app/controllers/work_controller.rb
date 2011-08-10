@@ -3,7 +3,8 @@ class WorkController < ApplicationController
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
   
   def index
-    @work = Work.all
+    @series = Series.all
+    @work = Work.not_in_series
   end
   
   def show

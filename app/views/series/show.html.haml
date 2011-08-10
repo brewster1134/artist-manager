@@ -1,0 +1,9 @@
+- content_for :title do
+  = "Series: #{@series.title}"
+
+= link_to "Edit", edit_series_path(@series)
+= @series.inspect
+
+%h1 Work
+= @series.works.each do |w|
+  = w.inspect

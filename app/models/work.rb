@@ -1,6 +1,8 @@
 class Work < ActiveRecord::Base
   acts_as_taggable
   has_many :images, :class_name => "WorkImage", :dependent => :destroy
+  belongs_to :series
+  attr_accessible :title, :series_id, :tag_list, :description, :media, :dimensions, :completion_year, :video_link, :for_sale, :price, :price_currency, :quantity
   
   validates :title,           presence:   true,
                               uniqueness: true
@@ -23,6 +25,9 @@ class Work < ActiveRecord::Base
     self.price_cents = Money.parse(price).cents
   end  
 
+  def self.not_in_series
+    all.select{|w| w.series.blank?}
+  end
 
   def url
     self.title.parameterize
