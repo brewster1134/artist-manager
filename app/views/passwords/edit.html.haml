@@ -1,5 +1,6 @@
 = simple_form_for @user, :url => change_password_path do |u|
+  = render 'shared/form_errors', :instance => @user
   = u.input :password_reset_token, :as => :hidden
-  = u.input :password
-  = u.input :password_confirmation
-  = u.button :submit, "Change Password"
+  = render 'form_fields', :user => u, :required => true
+  .actions
+    = u.button :submit, "Change Password"

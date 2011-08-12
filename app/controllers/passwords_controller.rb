@@ -19,7 +19,8 @@ class PasswordsController < ApplicationController
   end
 
   def edit
-    @user = current_user || User.find_by_password_reset_token(params[:token])
+    redirect_to edit_user_path(current_user) if current_user
+    @user = User.find_by_password_reset_token(params[:token])
     if !@user
       if params[:token]
         redirect_to change_password_request_path, :alert => "Invalid token.  Please make a new request to change your password."
@@ -30,7 +31,7 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    @user = current_user || User.find_by_password_reset_token(params[:user][:password_reset_token])
+    @user = User.find_by_password_reset_token(params[:user][:password_reset_token])
     if @user.try(:update_attributes, params[:user])
       session[:user_id] = @user.id
       @user.password_reset_token = nil

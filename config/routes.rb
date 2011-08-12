@@ -4,6 +4,7 @@ ArtistManager::Application.routes.draw do
   get   "change_password_request" => "passwords#new"
   post  "change_password_request" => "passwords#create"
   get   "change_password" => "passwords#edit"
+  get   "edit_account" => "passwords#edit"
   put   "change_password" => "passwords#update"
 
   resources :series, :only => [:show, :new, :create, :edit, :update, :destroy]
@@ -12,6 +13,8 @@ ArtistManager::Application.routes.draw do
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
 
+  resources :users, :only => [:edit, :update]
+  
   resources :work do
     get :autocomplete_tag_name, :on => :collection
     resources :work_images, :shallow => true, :only => [:index, :create, :destroy], :as => :images

@@ -1,0 +1,7 @@
+= simple_form_for @user do |u|
+  = render 'shared/form_errors', instance: @user
+  = u.input :username
+  = u.input :email
+  = render 'passwords/form_fields', user: u, required: false
+  .actions
+    = u.button :submit

@@ -7,10 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 u = User.create(
-  username:              Settings.admin.username,
-  email:                 Settings.admin.email,
-  password:              Settings.admin.password,
-  password_confirmation: Settings.admin.password  
+  username:              "username",
+  email:                 "email@domain.com",
+  password:              "password",
+  password_confirmation: "password"  
 )
 puts "USER CREATED:"
 puts "  #{u.username} / #{u.email}"

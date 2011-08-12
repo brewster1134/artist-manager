@@ -16,12 +16,12 @@ body
     &:hover
       color: $grey_04
   
-  #container
+  >#container
     width: $site_width
     margin: 0 auto
     position: relative
     
-    #header
+    >#header
       +border-radius(0 0 $default-border-radius $default-border-radius)
       +single-box-shadow($grey_04, 10px, 10px)
       font-family: 'Shanti', sans-serif
@@ -32,7 +32,7 @@ body
       background: $grey_09
       margin-bottom: 30px
       
-      #menu
+      >#menu
         font-size: 0.8em
         margin-bottom: 15px
         text-align: right
@@ -52,16 +52,18 @@ body
           >ul
             position: absolute
             display: none
+            z-index: 1
             >li
               >a // sub category
                 display: block
                 padding: 5px 10px
                 background: $grey_06
                 text-decoration: none
+                text-align: left
                 &:hover
                   color: white
                   background: $grey_03
-    #flash
+    >#flash
       font-family: 'Shanti', sans-serif
       margin: -5px 0 20px 0
       padding: 5px 0
@@ -74,7 +76,7 @@ body
         color: green
       >.alert
         color: red
-    #content
+    >#content
       +border-radius
       +single-box-shadow($grey_04, 10px, 10px)
       position: relative
@@ -84,7 +86,7 @@ body
       border: 2px solid $grey_02
       background: $grey_09
       margin-bottom: 30px
-      #title
+      >#title
         position: relative
         top: -28px
         background: $grey_07

@@ -5,6 +5,7 @@
     %li
       = link_to_function "Admin", nil
       %ul
+        %li= link_to "Account Settings", edit_user_path(current_user)
         %li= link_to "Create New Series", new_series_path
         %li= link_to "Create New Work", new_work_path
   %li= link_to "Logout", logout_path if current_user
