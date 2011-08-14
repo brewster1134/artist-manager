@@ -1,0 +1,20 @@
+= simple_form_for @settings, :url => settings_path, :method => :put do |s|
+  = render 'shared/form_errors', instance: @settings
+  %fieldset
+    %legend General
+    = s.input :title, :hint => input_hint(:title)
+    = s.input :splash_page, :as => :boolean, :hint => input_hint(:splash_page)
+    = s.input :currency, :collection => currency_select_array, :hint => input_hint(:currency)
+  %fieldset
+    %legend Email
+    = s.input :email_no_reply, :hint => input_hint(:email_no_reply)
+  %fieldset
+    %legend Google Account
+    = s.input :google_email, :hint => input_hint(:google_email)
+    = s.input :google_password, :hint => input_hint(:google_password)
+    = s.input :google_calendar, :hint => input_hint(:google_calendar)
+  %fieldset
+    %legend Developer
+    = s.input :email_interceptor, :hint => input_hint(:email_interceptor)
+  .actions
+    = s.button :submit, "Save Settings"

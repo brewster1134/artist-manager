@@ -16,7 +16,6 @@ gem "mini_magick"
 gem "money"
 gem "rails3-jquery-autocomplete"
 gem "redcarpet"
-gem "settingslogic"
 gem "simple_form"
 
 # Gems used only for assets and not required

@@ -20,6 +20,10 @@ ArtistManager::Application.routes.draw do
     resources :work_images, :shallow => true, :only => [:index, :create, :destroy], :as => :images
   end
 
+  # settings
+  get 'settings' => 'settings#edit', :as => :edit_settings
+  put 'settings' => 'settings#update'
+
   get 'home' => 'home#show'
   root :to => 'home#splash'
   

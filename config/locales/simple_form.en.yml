@@ -22,6 +22,13 @@ en:
       session:
         new:
           login: Username or E-mail
+      settings:
+        title:  This appears in the browser toolbar, when the site is bookmarked, and in search-engine results
+        splash_page: Enables or Disables showing a splash page 
+        google_password: If you use 2-step authorization, create an app specific password, and use that.
+        google_calendar: Name of the calendar you want to show events from.
+        email_interceptor: In development, all emails sent from the site will be intercepted, and sent here.
+        email_no_reply: The FROM address for any emails sent by the site that is not checked by anyone.
       work:
         tag_list: Any keywords or categories seperated by comma e.g. Paintings, Photography, Video 
         media: e.g. Oil on Canvas

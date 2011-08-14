@@ -3,7 +3,7 @@ module Google
   
   def calendar_events
     if service
-      calendar = Calendar.find(service, title: Settings.google.calendar.name).first
+      calendar = Calendar.find(service, title: Settings.google_calendar).first
       if calendar.present?
         if calendar.exists?
           return calendar.events
@@ -11,7 +11,7 @@ module Google
           flash.now.alert = "No events were found on the calendar." if current_user
         end 
       else
-        flash.now.alert = "No calendar with the name '#{Settings.google.calendar.name}' could be found." if current_user
+        flash.now.alert = "No calendar with the name '#{Settings.google_calendar}' could be found." if current_user
       end 
     end
     return []
@@ -20,7 +20,7 @@ module Google
   def service
     service = Service.new
     begin
-      service.authenticate(Settings.google.email, Settings.google.password)
+      service.authenticate(Settings.google_email, Settings.google_password)
       return service
     rescue GData4Ruby::HTTPRequestFailed
       flash.now.alert = "There was a problem authenticating your google account" if current_user
