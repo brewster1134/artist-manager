@@ -14,6 +14,8 @@ en:
       session:
         new:
           login: 
+      settings:
+        email_no_reply: No Reply Email
       work:
         tag_list: Tags
       work_image:
@@ -28,7 +30,7 @@ en:
         google_password: If you use 2-step authorization, create an app specific password, and use that.
         google_calendar: Name of the calendar you want to show events from.
         email_interceptor: In development, all emails sent from the site will be intercepted, and sent here.
-        email_no_reply: The FROM address for any emails sent by the site that is not checked by anyone.
+        email_no_reply: The FROM address for any emails sent by the site that you dont want anyone replying to.
       work:
         tag_list: Any keywords or categories seperated by comma e.g. Paintings, Photography, Video 
         media: e.g. Oil on Canvas

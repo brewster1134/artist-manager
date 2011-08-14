@@ -24,25 +24,30 @@ class Settings < ActiveRecord::Base
     self.send("#{k}=", v)
   end
 
-  validates :title, :length => { :minimum => 5 }
-
+  validates :title,             :presence => true
+  validates :splash_page,       :inclusion => { :in => ["0", "1"] }
+  validates :currency,          :inclusion => { :in => Money::Currency::TABLE.stringify_keys.keys }
+  validates :google_email,      :email => true,
+                                :allow_blank => true
+  validates :email_interceptor, :email => true
+  validates :email_no_reply,    :email => true
+  
   def save
     if self.valid?
       hash = {}
       @@defaults.each do |k,v|
         value = self.send(k)
-        puts value.inspect
-        puts v.inspect
         value = case v
         when TrueClass, FalseClass
-          value.to_i > 0 
+          value.to_i > 0
         when Symbol
           value.to_sym
         else
           value
         end
-        hash[k.to_s] = value if value && value != "" && value != v
+        hash[k.to_s] = value if !value.nil? && value != "" && value != v
       end
+      puts hash.inspect
       File.open(CUSTOM_FILE, 'w+') { |f| f.write hash.to_yaml }
     end
   end
