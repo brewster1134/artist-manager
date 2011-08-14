@@ -1,3 +1,16 @@
+#form_errors
+  padding: $content_padding
+  text-align: center
+  >#header
+    font-weight: bold
+    font-size: 1.2em
+  >ul#error_list
+    width: 50%
+    margin: 5px auto
+    text-align: left
+    list-style: circle inside
+    >li
+      border-bottom: 1px solid $grey_08
 fieldset
   +border-radius
   padding: 15px
@@ -60,6 +73,12 @@ form
             width: 49%
             float: right
             overflow: auto
+    &.field_with_errors
+      label, .error, input, textarea, select
+        color: red
+      .error
+        margin-left: 5px
+      
   div.actions
     margin: 5px 0
     padding: 15px 0 15px $label_width + 4px
