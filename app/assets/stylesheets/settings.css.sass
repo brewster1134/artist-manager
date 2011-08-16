@@ -20,27 +20,10 @@ $grey_07: #B3B3B3
 $grey_08: #CCCCCC
 $grey_09: #E5E5E5
 
-@mixin markup
-  strong
-    font-weight: bold
-  em
-    font-style: italic
-  ol
-    list-style: decimal inside none
-    margin: 10px 0 10px 10px
-    >li
-      font-size: 0.9em
-  ul
-    list-style: disc inside none
-    margin: 10px 0 10px 10px
-  blockquote
-    font-style: italic
-    margin: 10px 0 10px 10px
-    padding: 2px 2px 2px 10px
-    border-left: 2px solid $grey_05
-    font-size: 0.9em
-  pre
-    margin: 10px
-    padding: 10px
-    background-color: $grey_08
-    font-family: monospace
+// layout settings
+$site_width: 966px
+$content_padding: 15px
+$content_border_width: 2px
+$content_width: $site_width - ($content_padding * 2) - ($content_border_width * 2)
+$default-border-radius: 15px
+$default-box-shadow-color: $grey_02

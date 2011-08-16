@@ -1,7 +1,7 @@
 = work.input :title
 = work.input :series_id, :collection => Series.all.collect{|s| [s.title, s.id]}, :hint => link_to("Create New Series", new_series_path).html_safe
 = work.input :tag_list, :url => autocomplete_tag_name_work_index_path, :as => :autocomplete, :input_html => {:'data-delimiter' => ', '}
-= work.input :description, wrapper_html: { class: "markup" }
+= work.input :description, wrapper_html: { class: "markup_edit" }
 = work.input :media
 = work.input :dimensions
 = work.input :completion_year, :collection => (100.years.ago.year..Date.today.year).to_a.reverse, :selected => Date.today.year, :include_blank => true

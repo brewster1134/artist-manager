@@ -24,7 +24,7 @@ module ApplicationHelper
       :filter_styles =>     true,
       :generate_toc =>      false,
       :gh_blockcode =>      true,
-      :hard_wrap =>         false,
+      :hard_wrap =>         true,
       :lax_htmlblock =>     false,
       :no_image =>          true,
       :no_intraemphasis =>  false,
@@ -35,7 +35,7 @@ module ApplicationHelper
       :xhtml =>             true
     )
     options.reject! { |k, v| !v }
-    Redcarpet.new(text, *options.keys).to_html.html_safe
+    content_tag(:div, Redcarpet.new(text.to_s, *options.keys).to_html.html_safe, :class => "markup")
   end
   
   def currency_select_array

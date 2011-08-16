@@ -1,13 +1,6 @@
 // backgrounds: http://bgpatterns.com/
 // fonts:       http://www.google.com/webfonts
 
-// settings
-$site_width: 966px
-$content_padding: 15px
-$content_width: $site_width - ($content_padding * 2) 
-$default-border-radius: 15px
-$default-box-shadow-color: $grey_02
-
 body
   background: url(bg.png)
   
@@ -15,6 +8,44 @@ body
     color: $grey_02
     &:hover
       color: $grey_04
+  
+  h1, h2, h3, h4, h5, h6
+    border-bottom: 1px solid 
+    margin: 5px 0 10px 0
+  h1
+    color: $grey_01
+    border-color: $grey_01 
+    font-weight: bold
+    font-size: 1.6em
+    border-width: 2px
+  h2
+    color: $grey_01
+    border-color: $grey_01 
+    font-weight: bold
+    font-size: 1.5em
+    border-width: 2px
+    margin-bottom: 9px
+  h3
+    color: $grey_02
+    border-color: $grey_02 
+    font-size: 1.4em
+    border-width: 2px
+    margin-bottom: 8px
+  h4
+    color: $grey_02
+    border-color: $grey_02 
+    font-size: 1.3em
+    margin-bottom: 7px
+  h5
+    color: $grey_03
+    border-color: $grey_03 
+    font-size: 1.2em
+    margin-bottom: 6px
+  h6
+    color: $grey_03
+    border-color: $grey_03 
+    font-size: 1.1em
+    margin-bottom: 5px
   
   >#container
     width: $site_width
@@ -26,10 +57,10 @@ body
       +single-box-shadow($grey_04, 10px, 10px)
       font-family: 'Shanti', sans-serif
       padding: 0 15px 15px 15px
-      border-width: 0 2px 2px 2px
+      border-width: 0 $content_border_width $content_border_width
       border-style: solid
       border-color: $grey_02
-      background: $grey_09
+      background: white
       margin-bottom: 30px
       
       >#menu
@@ -40,7 +71,7 @@ body
           white-space: nowrap
           position: relative
           display: inline-block
-          background: $grey_07
+          background: $grey_08
           text-transform: uppercase
           >a // main category
             padding: 5px 10px
@@ -48,7 +79,7 @@ body
             text-decoration: none
             &:hover
               color: white
-              background: $grey_03
+              background: $grey_04
           >ul
             position: absolute
             display: none
@@ -57,12 +88,12 @@ body
               >a // sub category
                 display: block
                 padding: 5px 10px
-                background: $grey_06
+                background: $grey_07
                 text-decoration: none
                 text-align: left
                 &:hover
                   color: white
-                  background: $grey_03
+                  background: $grey_04
     >#flash
       font-family: 'Shanti', sans-serif
       margin: -5px 0 20px 0
@@ -75,22 +106,56 @@ body
         color: green
       >.alert
         color: red
+    >#title
+      font-family: 'Abel', sans-serif
+      position: relative
+      top: 10px
+      background: $grey_07
+      border: 2px solid $grey_02
+      margin: -10px auto 0
+      padding: 2px
+      width: 50%
+      text-align: center
+      z-index: 1
     >#content
+      +clearfix
       +border-radius
       +single-box-shadow($grey_04, 10px, 10px)
       position: relative
       font-family: 'Abel', sans-serif
       font-size: 0.8em
       padding: $content_padding
-      border: 2px solid $grey_02
-      background: $grey_09
+      border: $content_border_width solid $grey_02
+      background: white
       margin-bottom: 30px
-      >#title
-        position: relative
-        top: -28px
-        background: $grey_07
-        border: 2px solid $grey_02
-        margin: 0 auto
-        padding: 2px
-        width: 50%
-        text-align: center
+        
+  .ui-accordion-header
+    padding: 2px 2px 2px 28px
+    font-size: 1.2em 
+    
+  .markup
+    p
+      margin-bottom: 10px
+    strong
+      font-weight: bold
+    em
+      font-style: italic
+    ol
+      list-style: decimal inside none
+      margin: 10px 0 10px 10px
+      >li
+        font-size: 0.9em
+    ul
+      list-style: disc inside none
+      margin: 10px 0 10px 10px
+    blockquote
+      font-style: italic
+      margin: 10px 0 10px 10px
+      padding: 2px 2px 2px 10px
+      border-left: 2px solid $grey_05
+      font-size: 0.9em
+    pre
+      margin: 10px
+      padding: 10px
+      background-color: $grey_08
+      font-family: monospace

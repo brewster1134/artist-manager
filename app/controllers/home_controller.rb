@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   end
 
   def show
+    @tags = Work.tag_counts.sort_by(&:count).reverse
     @events = calendar_events.select{ |e| e.start_time.to_date > Date.today}.sort_by(&:start_time)
   end
 

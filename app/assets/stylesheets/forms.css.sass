@@ -12,13 +12,13 @@
     >li
       border-bottom: 1px solid $grey_08
 fieldset
-  +border-radius
-  padding: 15px
-  background: white
+  +border-radius(4px)
+  padding: 10px 15px 15px
+  background: $grey_08
   margin-bottom: 15px
   legend
     +border-radius(4px)
-    background: white
+    background: $grey_08
     padding: 2px 10px
     margin-left: 15px
     font-size: 1.2em
@@ -59,7 +59,7 @@ form
     &.text
       label
         vertical-align: top
-      &.markup
+      &.markup_edit
         label
           float: left
         .wysiwym-editor
@@ -69,8 +69,7 @@ form
             width: 49%
             height: $editor_height
             resize: none
-          .markup_livepreview
-            +markup
+          .markup
             height: $editor_height
             width: 49%
             float: right

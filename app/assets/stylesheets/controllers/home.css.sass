@@ -1,0 +1,66 @@
+@import compass/utilities
+@import settings
+
+$item_height: 75px
+$item_margin: 5px
+$work_width: 75px
+$series_width: ($work_width * 2) + ($item_margin * 2)
+$item_index_padding: 10px
+$item_index_width: ($series_width * 2) + ($item_margin * 4) + ($item_index_padding * 2) + 2
+
+@mixin tags_item
+  +clearfix
+  .item
+    margin: $item_margin
+    float: left
+    a
+      text-decoration: none
+      background: $grey_09
+      display: block
+      .image
+        height: $item_height
+        overflow: hidden
+      .title
+        text-align: center
+        overflow: hidden
+      &:hover
+        background: $grey_08
+
+fieldset#events
+  width: $content_width - $item_index_width - ($content_padding * 5)
+  float: left
+  .date, .time, .title
+    margin-top: 2px
+    vertical-align: top
+    display: inline-block
+  .date, .time
+    text-align: right
+    display: inline-block
+    width: 60px
+    color: $grey_06
+  .date
+    font-size: 0.8em
+    margin-right: 5px
+  .title
+    font-size: 0.9em
+    width: 320px
+  .time
+    width: 60px
+    font-size: 0.7em
+    float: right
+    margin: 3px 5px
+
+fieldset#tags
+  +clearfix
+  float: right
+  width: $item_index_width
+  .ui-accordion-content
+    padding: 0 $item_index_padding 10px
+    .series_section
+      +tags_item
+      .series
+        width: $series_width
+    .work_section
+      +tags_item
+      .work
+        width: $work_width

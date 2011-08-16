@@ -28,6 +28,9 @@ class Work < ActiveRecord::Base
   def self.not_in_series
     all.select{|w| w.series.blank?}
   end
+  def image
+    self.images.present? ? self.images.sample : nil
+  end
 
   def url
     self.title.parameterize

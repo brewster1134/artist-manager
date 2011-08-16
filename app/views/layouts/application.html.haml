@@ -17,7 +17,7 @@
         #flash
           - flash.each do |type, msg|
             = content_tag :div, msg, :class => type
+      - if content_for? :title
+        #title= yield :title
       #content
-        - if content_for? :title
-          #title= yield :title
         = yield

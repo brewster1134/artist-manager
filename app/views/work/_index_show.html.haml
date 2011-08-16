@@ -1,0 +1,4 @@
+.work.item{ "data-work-id" => work.id }
+  %a{ :href => work_path(work), :title => work.title }
+    .image= image_tag(work.image.image.url, :width => 75) if work.image
+    .title= work.title

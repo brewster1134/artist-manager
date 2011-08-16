@@ -2,14 +2,14 @@
 //= require showdown
 # http://pushingkarma.com/projects/jquery-wysiwym/
 $ ->
-  $.each $("div.markup textarea"), ->
+  $.each $("div.markup_edit textarea"), ->
     textarea = $(@)
     textarea.wysiwym Wysiwym.Markdown,
       helpEnabled: false
     showdown = new Showdown.converter()
     prev_text = ""
     live_preview = $(document.createElement('div'))
-    live_preview.insertAfter(textarea).addClass('markup_livepreview')
+    live_preview.insertAfter(textarea).addClass('markup')
     update_live_preview = ->
       input_text = textarea.val()
       if input_text != prev_text
