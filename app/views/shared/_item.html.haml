@@ -1,0 +1,5 @@
+- item_type = item.class.to_s.downcase
+.item{ "data-#{item_type}-id" => item.id, :class => item_type }
+  %a{ :href => url_for(item), :title => item.title }
+    .image= image_tag(item.image.image.url) if item.image
+    .title= item.title

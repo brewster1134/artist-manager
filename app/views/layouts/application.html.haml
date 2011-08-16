@@ -4,8 +4,10 @@
     %title= [Settings.title, content_for?(:title) ? yield(:title) : nil].compact * " - "
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Abel|Shanti|'
     = stylesheet_link_tag :application
+    = yield :css
     = include_controller_asset params[:controller], :css
     = javascript_include_tag :application
+    = yield :js
     = include_controller_asset params[:controller], :js
     = csrf_meta_tags
   %body
@@ -17,7 +19,7 @@
         #flash
           - flash.each do |type, msg|
             = content_tag :div, msg, :class => type
-      - if content_for? :title
-        #title= yield :title
+      - if page_title
+        #title= page_title 
       #content
         = yield

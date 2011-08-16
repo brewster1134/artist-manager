@@ -1,0 +1,29 @@
+@import settings
+@import compass/utilities
+@mixin items($work_width: 75px)
+  $item_margin: 5px
+  $series_width: ($work_width * 2) + ($item_margin * 2)
+  .section
+    +clearfix
+    .item
+      margin: $item_margin
+      float: left
+      a
+        text-decoration: none
+        background: $grey_09
+        display: block
+        .image
+          height: $work_width
+          overflow: hidden
+          img
+            height: $work_width
+        .title
+          text-align: center
+          overflow: hidden
+        &:hover
+          background: $grey_08
+      &.series
+        width: $series_width
+      &.work
+        width: $work_width
+

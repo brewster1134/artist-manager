@@ -1,29 +1,16 @@
 %fieldset#events
   %legend Events
-  #events.accordion
-    - @events.each do |e|
-      %h3
-        %span.date= e.start_time.strftime("%a, %b %d")
-        %span.title= e.title
-        %span.time= e.start_time.strftime("@ %I:%M %p") unless e.all_day
-      = markup e.content
+  - if @events.present?
+    = render "events_accordion", :events => @events
+  - else
+    No Events Found 
 
 %fieldset#tags
   %legend Work
-  #tags.accordion
-    - tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class|
-      %h3= tag.name
-      %div
-        - work_by_series = Work.tagged_with(tag.name).sort.group_by(&:series)
-        - series = work_by_series.keys.compact
-        - work = work_by_series[nil]
-        - if series.present?
-          .series_section
-            %h5 Series
-            - series.each do |s|
-              = render 'series/index_show', series: s
-        - if work
-          .work_section
-            %h5 Work
-            - work.each do |w|
-              = render 'work/index_show', work: w
+  - if Settings.home_show_tags == :accordion
+    = render "tags_accordion", :tags => @tags
+  - else
+    = render "tags_plain", :tags => @tags
+  
+  
+      

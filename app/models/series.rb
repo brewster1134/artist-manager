@@ -16,6 +16,9 @@ class Series < ActiveRecord::Base
       images.sample
     end
   end
+  def self.tagged_with(tag)
+    (all.collect{ |s| s.works }.flatten & Work.tagged_with(tag)).collect{ |w| w.series}.uniq
+  end
   def self.find_by_url(url)
     all.select{ |w| w.url == url }.first
   end

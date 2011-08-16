@@ -1,0 +1,16 @@
+.accordion
+  - tag_cloud(tags, %w(css1 css2 css3 css4)) do |tag, css_class|
+    %h3= tag.name
+    %div
+      - series = Series.tagged_with(tag)
+      - work = Work.not_in_series(tag)
+      - if series.present?
+        .section.series
+          %h5 Series
+          - series.each do |s|
+            = render 'shared/item', item: s
+      - if work.present?
+        .section.work
+          %h5 Work
+          - work.each do |w|
+            = render 'shared/item', item: w

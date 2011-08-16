@@ -13,6 +13,8 @@ require "sprockets/railtie"
 # or test environments.
 Bundler.require *Rails.groups(:assets) if defined?(Bundler)
 
+Sprockets.register_engine '.haml', Tilt::HamlTemplate
+
 module ArtistManager
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

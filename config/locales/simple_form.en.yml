@@ -15,6 +15,7 @@ en:
         new:
           login: 
       settings:
+        home_show_tags: Home Page Tag Style
         email_no_reply: No Reply Email
       work:
         tag_list: Tags
@@ -25,6 +26,7 @@ en:
         new:
           login: Username or E-mail
       settings:
+        home_show_tags: Style of 'Work' on the Home page.
         title:  This appears in the browser toolbar, when the site is bookmarked, and in search-engine results
         splash_page: Enables or Disables showing a splash page 
         google_password: If you use 2-step authorization, create an app specific password, and use that.

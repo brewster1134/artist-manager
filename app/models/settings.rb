@@ -13,10 +13,11 @@ class Settings < ActiveRecord::Base
     :google_password =>   "password",
     :google_calendar =>   "My Calendar",
     :email_interceptor => "developer@domain.com",
-    :email_no_reply =>    "noreply@domain.com"
+    :email_no_reply =>    "noreply@domain.com",
+    :home_show_tags =>    :accordion
   }.with_indifferent_access
   
-  @@custom = YAML::load(File.open(CUSTOM_FILE, 'r')) || {}
+  @@custom = File.exists?(CUSTOM_FILE) ? YAML::load(File.open(CUSTOM_FILE, 'r')) : {}
   @@custom.delete_if{ |k,v| !@@defaults.keys.include?(k) || v == "" }
   @@defaults.merge(@@custom).each do |k,v|
     cattr_accessor k
@@ -31,6 +32,7 @@ class Settings < ActiveRecord::Base
                                 :allow_blank => true
   validates :email_interceptor, :email => true
   validates :email_no_reply,    :email => true
+  validates :home_show_tags,    :inclusion => { :in => [:accordion, :plain] }
   
   def save
     if self.valid?

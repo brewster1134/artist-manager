@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: Settings.email.no_reply
+  default from: Settings.email_no_reply
 
   def password_reset(user)
     @token = user.password_reset_token

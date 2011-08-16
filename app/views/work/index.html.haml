@@ -1,0 +1,24 @@
+- content_for :js do
+  :coffee
+    work_index_path = "#{work_index_path}"
+
+- content_for :title do
+  - ["Work", params[:tag]].compact * ": "
+    
+- content_for :page_title do
+  - if params[:tag]
+    = "Currently Showing:" 
+    = select_tag :poo, options_for_select(tag_select_array, params[:tag]), :id => "tag_select"
+
+.items
+  - if @series.present?
+    %h1 Series
+    .section.series
+      - @series.each do |s|
+        = render 'shared/item', :item => s
+  
+  - if @work.present?
+    %h1 Work
+    .section.work
+      - @work.each do |w|
+        = render 'shared/item', :item => w

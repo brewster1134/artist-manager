@@ -1,8 +1,12 @@
 class WorkController < ApplicationController
+  helper TagHelper
   skip_before_filter :check_for_user, :only => [:index, :show]
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
   
   def index
+    tag = params[:tag]
+    @series = tag ? Series.all & Series.tagged_with(tag) : Series.all
+    @work = tag ? Work.not_in_series(tag) : Work.not_in_series 
   end
   
   def show

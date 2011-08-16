@@ -5,15 +5,22 @@ module ApplicationHelper
     case type
     when :javascript, :js
       dir = "javascripts"
-      ext = ".js.coffee"
+      ext = [".js.coffee", ".js.coffee.haml"]
       helper = "javascript_include_tag" 
     when :stylesheet, :css
       dir = "stylesheets"
-      ext = ".css.sass"
+      ext = [".css.sass", ".css.sass.haml"]
       helper = "stylesheet_link_tag" 
     end
-    file_exists = File.exists?(File.join(Rails.root, "app", "assets", dir, "controllers", name.to_s + ext))
-    send(helper, File.join("controllers", name)) if file_exists
+    ext.each do |e|
+      file_exists = File.exists?(File.join(Rails.root, "app", "assets", dir, "controllers", name.to_s + e))
+      return send(helper, File.join("controllers", "#{name}#{e}")) if file_exists
+    end
+  end
+
+  def page_title
+    return content_for(:page_title) if content_for?(:page_title)
+    return content_for(:title) if content_for?(:title)
   end
 
   def markup(text, options = {})

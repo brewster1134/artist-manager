@@ -5,7 +5,7 @@
 
 $ ->
 
-  # menu
+  #// menu
   main_cats = $('ul#menu>li')
   sub_cats = $('ul#menu>li>ul')
   main_cats.mouseenter ->

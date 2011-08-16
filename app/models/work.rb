@@ -18,20 +18,6 @@ class Work < ActiveRecord::Base
   validates :price_currency,  inclusion:    { in: Money::Currency::TABLE.stringify_keys.keys }
   validates :quantity,        numericality: { greater_than_or_equal_to: 0 }
   
-  def price
-    Money.new(self.price_cents.to_i || 0, self.price_currency || Money.default_currency)
-  end
-  def price=(price)
-    self.price_cents = Money.parse(price).cents
-  end  
-
-  def self.not_in_series
-    all.select{|w| w.series.blank?}
-  end
-  def image
-    self.images.present? ? self.images.sample : nil
-  end
-
   def url
     self.title.parameterize
   end
@@ -41,5 +27,22 @@ class Work < ActiveRecord::Base
   def self.find_by_url(url)
     all.select{ |w| w.url == url }.first
   end
+  def price
+    Money.new(self.price_cents.to_i || 0, self.price_currency || Money.default_currency)
+  end
+  def price=(price)
+    self.price_cents = Money.parse(price).cents
+  end  
 
+  def self.tags
+    tag_counts.sort_by(&:count).reverse
+  end
+  def self.not_in_series(tag = nil)
+    without_series = all.select{|w| w.series.blank?}
+    without_series = without_series & Work.tagged_with(tag) if tag
+    without_series
+  end
+  def image
+    self.images.present? ? self.images.sample : nil
+  end
 end
