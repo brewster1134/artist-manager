@@ -4,7 +4,7 @@ class WorkController < ApplicationController
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
   
   def index
-    tag = params[:tag]
+    tag = params[:tag] unless params[:tag].blank? || params[:tag] == 'all' 
     @series = tag ? Series.all & Series.tagged_with(tag) : Series.all
     @work = tag ? Work.not_in_series(tag) : Work.not_in_series 
   end

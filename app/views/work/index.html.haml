@@ -6,10 +6,8 @@
   - ["Work", params[:tag]].compact * ": "
     
 - content_for :page_title do
-  - if params[:tag]
-    = "Currently Showing:" 
-    = select_tag :poo, options_for_select(tag_select_array, params[:tag]), :id => "tag_select"
-
+  = "Currently Showing:" 
+  = select_tag :tag, options_for_select(tag_select_array, params[:tag]), :id => "tag_select"
 .items
   - if @series.present?
     %h1 Series

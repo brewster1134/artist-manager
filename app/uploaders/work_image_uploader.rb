@@ -30,8 +30,15 @@ class WorkImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+
+  # preview after uploading
   version :upload do
     process :resize_to_fit => [80, 80]
+  end
+
+  # full content width
+  version :full_content_width do
+    process :resize_to_fill => [962, 400]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

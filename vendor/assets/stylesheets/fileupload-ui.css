@@ -58,7 +58,7 @@
 }
 
 .fileupload-content .ui-progressbar-value {
-  background: url(/assets/pbar-ani.gif);
+  background: url(/assets/fileupload-ui/pbar-ani.gif);
 }
 
 .fileupload-content .fileupload-progressbar {

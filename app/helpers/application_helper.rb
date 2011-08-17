@@ -1,7 +1,7 @@
 module ApplicationHelper
   require 'redcarpet'
 
-  def include_controller_asset(name, type)
+  def include_controller_assets(type, controller_name, action_name)
     case type
     when :javascript, :js
       dir = "javascripts"
@@ -12,15 +12,36 @@ module ApplicationHelper
       ext = [".css.sass", ".css.sass.haml"]
       helper = "stylesheet_link_tag" 
     end
-    ext.each do |e|
-      file_exists = File.exists?(File.join(Rails.root, "app", "assets", dir, "controllers", name.to_s + e))
-      return send(helper, File.join("controllers", "#{name}#{e}")) if file_exists
+    action_name = case action_name
+    when "create" then "new"  
+    when "update" then "edit"
+    else action_name
+    end  
+    sub_directory = "controllers"
+    names = [ controller_name, "#{controller_name}.#{action_name}"]
+    files = []
+    names.each do |n|
+      ext.each do |e|
+        file_exists = File.exists?(File.join(Rails.root, "app", "assets", dir, sub_directory, n + e))
+        files << send(helper, File.join(sub_directory, n + e)) if file_exists
+      end
     end
+    return (files * "").html_safe
+  end
+
+  def site_title
+    title = if content_for?(:page_title) && !content_for?(:title)
+      content_for(:page_title)
+    elsif content_for?(:title)
+      content_for(:title)
+    else
+      nil
+    end
+    return [Settings.title, title].compact * " - "
   end
 
   def page_title
     return content_for(:page_title) if content_for?(:page_title)
-    return content_for(:title) if content_for?(:title)
   end
 
   def markup(text, options = {})

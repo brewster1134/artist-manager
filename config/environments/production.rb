@@ -17,7 +17,6 @@ ArtistManager::Application.configure do
   config.assets.css_compressor = :scss
 
   # Specifies the header that your server uses for sending files
-  # (comment out if your front-end server doesn't support this)
   config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for nginx
 

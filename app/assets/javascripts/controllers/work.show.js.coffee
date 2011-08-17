@@ -1,0 +1,4 @@
+//= require slideshow
+
+$ ->
+  $('.slideshow').nivoSlider()

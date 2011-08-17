@@ -1,13 +1,29 @@
 - content_for :title do
   = @work.title
-= link_to "Edit", edit_work_path(@work)
-= @work.title
-= @work.tags
-= markup(@work.description)
-= @work.media
-= @work.video_link
-= @work.dimensions
-= @work.completion_year
-= @work.for_sale
-= @work.price.format
-= @work.quantity
+
+- if current_user
+  - content_for :page_title do
+    = link_to "Edit", edit_work_path(@work)
+
+- if Settings.work_show_slideshow == :nivo_slider
+  %div.theme-default{:id => Settings.work_show_slideshow.to_s}
+    %h1.work_title= @work.title
+    .tags
+      - @work.tags.each do |t|
+        = link_to t.name, work_index_path(:tag => t.name)
+    .slideshow
+      - @work.images.each do |i|
+        = image_tag i.image.full_content_width.url
+    .info
+      = content_tag(:span, @work.completion_year) if @work.completion_year.present? 
+      = content_tag(:span, @work.media) if @work.media.present? 
+      = content_tag(:span, @work.dimensions) if @work.dimensions.present? 
+    .description= markup @work.description
+
+  = @work.video_link
+  = @work.for_sale
+  = @work.price.format
+  = @work.quantity
+
+- if Settings.work_show_slideshow == :plain
+  TODO

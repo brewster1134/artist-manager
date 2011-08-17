@@ -1,6 +1,10 @@
 - content_for :title do
   = "Edit #{@work.title}"
 
+- content_for :page_title do
+  = "Edit #{@work.title}"
+  = link_to "Preview", @work
+
 %fieldset
   %legend Manage Images
   = render "shared/file_upload", :path => work_images_path(@work), :label => "Images"

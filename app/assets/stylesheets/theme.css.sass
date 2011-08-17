@@ -2,7 +2,8 @@
 // fonts:       http://www.google.com/webfonts
 
 body
-  background: asset-url('bg.png', image)
+  font-family: 'Abel', sans-serif
+  background: asset-url('body_bg.png', image)
   
   a
     color: $grey_02
@@ -106,23 +107,33 @@ body
         color: green
       >.alert
         color: red
-    >#title
-      font-family: 'Abel', sans-serif
+    >#page_title
       position: relative
       top: 10px
-      background: $grey_07
+      color: black
+      background: $grey_08
       border: 2px solid $grey_02
       margin: -10px auto 0
       padding: 2px
       width: 50%
       text-align: center
       z-index: 1
+      overflow: hidden
+      >a
+        font-size: 0.8em
+        text-decoration: none
+        color: $grey_01
+        margin: 0 10px
+        padding: 10px
+        background: white
+        &:hover
+          color: $grey_02
+          background: $grey_09
     >#content
       +clearfix
       +border-radius
       +single-box-shadow($grey_04, 10px, 10px)
       position: relative
-      font-family: 'Abel', sans-serif
       font-size: 0.8em
       padding: $content_padding
       border: $content_border_width solid $grey_02
@@ -136,6 +147,8 @@ body
   .markup
     p
       margin-bottom: 10px
+      &:last-child
+        margin-bottom: 0
     strong
       font-weight: bold
     em

@@ -1,6 +1,7 @@
 //= require jquery.wysiwym
 //= require showdown
 # http://pushingkarma.com/projects/jquery-wysiwym/
+
 $ ->
   $.each $("div.markup_edit textarea"), ->
     textarea = $(@)

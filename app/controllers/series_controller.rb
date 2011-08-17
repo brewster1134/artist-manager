@@ -1,4 +1,5 @@
 class SeriesController < ApplicationController
+  skip_before_filter :check_for_user, :only => :show
 
   def show
     @series = Series.find_by_url(params[:id])
