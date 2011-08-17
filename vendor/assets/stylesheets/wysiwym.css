@@ -6,7 +6,7 @@ div.wysiwym-buttons {
 }
 div.wysiwym-buttons div.button {
   float: left;
-  background-image: url(/assets/wysiwym/wysiwym_buttons.png);
+  background-image: url(/assets/wysiwym/buttons.light.png);
   background-repeat: repeat-x;
   background-position: 0px 0px;
   border-right: 1px solid #aaa;
@@ -56,13 +56,13 @@ div.wysiwym-buttons div.button.quote span.text { display: none; }
 div.wysiwym-buttons div.button.code span.text { display: none; }
 
 /*--- Button Image Offsets (Default) ---*/
-div.wysiwym-buttons div.button.bold span.wrap { width: 22px; background-image: url(/assets/wysiwym/wysiwym_buttons.png); background-position: -1px -54px; }
-div.wysiwym-buttons div.button.italic span.wrap { width: 22px; background-image: url(/assets/wysiwym/wysiwym_buttons.png); background-position: -1px -81px; }
-div.wysiwym-buttons div.button.link span.wrap { width: 22px; background-image: url(/assets/wysiwym/wysiwym_buttons.png); background-position: -1px -106px; }
-div.wysiwym-buttons div.button.bulletlist span.wrap { width: 22px; background-image: url(/assets/wysiwym/wysiwym_buttons.png); background-position: -1px -132px; }
-div.wysiwym-buttons div.button.numberlist span.wrap { width: 22px; background-image: url(/assets/wysiwym/wysiwym_buttons.png); background-position: -2px -158px; }
-div.wysiwym-buttons div.button.quote span.wrap { width: 22px; background-image: url(/assets/wysiwym/wysiwym_buttons.png); background-position: -1px -184px; }
-div.wysiwym-buttons div.button.code span.wrap { width: 22px; background-image: url(/assets/wysiwym/wysiwym_buttons.png); background-position: -1px -211px; }
+div.wysiwym-buttons div.button.bold span.wrap { width: 22px; background-image: url(/assets/wysiwym/buttons.light.png); background-position: -1px -54px; }
+div.wysiwym-buttons div.button.italic span.wrap { width: 22px; background-image: url(/assets/wysiwym/buttons.light.png); background-position: -1px -81px; }
+div.wysiwym-buttons div.button.link span.wrap { width: 22px; background-image: url(/assets/wysiwym/buttons.light.png); background-position: -1px -106px; }
+div.wysiwym-buttons div.button.bulletlist span.wrap { width: 22px; background-image: url(/assets/wysiwym/buttons.light.png); background-position: -1px -132px; }
+div.wysiwym-buttons div.button.numberlist span.wrap { width: 22px; background-image: url(/assets/wysiwym/buttons.light.png); background-position: -2px -158px; }
+div.wysiwym-buttons div.button.quote span.wrap { width: 22px; background-image: url(/assets/wysiwym/buttons.light.png); background-position: -1px -184px; }
+div.wysiwym-buttons div.button.code span.wrap { width: 22px; background-image: url(/assets/wysiwym/buttons.light.png); background-position: -1px -211px; }
 
 /*--- Button Images Offsets (Hover) ---*/
 div.wysiwym-buttons div.button:hover { background-position: 0px -30px; }

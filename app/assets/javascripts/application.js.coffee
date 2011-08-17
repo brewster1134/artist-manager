@@ -1,5 +1,5 @@
-//= require jquery
-//= require jquery-ui
+//= require jquery.min
+//= require jquery-ui.min
 //= require jquery_ujs
 # require_tree .
 
