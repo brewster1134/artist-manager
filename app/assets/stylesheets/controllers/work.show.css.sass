@@ -2,9 +2,10 @@
  *= require slideshow
  */ 
 
+@import compass/utilities
 @import settings
 
-#nivo_slider
+#slideshow
   .work_title
     text-align: center
     border: none
@@ -23,7 +24,7 @@
       text-align: center
       margin: 0
       width: 100%
-      bottom: -50px
+      bottom: -52px
       left: 0
       a
         float: none
@@ -36,7 +37,19 @@
       background: $grey_09
       display: inline-block
       margin: 0 10px
-  .description
-    margin: 40px
-    padding: 20px
-    background: $grey_09
+  .details
+    +clearfix
+    $details_padding: 40px
+    padding: $details_padding
+    >div
+      padding: 20px
+      background: $grey_09
+    &.for_sale
+      $for_sale_width: 150px
+      .description
+        float: left
+        width: $content_width - ($details_padding * 5) - $for_sale_width 
+      .for_sale
+        float: right
+        width: $for_sale_width
+        

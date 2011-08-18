@@ -15,7 +15,7 @@ class Settings < ActiveRecord::Base
     :email_interceptor =>   "developer@domain.com",
     :email_no_reply =>      "noreply@domain.com",
     :home_show_tags =>      :accordion,
-    :work_show_slideshow => :nivo_slider
+    :work_show_view =>      :slideshow
   }.with_indifferent_access
   
   @@custom = File.exists?(CUSTOM_FILE) ? YAML::load(File.open(CUSTOM_FILE, 'r')) : {}
@@ -34,7 +34,7 @@ class Settings < ActiveRecord::Base
   validates :email_interceptor,   :email => true
   validates :email_no_reply,      :email => true
   validates :home_show_tags,      :inclusion => { :in => [:accordion, :plain] }
-  validates :work_show_slideshow, :inclusion => { :in => [:nivo_slider, :plain] }
+  validates :work_show_view,      :inclusion => { :in => [:slideshow, :plain] }
   
   def save
     if self.valid?

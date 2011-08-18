@@ -6,7 +6,7 @@
     = s.input :splash_page, :as => :boolean, :hint => input_hint(:splash_page)
     = s.input :currency, :collection => currency_select_array, :hint => input_hint(:currency)
     = s.input :home_show_tags, :collection => [:accordion, :plain], :hint => input_hint(:home_show_tags)
-    = s.input :work_show_slideshow, :collection => [:nivo_slider, :plain], :hint => input_hint(:work_show_slideshow)
+    = s.input :work_show_view, :collection => [:slideshow, :plain], :hint => input_hint(:work_show_view)
   %fieldset
     %legend Email
     = s.input :email_no_reply, :hint => input_hint(:email_no_reply)

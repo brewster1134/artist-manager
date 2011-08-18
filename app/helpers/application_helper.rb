@@ -69,5 +69,20 @@ module ApplicationHelper
   def currency_select_array
     Money::Currency::TABLE.collect{ |symbol, currency| ["#{currency[:iso_code]} - #{currency[:name]}", symbol.to_s] }.sort
   end
+
+  # = toggle_link :element_id
+  # #element_id
+  # = toggle_link :hidden_element, :state => :hide
+  # #hidden_element.hide
+  def toggle_link(name, options = {})
+    options.reverse_merge!({
+      :element_id =>  name,
+      :state =>       :show
+    })
+    state_opposite = {:show => :hide, :hide => :show}
+    initial_text = "#{state_opposite[options[:state]]}_#{name}".titleize
+    toggled_text = "#{options[:state]}_#{name}".titleize
+    link_to_function initial_text, "$(this).toggle('#{options[:element_id]}', '#{options[:state]}', 'Show #{options[:element_id]}', 'Hide #{options[:element_id]}')", :class => :toggle_link, :id => "toggle_#{options[:element_id]}_link", "data-default-state" => options[:state]
+  end
   
 end

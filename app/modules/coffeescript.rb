@@ -1,5 +1,7 @@
-module Haml::Filters::Coffee
-  include Haml::Filters::Base
+require 'haml'
+
+module Coffeescript
+  include ::Haml::Filters::Base
 
   lazy_require 'coffee-script'
 
@@ -7,7 +9,7 @@ module Haml::Filters::Coffee
     <<END
 <script type=#{options[:attr_wrapper]}text/javascript#{options[:attr_wrapper]}>
   //<![CDATA[
-    #{CoffeeScript.compile(text, {:bare => true})}
+    #{CoffeeScript.compile(text, options.merge({:bare => true}))}
   //]]>
 </script>
 END

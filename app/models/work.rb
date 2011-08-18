@@ -45,4 +45,19 @@ class Work < ActiveRecord::Base
   def image
     self.images.present? ? self.images.sample : nil
   end
+  def sold_out?
+    self.for_sale && self.quantity == 0
+  end
+  def price?
+    self.price > 0
+  end
+  def can_buy_on_site?
+    self.for_sale && !self.sold_out? && self.price?
+  end
+  def can_request_price?
+    self.for_sale && !self.sold_out? && !self.price?
+  end
+  def video_link_valid?
+    self.video_link.present?
+  end
 end
