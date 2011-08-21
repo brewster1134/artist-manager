@@ -2,6 +2,9 @@
   .jTscrollerContainer
     .jTscroller
       - images.each do |image|
-        = image_tag(image.image.send(image_version).url)
+        - if controller_name == "series"
+          = link_to image_tag(image.image.send(image_version).url), work_path(image.work.url)
+        - else
+          = link_to image_tag(image.image.send(image_version).url), "#" # TODO: image viewer
   %a.jTscrollerPrevButton{:href => "#"}
   %a.jTscrollerNextButton{:href => "#"}

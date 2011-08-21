@@ -1,11 +1,12 @@
 /*
  *= require slideshow
+ *= require image_scroller
  */
 @import compass/css3
 @import settings
 @import mixins
 
-h1.series_title
+.series_title
   text-align: center
   margin: 0
 .description
@@ -24,9 +25,21 @@ h1.series_title
     +slideshow
     height: <%= Settings.image_sizes[:series][:show][:slideshow][1] %>px
 
-  h1.series_title
+  .series_title
     margin: 0 0 5px
     border: none 
   
   .description
     margin: 33px 15px 27px
+
+#scroller_view
+  .series_title
+    border: none
+    margin-bottom: 15px
+  .description
+    margin-bottom: 15px
+  .image_scroller
+    height: <%= Settings.image_sizes[:series][:show][:image_scroller_height] %>px
+  a.jTscrollerNextButton,
+  a.jTscrollerPrevButton
+    top: 18px

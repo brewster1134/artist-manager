@@ -71,6 +71,9 @@ class WorkImageUploader < CarrierWave::Uploader::Base
   version :work_show_image_scroller do
     process :resize_by_height => Settings.image_sizes[:work][:show][:image_scroller_height]
   end
+  version :work_show_plain do
+    process :resize_to_fill => Settings.image_sizes[:work][:show][:plain]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

@@ -8,42 +8,63 @@
 @import settings
 @import mixins
 
-#video_link_view,
-#slideshow_view
-  .work_title
-    text-align: center
-    border: none
+.work_title
+  text-align: center
+  border: none
+
+.image_scroller
+  .jThumbnailScroller
+    border-width: 0 0 2px 0
+  height: <%= Settings.image_sizes[:work][:show][:image_scroller_height] %>px
+  a.jTscrollerNextButton,
+  a.jTscrollerPrevButton
+    top: 18px
+
+.info
+  margin: 0 40px
+  text-align: center
+  span
+    padding: 2px 20px
+    background: $grey_09
+    display: inline-block
+    margin: 0 10px
+.details
+  +clearfix
+  $for_sale_width: 150px
+  $details_padding: $content_padding
+  padding: $details_padding
+  >div
+    padding: $details_padding * 2
+    background: $grey_09
+  &.for_sale
+    .description
+      float: left
+      width: $content_width - ($details_padding * 12) - $for_sale_width
+    .for_sale
+      float: right
+      width: $for_sale_width
+
+#video_link_view
   iframe.video
     +full_site_width
     +single-box-shadow($grey_04, 0px, 1px, 5px, 0px)
     bottom: -2px
+#slideshow_view
   .slideshow
     +slideshow
-  .image_scroller
-    height: <%= Settings.image_sizes[:work][:show][:image_scroller_height] %>px
-    a.jTscrollerNextButton,
-    a.jTscrollerPrevButton
-      top: 18px
-  .info
-    margin: 0 40px
-    text-align: center
-    span
-      padding: 2px 20px
-      background: $grey_09
-      display: inline-block
-      margin: 0 10px
+    margin-bottom: 0
+    .nivo-controlNav
+      bottom: -47px
   .details
+    margin-top: 15px
+#plain_view
+  .images
+    background: black
     +clearfix
-    $details_padding: 40px
-    padding: $details_padding
-    >div
-      padding: 20px
-      background: $grey_09
-    &.for_sale
-      $for_sale_width: 150px
-      .description
-        float: left
-        width: $content_width - ($details_padding * 5) - $for_sale_width 
-      .for_sale
-        float: right
-        width: $for_sale_width
+    +single-box-shadow($grey_04, 0px, 1px, 5px, 0px)
+    +full_site_width
+    border-width: 2px 0
+    border-style: solid
+    border-color: $grey_01
+    img
+      float: left

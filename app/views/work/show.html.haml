@@ -5,58 +5,39 @@
   - content_for :menu do
     %li= link_to "Edit #{@work.title}", edit_work_path(@work)
 
-- if valid_video?(@work.video_link)
-  #video_link_view
-    %h1.work_title= @work.title
-    .tags
-      - @work.tags.each do |t|
-        = link_to t.name, work_index_path(:tag => t.name)
+%div{:id => "#{@view.to_s}_view"}
+  %h1.work_title= @work.title
+  = render 'shared/tags', :tags => @work.tags
+
+  - if [:video_link].include? @view
     = embed_video(@work.video_link)
-    - if @work.images.present?
-      = render 'shared/image_scroller', :images => @work.images, :image_version => "work_show_image_scroller", :link_method => ""
-    .info
-      = content_tag(:span, @work.completion_year) if @work.completion_year.present? 
-      = content_tag(:span, @work.media) if @work.media.present? 
-      = content_tag(:span, @work.dimensions) if @work.dimensions.present?
-    .details{:class => ("for_sale" if @work.for_sale)}
-      .description= markup @work.description
-      - if @work.for_sale
-        .for_sale
-          - if @work.can_buy_on_site? 
-            = @work.price.format
-            PAYMENT BUTTON HERE
-          - elsif @work.can_request_price?
-            REQUEST PRICE
-          - elsif @work.sold_out?
-            SOLD OUT
 
-- elsif Settings.work_show_view == :slideshow
-  #slideshow_view
-    .theme-default{:id => Settings.work_show_view.to_s}
-      %h1.work_title= @work.title
-      .tags
-        - @work.tags.each do |t|
-          = link_to t.name, work_index_path(:tag => t.name)
-      - if @work.images.present?
-        .slideshow
-          - @work.images.each do |i|
-            = image_tag i.image.work_show_slideshow.url 
-      .info
-        = content_tag(:span, @work.completion_year) if @work.completion_year.present? 
-        = content_tag(:span, @work.media) if @work.media.present? 
-        = content_tag(:span, @work.dimensions) if @work.dimensions.present?
-      .details{:class => ("for_sale" if @work.for_sale)}
-        .description= markup @work.description
-        - if @work.for_sale
-          .for_sale
-            - if @work.can_buy_on_site? 
-              = @work.price.format
-              PAYMENT BUTTON HERE
-            - elsif @work.can_request_price?
-              REQUEST PRICE
-            - elsif @work.sold_out?
-              SOLD OUT
+  - if [:video_link, :scroller].include?(@view) && @work.images.present?
+    = render 'shared/image_scroller', :images => @work.images, :image_version => "work_show_image_scroller"
 
-- elsif Settings.work_show_view == :plain
-  #plain_view
-    TODO
+  - if [:slideshow].include?(@view) && @work.images.present? 
+    .slideshow
+      - @work.images.each do |i|
+        = image_tag i.image.work_show_slideshow.url 
+
+  - if [:plain].include?(@view) && @work.images.present?
+    .images
+      - @work.images.each do |i|
+        = link_to image_tag(i.image.work_show_image_scroller.url), "#" # TODO: add image viewer 
+
+  .info
+    = content_tag(:span, @work.completion_year) if @work.completion_year.present? 
+    = content_tag(:span, @work.media) if @work.media.present? 
+    = content_tag(:span, @work.dimensions) if @work.dimensions.present?
+  .details{:class => ("for_sale" if @work.for_sale)}
+    .description= markup @work.description
+    - if @work.for_sale
+      .for_sale
+        - if @work.can_buy_on_site? 
+          = @work.price.format
+          PAYMENT BUTTON HERE
+        - elsif @work.can_request_price?
+          REQUEST PRICE
+        - elsif @work.sold_out?
+          SOLD OUT
+

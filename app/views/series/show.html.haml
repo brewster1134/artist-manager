@@ -5,25 +5,17 @@
   - content_for :menu do
     %li= link_to "Edit #{@series.title}", edit_series_path(@series)
 
-- if Settings.series_show_view == :slideshow
-  #slideshow_view
-    %h1.series_title= @series.title
-    = render 'shared/tags', :tags => @series.tags
+%div{:id => "#{@view.to_s}_view"}
+  %h1.series_title= @series.title
+  = render 'shared/tags', :tags => @series.tags
+  - if @view == :slideshow
     .slideshow
       - @series.images.shuffle.each do |i|
         = link_to image_tag(i.image.series_show_slideshow.url, :title => i.work.title), work_path(i.work)
-    .description= markup @series.description
-    .series_work
-      .section
-        - @series.works.each do |w|
-          = render 'shared/item', :item => w 
-  
-- else
-  #plain_view
-    %h1.series_title= @series.title
-    = render 'shared/tags', :tags => @series.tags
-    .description
-      = markup @series.description
+  - elsif @view == :scroller
+    = render 'shared/image_scroller', :images => @series.images(false), :image_version => "series_show_image_scroller"
+  .description= markup @series.description
+  - unless @view == :scroller
     .series_work
       .section
         - @series.works.each do |w|

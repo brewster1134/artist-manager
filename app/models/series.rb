@@ -11,8 +11,8 @@ class Series < ActiveRecord::Base
   def to_param
     url
   end
-  def images
-    self.works.collect{ |w| w.images}.flatten
+  def images(all = true)
+    all ? self.works.collect{ |w| w.images}.flatten : self.works.collect{ |w| w.image}.compact
   end
   def image
     self.images.sample if self.images.present?

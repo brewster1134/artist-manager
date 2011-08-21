@@ -1,6 +1,5 @@
-/*
- *= require thumbnailScroller
- */ 
+//= require thumbnailScroller
+//= require_self
 
 @import compass/css3
 @import settings
@@ -12,9 +11,22 @@
   +single-box-shadow
   background: black
   margin: 0
-  border-width: 0 0 2px 0
+  border-width: 2px 0 2px 0
   border-style: solid
   border-color: $grey_01
+  .jTscroller
+    a
+      +opacity(0.6)
+      margin: 0
+      border: none
+      float: left
+      &:first-child
+        margin: 0
+      &:last-child
+        margin: 0
+      &:hover
+        +opacity(1)
+      img
   .jTscrollerNextButton
     background-image: url(/assets/thumbnail-scroller/nextArrow.png)
     right: 0
@@ -24,5 +36,3 @@
   .jTscrollerPrevButton
     &:hover
       background-color: $grey_03
-  img
-    margin: 0

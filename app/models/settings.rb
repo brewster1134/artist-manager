@@ -40,7 +40,8 @@ class Settings < ActiveRecord::Base
         },
         :show => {
           :slideshow => [962, 400],
-          :image_scroller_height => 75 
+          :image_scroller_height => 75,
+          :plain => [150,150]
         }
       }
     }
