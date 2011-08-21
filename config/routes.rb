@@ -17,7 +17,7 @@ ArtistManager::Application.routes.draw do
   
   resources :work do
     get :autocomplete_tag_name, :on => :collection
-    resources :work_images, :shallow => true, :only => [:index, :create, :destroy], :as => :images
+    resources :work_images, :shallow => true, :only => [:index, :create, :destroy]
   end
 
   # settings

@@ -22,23 +22,54 @@ class WorkImageUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
-  # process :scale => [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
+  process :resize_to_fit => [1920, 1080]
 
-  # Create different versions of your uploaded files:
-
-  # preview after uploading
-  version :upload do
-    process :resize_to_fit => [80, 80]
+  def resize_by_height(height)
+    manipulate! do |img|
+      img.resize "x#{height}"
+      img = yield(img) if block_given?
+      img
+    end
   end
 
-  # full content width
-  version :full_content_width do
-    process :resize_to_fill => [962, 400]
+  # home#show accordion
+  version :home_show_series do
+    process :resize_to_fill => Settings.image_sizes[:home][:show][:series]
+  end
+  version :home_show_work do
+    process :resize_to_fill => Settings.image_sizes[:home][:show][:work]
+  end
+
+  # series#show
+  version :series_show_work do
+    process :resize_to_fill => Settings.image_sizes[:series][:show][:work]
+  end
+  version :series_show_slideshow do
+    process :resize_to_fill => Settings.image_sizes[:series][:show][:slideshow]
+  end
+  version :series_show_image_scroller do
+    process :resize_by_height => Settings.image_sizes[:series][:show][:image_scroller_height]
+  end
+
+  # work#edit
+  version :work_edit do
+    process :resize_and_pad => Settings.image_sizes[:work][:edit]
+  end
+
+  # work#index
+  version :work_index_series do
+    process :resize_to_fill => Settings.image_sizes[:work][:index][:series]
+  end
+  version :work_index_work do
+    process :resize_to_fill => Settings.image_sizes[:work][:index][:work]
+  end
+
+  # work#show
+  version :work_show_slideshow do
+    process :resize_to_fill => Settings.image_sizes[:work][:show][:slideshow]
+  end
+  version :work_show_image_scroller do
+    process :resize_by_height => Settings.image_sizes[:work][:show][:image_scroller_height]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

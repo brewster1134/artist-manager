@@ -2,12 +2,29 @@
   = @series.title
 
 - if current_user
-  - content_for :page_title do
-    = link_to "Edit", edit_series_path(@series)
+  - content_for :menu do
+    %li= link_to "Edit #{@series.title}", edit_series_path(@series)
 
-%h1.series_title= @series.title
-.description= markup @series.description
-#series_work
-  .section.work
-    - @series.works.each do |w|
-      = render 'shared/item', :item => w
+- if Settings.series_show_view == :slideshow
+  #slideshow_view
+    %h1.series_title= @series.title
+    = render 'shared/tags', :tags => @series.tags
+    .slideshow
+      - @series.images.shuffle.each do |i|
+        = link_to image_tag(i.image.series_show_slideshow.url, :title => i.work.title), work_path(i.work)
+    .description= markup @series.description
+    .series_work
+      .section
+        - @series.works.each do |w|
+          = render 'shared/item', :item => w 
+  
+- else
+  #plain_view
+    %h1.series_title= @series.title
+    = render 'shared/tags', :tags => @series.tags
+    .description
+      = markup @series.description
+    .series_work
+      .section
+        - @series.works.each do |w|
+          = render 'shared/item', :item => w 

@@ -1,5 +1,5 @@
-//# http://pushingkarma.com/projects/jquery-wysiwym/
-//# https://github.com/coreyti/showdown
+#// http://pushingkarma.com/projects/jquery-wysiwym/
+#// https://github.com/coreyti/showdown
 //= require jquery.wysiwym
 //= require showdown
 

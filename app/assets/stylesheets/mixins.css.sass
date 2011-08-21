@@ -1,5 +1,6 @@
 @import settings
 @import compass/utilities
+
 @mixin items($work_width: 75px)
   $item_margin: 5px
   $series_width: ($work_width * 2) + ($item_margin * 2)
@@ -7,7 +8,7 @@
     +clearfix
     .item
       margin: $item_margin
-      float: left
+      display: inline-block
       a
         text-decoration: none
         background: $grey_09
@@ -15,8 +16,6 @@
         .image
           height: $work_width
           overflow: hidden
-          img
-            height: $work_width
         .title
           text-align: center
           overflow: hidden
@@ -27,3 +26,13 @@
       &.work
         width: $work_width
 
+@mixin full_site_width
+  position: relative
+  left: $content_padding * -1
+  width: $site_width - ($content_border_width * 2)
+  
+@mixin slideshow
+  +full_site_width
+  +single-box-shadow($grey_04, 0px, 1px, 5px, 0px)
+  border-width: 2px 0
+  border-style: solid

@@ -1,34 +1,29 @@
 /*
  *= require slideshow
+ *= require image_scroller
  */ 
 
+@import compass/css3
 @import compass/utilities
 @import settings
+@import mixins
 
-#slideshow
+#video_link_view,
+#slideshow_view
   .work_title
     text-align: center
     border: none
-  .tags
-    text-align: center
-    margin-bottom: 2px
-    a
-      text-decoration: none
+  iframe.video
+    +full_site_width
+    +single-box-shadow($grey_04, 0px, 1px, 5px, 0px)
+    bottom: -2px
   .slideshow
-    border-width: 2px 0
-    border-style: solid
-    left: $content_padding * -1
-    img
-      max-width: $site_width - ($content_border_width * 2)
-    .nivo-controlNav
-      text-align: center
-      margin: 0
-      width: 100%
-      bottom: -52px
-      left: 0
-      a
-        float: none
-        display: inline-block
+    +slideshow
+  .image_scroller
+    height: <%= Settings.image_sizes[:work][:show][:image_scroller_height] %>px
+    a.jTscrollerNextButton,
+    a.jTscrollerPrevButton
+      top: 18px
   .info
     margin: 0 40px
     text-align: center
@@ -52,4 +47,3 @@
       .for_sale
         float: right
         width: $for_sale_width
-        

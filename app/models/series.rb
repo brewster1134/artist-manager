@@ -11,10 +11,14 @@ class Series < ActiveRecord::Base
   def to_param
     url
   end
+  def images
+    self.works.collect{ |w| w.images}.flatten
+  end
   def image
-    if (images = self.works.collect{ |w| w.images}.flatten).present?
-      images.sample
-    end
+    self.images.sample if self.images.present?
+  end
+  def tags
+    self.works.collect{|w| w.tags}.compact.flatten.uniq
   end
   def self.tagged_with(tag)
     (all.collect{ |s| s.works }.flatten & Work.tagged_with(tag)).collect{ |w| w.series}.uniq

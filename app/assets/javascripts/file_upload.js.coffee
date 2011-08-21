@@ -1,4 +1,4 @@
-//# http://aquantum-demo.appspot.com/file-upload
+#// http://aquantum-demo.appspot.com/file-upload
 //= require jquery.fileupload
 //= require jquery.fileupload-ui
 //= require jquery.tmpl.js

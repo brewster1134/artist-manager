@@ -1,17 +1,19 @@
 - content_for :title do
   = @work.title
 
-- if !@work.video_link_valid?
+- if current_user
+  - content_for :menu do
+    %li= link_to "Edit #{@work.title}", edit_work_path(@work)
 
-- elsif Settings.work_show_view == :slideshow
-  %div.theme-default{:id => Settings.work_show_view.to_s}
+- if valid_video?(@work.video_link)
+  #video_link_view
     %h1.work_title= @work.title
     .tags
       - @work.tags.each do |t|
         = link_to t.name, work_index_path(:tag => t.name)
-    .slideshow
-      - @work.images.each do |i|
-        = image_tag i.image.full_content_width.url
+    = embed_video(@work.video_link)
+    - if @work.images.present?
+      = render 'shared/image_scroller', :images => @work.images, :image_version => "work_show_image_scroller", :link_method => ""
     .info
       = content_tag(:span, @work.completion_year) if @work.completion_year.present? 
       = content_tag(:span, @work.media) if @work.media.present? 
@@ -28,7 +30,33 @@
           - elsif @work.sold_out?
             SOLD OUT
 
-  = @work.video_link
+- elsif Settings.work_show_view == :slideshow
+  #slideshow_view
+    .theme-default{:id => Settings.work_show_view.to_s}
+      %h1.work_title= @work.title
+      .tags
+        - @work.tags.each do |t|
+          = link_to t.name, work_index_path(:tag => t.name)
+      - if @work.images.present?
+        .slideshow
+          - @work.images.each do |i|
+            = image_tag i.image.work_show_slideshow.url 
+      .info
+        = content_tag(:span, @work.completion_year) if @work.completion_year.present? 
+        = content_tag(:span, @work.media) if @work.media.present? 
+        = content_tag(:span, @work.dimensions) if @work.dimensions.present?
+      .details{:class => ("for_sale" if @work.for_sale)}
+        .description= markup @work.description
+        - if @work.for_sale
+          .for_sale
+            - if @work.can_buy_on_site? 
+              = @work.price.format
+              PAYMENT BUTTON HERE
+            - elsif @work.can_request_price?
+              REQUEST PRICE
+            - elsif @work.sold_out?
+              SOLD OUT
 
 - elsif Settings.work_show_view == :plain
-  TODO
+  #plain_view
+    TODO

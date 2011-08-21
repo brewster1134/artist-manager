@@ -1,5 +1,6 @@
 - item_type = item.class.to_s.downcase
+- image_version ||= "#{controller_name}_#{action_name}_#{item_type}"
 .item{ "data-#{item_type}-id" => item.id, :class => item_type }
   %a{ :href => url_for(item), :title => item.title }
-    .image= image_tag(item.image.image.url) if item.image
+    .image= image_tag(item.image.image.send(image_version).url) if item.image
     .title= item.title

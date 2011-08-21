@@ -1,6 +1,10 @@
 - content_for :title do
   = "Edit #{@series.title}"
 
+- content_for :page_title do
+  = "Edit #{@series.title}"
+  = link_to "Preview", @series
+  
 = simple_form_for @series do |s|
   = render 'shared/form_errors', :instance => @series
   = render 'form_fields', :series => s

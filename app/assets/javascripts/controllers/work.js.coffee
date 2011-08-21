@@ -1,6 +1,6 @@
 //= require file_upload
-//= require jquery.autocomplete
 //= require markup
+//= require jquery.autocomplete
  
 $ ->
   $('select#tag_select').change ->

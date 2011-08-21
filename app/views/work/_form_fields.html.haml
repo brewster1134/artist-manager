@@ -1,5 +1,5 @@
-= work.input :title
 = work.input :series_id, :collection => Series.all.collect{|s| [s.title, s.id]}, :hint => link_to("Create New Series", new_series_path).html_safe
+= work.input :title
 = work.input :tag_list, :url => autocomplete_tag_name_work_index_path, :as => :autocomplete, :input_html => {:'data-delimiter' => ', '}
 = work.input :description, wrapper_html: { class: "markup_edit" }
 = work.input :media

@@ -1,5 +1,5 @@
 class WorkController < ApplicationController
-  helper TagHelper
+  helper TagHelper, VideoLinkHelper
   skip_before_filter :check_for_user, :only => [:index, :show]
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
   

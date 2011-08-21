@@ -1,0 +1,28 @@
+/*
+ *= require thumbnailScroller
+ */ 
+
+@import compass/css3
+@import settings
+@import mixins
+
+.jThumbnailScroller
+  +full_site_width
+  +border-radius(0px)
+  +single-box-shadow
+  background: black
+  margin: 0
+  border-width: 0 0 2px 0
+  border-style: solid
+  border-color: $grey_01
+  .jTscrollerNextButton
+    background-image: url(/assets/thumbnail-scroller/nextArrow.png)
+    right: 0
+  .jTscrollerPrevButton
+    background-image: url(/assets/thumbnail-scroller/prevArrow.png)
+  .jTscrollerNextButton,
+  .jTscrollerPrevButton
+    &:hover
+      background-color: $grey_03
+  img
+    margin: 0

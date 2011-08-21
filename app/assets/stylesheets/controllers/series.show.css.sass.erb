@@ -1,0 +1,32 @@
+/*
+ *= require slideshow
+ */
+@import compass/css3
+@import settings
+@import mixins
+
+h1.series_title
+  text-align: center
+  margin: 0
+.description
+  margin: 30px 15px
+  padding: 30px
+  background: $grey_09
+
+.series_work
+  +items(145px)
+  border-top: 2px solid $grey_01
+  padding-top: 23px
+  text-align: center
+
+#slideshow_view
+  .slideshow
+    +slideshow
+    height: <%= Settings.image_sizes[:series][:show][:slideshow][1] %>px
+
+  h1.series_title
+    margin: 0 0 5px
+    border: none 
+  
+  .description
+    margin: 33px 15px 27px

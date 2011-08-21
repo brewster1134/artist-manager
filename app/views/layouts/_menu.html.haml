@@ -2,6 +2,7 @@
   %li= link_to "Home", home_path
   %li= link_to "Work", work_index_path
   - if current_user
+    = yield(:menu) if content_for?(:menu)
     %li
       = link_to_function "Admin", nil
       %ul

@@ -6,6 +6,7 @@
     = s.input :splash_page, :as => :boolean, :hint => input_hint(:splash_page)
     = s.input :currency, :collection => currency_select_array, :hint => input_hint(:currency)
     = s.input :home_show_tags, :collection => [:accordion, :plain], :hint => input_hint(:home_show_tags)
+    = s.input :series_show_view, :collection => [:slideshow, :plain], :hint => input_hint(:series_show_view)
     = s.input :work_show_view, :collection => [:slideshow, :plain], :hint => input_hint(:work_show_view)
   %fieldset
     %legend Email

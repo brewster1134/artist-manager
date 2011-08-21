@@ -9,7 +9,7 @@ module ApplicationHelper
       helper = "javascript_include_tag" 
     when :stylesheet, :css
       dir = "stylesheets"
-      ext = [".css.sass", ".css.sass.haml"]
+      ext = [".css.sass", ".css.sass.erb"]
       helper = "stylesheet_link_tag" 
     end
     action_name = case action_name

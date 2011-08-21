@@ -57,7 +57,5 @@ class Work < ActiveRecord::Base
   def can_request_price?
     self.for_sale && !self.sold_out? && !self.price?
   end
-  def video_link_valid?
-    self.video_link.present?
-  end
+    
 end

@@ -15,8 +15,38 @@ class Settings < ActiveRecord::Base
     :email_interceptor =>   "developer@domain.com",
     :email_no_reply =>      "noreply@domain.com",
     :home_show_tags =>      :accordion,
-    :work_show_view =>      :slideshow
+    :series_show_view =>    :slideshow,
+    :work_show_view =>      :slideshow,
+    :image_sizes =>        {
+      :home => {
+        :show => {
+          :series => [160, 75],
+          :work => [75, 75],
+        }
+      },
+      :series => {
+        :show => {
+          :work => [145, 145],
+          :slideshow => [962, 400],
+          :image_scroller_height => 75 
+          
+        }
+      },
+      :work => {
+        :edit => [80, 80],
+        :index => {
+          :series => [300, 145],
+          :work => [145, 145]
+        },
+        :show => {
+          :slideshow => [962, 400],
+          :image_scroller_height => 75 
+        }
+      }
+    }
   }.with_indifferent_access
+  # If changes are made to :image_sizes, the following needs to be run to resize all existing imags to the new sizes.
+  # WorkImage.all.each{|w| w.image.recreate_versions!}
   
   @@custom = File.exists?(CUSTOM_FILE) ? YAML::load(File.open(CUSTOM_FILE, 'r')) : {}
   @@custom.delete_if{ |k,v| !@@defaults.keys.include?(k) || v == "" }
@@ -33,8 +63,9 @@ class Settings < ActiveRecord::Base
                                   :allow_blank => true
   validates :email_interceptor,   :email => true
   validates :email_no_reply,      :email => true
-  validates :home_show_tags,      :inclusion => { :in => [:accordion, :plain] }
-  validates :work_show_view,      :inclusion => { :in => [:slideshow, :plain] }
+  validates :home_show_tags,      :inclusion => { :in => ["accordion", "plain"] }
+  validates :series_show_view,    :inclusion => { :in => ["slideshow", "plain"] }
+  validates :work_show_view,      :inclusion => { :in => ["slideshow", "plain"] }
   
   def save
     if self.valid?
@@ -46,6 +77,8 @@ class Settings < ActiveRecord::Base
           value.to_i > 0
         when Symbol
           value.to_sym
+        when Hash
+          value.with_indifferent_access
         else
           value
         end

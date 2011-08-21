@@ -1,0 +1,7 @@
+.image_scroller.jThumbnailScroller
+  .jTscrollerContainer
+    .jTscroller
+      - images.each do |image|
+        = image_tag(image.image.send(image_version).url)
+  %a.jTscrollerPrevButton{:href => "#"}
+  %a.jTscrollerNextButton{:href => "#"}
