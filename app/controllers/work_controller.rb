@@ -11,7 +11,13 @@ class WorkController < ApplicationController
   
   def show
     @work = Work.find_by_url(params[:id])
-    @view = @work.video_link.present? ? :video_link : (params[:view] || Settings.work_show_view).to_sym 
+    @view = if params[:view]
+      params[:view].to_sym
+    elsif @work.video_link.present?
+      :video_link
+    else
+      Settings.work_show_view
+    end
   end
   
   def new

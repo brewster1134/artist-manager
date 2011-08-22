@@ -65,8 +65,8 @@ class Settings < ActiveRecord::Base
   validates :email_interceptor,   :email => true
   validates :email_no_reply,      :email => true
   validates :home_show_tags,      :inclusion => { :in => ["accordion", "plain"] }
-  validates :series_show_view,    :inclusion => { :in => ["slideshow", "plain"] }
-  validates :work_show_view,      :inclusion => { :in => ["slideshow", "plain"] }
+  validates :series_show_view,    :inclusion => { :in => ["slideshow", "scroller", "plain"] }
+  validates :work_show_view,      :inclusion => { :in => ["slideshow", "scroller", "plain"] }
   
   def save
     if self.valid?

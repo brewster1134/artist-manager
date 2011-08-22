@@ -5,6 +5,6 @@
         - if controller_name == "series"
           = link_to image_tag(image.image.send(image_version).url), work_path(image.work.url)
         - else
-          = link_to image_tag(image.image.send(image_version).url), "#" # TODO: image viewer
+          = link_to image_tag(image.image.send(image_version).url), image.image.url, :class => "lightbox", :rel => image.work.url
   %a.jTscrollerPrevButton{:href => "#"}
   %a.jTscrollerNextButton{:href => "#"}

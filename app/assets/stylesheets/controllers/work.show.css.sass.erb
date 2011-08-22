@@ -1,7 +1,6 @@
-/*
- *= require slideshow
- *= require image_scroller
- */ 
+//= require slideshow
+//= require image_scroller
+//= require lightbox
 
 @import compass/css3
 @import compass/utilities
@@ -52,6 +51,7 @@
 #slideshow_view
   .slideshow
     +slideshow
+    height: <%= Settings.image_sizes[:work][:show][:slideshow][1] %>px
     margin-bottom: 0
     .nivo-controlNav
       bottom: -47px

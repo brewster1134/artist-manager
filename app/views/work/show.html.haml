@@ -18,13 +18,12 @@
   - if [:slideshow].include?(@view) && @work.images.present? 
     .slideshow
       - @work.images.each do |i|
-        = image_tag i.image.work_show_slideshow.url 
+        = link_to image_tag(i.image.work_show_slideshow.url), i.image.url, :class => "lightbox", :rel => @work.url
 
   - if [:plain].include?(@view) && @work.images.present?
     .images
       - @work.images.each do |i|
-        = link_to image_tag(i.image.work_show_image_scroller.url), "#" # TODO: add image viewer 
-
+        = link_to image_tag(i.image.work_show_plain.url), i.image.url, :class => "lightbox", :rel => @work.url
   .info
     = content_tag(:span, @work.completion_year) if @work.completion_year.present? 
     = content_tag(:span, @work.media) if @work.media.present? 
