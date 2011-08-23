@@ -1,0 +1,18 @@
+//= require slideshow
+
+@import compass/css3
+@import settings
+
+#logo
+  margin: 15px 0
+  text-align: center
+.view
+  margin-bottom: 30px
+.view#slideshow_view
+  .slideshow
+    height: <%= Settings.image_sizes[:home][:splash][:slideshow][1] %>px
+    +single-box-shadow($grey_01)
+    
+.view#random_view
+  img
+    +single-box-shadow($grey_01)

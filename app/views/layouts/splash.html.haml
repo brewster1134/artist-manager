@@ -11,15 +11,7 @@
     = include_controller_assets :js, controller_name, action_name
     = csrf_meta_tags
   %body
+    #logo= logo
     #container
-      #header
-        = render 'layouts/menu'
-        = logo
-      - if flash.present?
-        #flash
-          - flash.each do |type, msg|
-            = content_tag :div, msg, :class => type
-      - if page_title
-        #page_title= page_title 
-      #content= yield
+      = yield
       #footer= footer

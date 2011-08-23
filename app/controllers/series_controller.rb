@@ -2,8 +2,8 @@ class SeriesController < ApplicationController
   skip_before_filter :check_for_user, :only => :show
 
   def show
-    @view = (params[:view] || Settings.series_show_view).to_sym
     @series = Series.find_by_url(params[:id])
+    @view = (params[:view] || @series.view || Settings.series_show_view).to_sym
   end
 
   def new

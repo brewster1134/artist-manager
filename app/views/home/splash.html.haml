@@ -1,1 +1,8 @@
-= Settings.splash_page
+.view{:id => "#{@view.to_s}_view"}
+  - if @view == :slideshow
+    .slideshow
+      - @images.each do |i|
+        = link_to image_tag(i.image.home_splash_slideshow.url, :title => i.work.title), home_path
+
+  - elsif @view == :random
+    = link_to image_tag(@images.image.home_splash_random.url, :title => @images.work.title), home_path

@@ -97,5 +97,11 @@ module ApplicationHelper
     toggled_text = "#{options[:state]}_#{name}".titleize
     link_to_function initial_text, "$(this).toggle('#{options[:element_id]}', '#{options[:state]}', 'Show #{options[:element_id].to_s.titleize}', 'Hide #{options[:element_id].to_s.titleize}')", :class => :toggle_link, :id => "toggle_#{options[:element_id]}_link", "data-default-state" => options[:state]
   end
+
+  def footer
+    footer_html = "Site by "
+    footer_html << link_to("Man Alive!", "http://www.wearemanalive.com")
+    return footer_html.html_safe
+  end
   
 end

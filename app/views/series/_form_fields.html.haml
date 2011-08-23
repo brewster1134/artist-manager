@@ -1,2 +1,3 @@
 = series.input :title
 = series.input :description, wrapper_html: { class: "markup_edit" }
+= series.input :view, :collection => Settings.site[:series_show_views]

@@ -32,6 +32,14 @@ class WorkImageUploader < CarrierWave::Uploader::Base
     end
   end
 
+  # home#splash page
+  version :home_splash_slideshow do
+    process :resize_to_fill => Settings.image_sizes[:home][:splash][:slideshow]
+  end
+  version :home_splash_random do
+    process :resize_to_fill => Settings.image_sizes[:home][:splash][:random]
+  end
+
   # home#show accordion
   version :home_show_series do
     process :resize_to_fill => Settings.image_sizes[:home][:show][:series]

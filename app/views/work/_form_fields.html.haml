@@ -6,6 +6,8 @@
 = work.input :dimensions
 = work.input :completion_year, :collection => (100.years.ago.year..Date.today.year).to_a.reverse, :selected => Date.today.year, :include_blank => true
 = work.input :video_link
+= work.input :view, :collection => Settings.site[:work_show_views]
+= work.input :featured
 = work.input :for_sale
 %fieldset#for_sale
   %legend For Sale Options

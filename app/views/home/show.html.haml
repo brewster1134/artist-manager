@@ -7,7 +7,7 @@
 
 %fieldset#tags
   %legend Work
-  - if Settings.home_show_tags == :accordion
+  - if Settings.home_show_tag_view == :accordion
     = render "tags_accordion", :tags => @tags
   - else
     = render "tags_plain", :tags => @tags

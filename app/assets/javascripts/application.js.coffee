@@ -30,4 +30,4 @@ $ ->
   sub_cats.mouseleave ->
     $(@).fadeOut() 
 
-
+  alert ("You have to keep the footer at the bottom with a link to Man Alive! if you want to avoid seeing this message!") if !$("#footer").length || $("#footer").html().indexOf('wearemanalive.com') == -1 or $("#footer").is(':hidden')

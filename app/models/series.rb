@@ -1,9 +1,10 @@
 class Series < ActiveRecord::Base
   has_many :works
-  attr_accessible :title, :description
+  attr_accessible :title, :description, :view
 
   validates :title,       :presence => true,
                           :uniqueness => true
+  validates :view,        :inclusion => {:in => ["slideshow", "scroller", "plain"]}
 
   def url
     self.title.parameterize

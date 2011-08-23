@@ -6,25 +6,37 @@ class Settings < ActiveRecord::Base
   CUSTOM_FILE = Rails.root.join("config", "settings_#{Rails.env}.yml")
   after_initialize :populate_instance_accessors
 
-  cattr_accessor :defaults
+  cattr_accessor :site, :defaults
+  @@site = {
+    :splash_page_views =>   ["slideshow", "random"],
+    :home_show_tag_views => ["accordion", "plain"],
+    :series_show_views =>   ["slideshow", "scroller", "plain"],
+    :work_show_views =>     ["slideshow", "scroller", "plain"]
+  }
   @@defaults = {
-    :title =>               "Artist Manager",
-    :use_logo =>            true,
-    :splash_page =>         true,
-    :currency =>            :usd,
-    :google_email =>        "email@gmail.com",
-    :google_password =>     "password",
-    :google_calendar =>     "My Calendar",
-    :email_interceptor =>   "developer@domain.com",
-    :email_no_reply =>      "noreply@domain.com",
-    :home_show_tags =>      :accordion,
-    :series_show_view =>    :slideshow,
-    :work_show_view =>      :slideshow,
-    :image_sizes =>        {
+    :title =>                 "Artist Manager",
+    :use_logo =>              true,
+    :splash_page =>           true,
+    :splash_page_view =>      :slideshow,
+    :splash_page_featured =>  false,
+    :currency =>              :usd,
+    :google_email =>          "email@gmail.com",
+    :google_password =>       "password",
+    :google_calendar =>       "My Calendar",
+    :email_interceptor =>     "developer@domain.com",
+    :email_no_reply =>        "noreply@domain.com",
+    :home_show_tag_view =>    :accordion,
+    :series_show_view =>      :slideshow,
+    :work_show_view =>        :slideshow,
+    :image_sizes =>           {
       :home => {
         :show => {
           :series => [160, 75],
           :work => [75, 75],
+        },
+        :splash => {
+          :slideshow => [966, 402],
+          :random => [966, 402]
         }
       },
       :series => {
@@ -60,17 +72,19 @@ class Settings < ActiveRecord::Base
     self.send("#{k}=", v)
   end
 
-  validates :title,               :presence => true
-  validates :use_logo,            :inclusion => { :in => ["0", "1"] }
-  validates :splash_page,         :inclusion => { :in => ["0", "1"] }
-  validates :currency,            :inclusion => { :in => Money::Currency::TABLE.stringify_keys.keys }
-  validates :google_email,        :email => true,
-                                  :allow_blank => true
-  validates :email_interceptor,   :email => true
-  validates :email_no_reply,      :email => true
-  validates :home_show_tags,      :inclusion => { :in => ["accordion", "plain"] }
-  validates :series_show_view,    :inclusion => { :in => ["slideshow", "scroller", "plain"] }
-  validates :work_show_view,      :inclusion => { :in => ["slideshow", "scroller", "plain"] }
+  validates :title,                 :presence => true
+  validates :use_logo,              :inclusion => { :in => ["0", "1"] }
+  validates :splash_page,           :inclusion => { :in => ["0", "1"] }
+  validates :splash_page_view,      :inclusion => { :in => @@site[:splash_page_views] }
+  validates :splash_page_featured,  :inclusion => { :in => ["0", "1"] }
+  validates :currency,              :inclusion => { :in => Money::Currency::TABLE.stringify_keys.keys }
+  validates :google_email,          :email => true,
+                                    :allow_blank => true
+  validates :email_interceptor,     :email => true
+  validates :email_no_reply,        :email => true
+  validates :home_show_tag_view,    :inclusion => { :in => @@site[:home_show_tag_views] }
+  validates :series_show_view,      :inclusion => { :in => @@site[:series_show_views] }
+  validates :work_show_view,        :inclusion => { :in => @@site[:work_show_views] }
   
   def save
     if self.valid?
