@@ -1,12 +1,15 @@
 require 'yaml'
 
 class Settings < ActiveRecord::Base
+  attr_accessor :logo
+
   CUSTOM_FILE = Rails.root.join("config", "settings_#{Rails.env}.yml")
   after_initialize :populate_instance_accessors
 
   cattr_accessor :defaults
   @@defaults = {
     :title =>               "Artist Manager",
+    :use_logo =>            true,
     :splash_page =>         true,
     :currency =>            :usd,
     :google_email =>        "email@gmail.com",
@@ -58,6 +61,7 @@ class Settings < ActiveRecord::Base
   end
 
   validates :title,               :presence => true
+  validates :use_logo,            :inclusion => { :in => ["0", "1"] }
   validates :splash_page,         :inclusion => { :in => ["0", "1"] }
   validates :currency,            :inclusion => { :in => Money::Currency::TABLE.stringify_keys.keys }
   validates :google_email,        :email => true,
@@ -70,6 +74,14 @@ class Settings < ActiveRecord::Base
   
   def save
     if self.valid?
+      # Save Logo
+      if self.logo && self.logo.content_type =~ /image/
+        File.open(self.logo.open, 'rb') do |l|
+          File.open(Dir.glob(File.join(Rails.root, 'public', 'uploads', 'logo.*')).first, 'w+b') {|out| out.write(l.read) }
+        end
+      end
+
+      # Save settings
       hash = {}
       @@defaults.each do |k,v|
         value = self.send(k)

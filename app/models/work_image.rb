@@ -8,9 +8,10 @@ class WorkImage < ActiveRecord::Base
       "name" =>           read_attribute(:image),
       "size" =>           self.image.size,
       "url" =>            self.image.url,
-      "thumbnail_url" =>  self.image.work_edit.url,
-      "delete_url" =>     work_image_path(id),
-      "delete_type" =>    "DELETE" 
+      "thumbnail_path" => self.image.work_edit.url,
+      "delete_path" =>    work_image_path(id),
+      "delete_type" =>    "DELETE", 
+      "work_id" =>        self.work.url
      }
   end
 end

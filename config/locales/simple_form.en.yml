@@ -37,7 +37,7 @@ en:
         tag_list: Any keywords or categories seperated by comma e.g. Paintings, Photography, Video 
         media: e.g. Oil on Canvas
         dimensions: e.g. 5ft x 10ft
-        for_sale: If NOT for sale, a price request form will replace the purchasing option
+        price: If no price is listed, there will show a price request form instead of a purchasing option
         quantity: If you sell this work outside the site, remember to update this to the current quantity!
         new:
           title: The title will also be used for the url i.e. "My New Peice" will have a url of '/work/my-new-peice'

@@ -44,6 +44,19 @@ module ApplicationHelper
     return content_for(:page_title) if content_for?(:page_title)
   end
 
+  def logo
+    logo_path = File.join(Rails.root, 'public', 'uploads')
+    logo = Dir.glob(File.join(logo_path, 'logo.*')).first
+    logo_filename = File.basename(logo)
+    
+    content = if Settings.use_logo && File.exists?(logo)
+      image_tag(File.join("/uploads/#{logo_filename}"))
+    else
+      Settings.title
+    end
+    return link_to content, home_path, :alt => Settings.title, :id => "logo"
+  end
+    
   def markup(text, options = {})
     # http://rdoc.info/github/tanoku/redcarpet/master/Redcarpet
     options.reverse_merge!(
@@ -82,7 +95,7 @@ module ApplicationHelper
     state_opposite = {:show => :hide, :hide => :show}
     initial_text = "#{state_opposite[options[:state]]}_#{name}".titleize
     toggled_text = "#{options[:state]}_#{name}".titleize
-    link_to_function initial_text, "$(this).toggle('#{options[:element_id]}', '#{options[:state]}', 'Show #{options[:element_id]}', 'Hide #{options[:element_id]}')", :class => :toggle_link, :id => "toggle_#{options[:element_id]}_link", "data-default-state" => options[:state]
+    link_to_function initial_text, "$(this).toggle('#{options[:element_id]}', '#{options[:state]}', 'Show #{options[:element_id].to_s.titleize}', 'Hide #{options[:element_id].to_s.titleize}')", :class => :toggle_link, :id => "toggle_#{options[:element_id]}_link", "data-default-state" => options[:state]
   end
   
 end

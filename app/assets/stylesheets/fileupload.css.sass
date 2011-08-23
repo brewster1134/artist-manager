@@ -1,16 +1,22 @@
 //= require fileupload-ui
 
-label.fileinput-button
-  float: right
-table.files
-  width: 100%
-  td.preview
-    width: 80px
-  td.progress
-    min-width: 150px
-  td.start,
-  td.cancel,
-  td.delete
-    width: 40px 
-.fileupload-content .fileupload-progressbar
-  width: 100%
+@import settings
+
+.ui-widget
+  .fileupload-buttonbar
+    background: $grey_06
+    label.fileinput-button
+      float: right
+  .fileupload-content
+    table.files
+      width: 100%
+      td.preview
+        width: 80px
+      td.progress
+        min-width: 150px
+      td.start,
+      td.cancel,
+      td.delete
+        width: 40px 
+    .fileupload-progressbar
+      width: 100%

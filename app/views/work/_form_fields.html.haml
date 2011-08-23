@@ -9,6 +9,6 @@
 = work.input :for_sale
 %fieldset#for_sale
   %legend For Sale Options
-  = work.input :price
+  = work.input :price, :input_html => {size: 5}
   = work.input :price_currency, collection: currency_select_array, prompt: false
   = work.input :quantity, input_html: { size: 5 }

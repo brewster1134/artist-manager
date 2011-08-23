@@ -35,19 +35,19 @@
       {{/if}}
     {{else}}
     %td.preview
-      {{if thumbnail_url}}
-      %a{ href: "${url}", target: "_blank" }
-        %img{ src: "${thumbnail_url}" }
+      {{if thumbnail_path}}
+      %a.lightbox{ href: "${url}", target: "_blank", rel: "${work_id}" }
+        %img{ src: "${thumbnail_path}" }
       {{/if}}
     %td.name
-      %a{ href: "${url}", target: "{{if thumbnail_url}}_blank{{/if}}" }
+      %a.lightbox{ href: "${url}", target: "{{if thumbnail_path}}_blank{{/if}}", rel: "${work_id}" }
         ${name}
     %td.size
       ${sizef}
     %td{ colspan: 2 }
     {{/if}}
     %td.delete
-      %button.delete{ "data-type" => "${delete_type}", "data-url" => "${delete_url}" }Delete
+      %button.delete{ "data-type" => "${delete_type}", "data-url" => "${delete_path}" }Delete
 
 #fileupload
   .fileupload-buttonbar

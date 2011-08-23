@@ -7,7 +7,7 @@
 
 %fieldset
   %legend Manage Images
-  = render "shared/file_upload", :path => work_images_path(@work), :label => "Images"
+  = render "shared/file_upload", :path => work_work_images_path(@work), :label => "Images"
 
 = simple_form_for @work do |w|
   = render 'shared/form_errors', instance: @work
