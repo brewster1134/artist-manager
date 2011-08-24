@@ -9,8 +9,8 @@
   %fieldset
     %legend Splash Page
     = s.input :splash_page, :as => :boolean, :hint => input_hint(:splash_page)
-    = s.input :splash_page_view, :collection => Settings.site[:splash_page_views], :include_blank => false, :hint => input_hint(:splash_page_view)
     = s.input :splash_page_featured, :as => :boolean, :hint => input_hint(:splash_page_featured)
+    = s.input :splash_page_view, :collection => Settings.site[:splash_page_views], :include_blank => false, :hint => input_hint(:splash_page_view)
   %fieldset
     %legend General
     = s.input :title, :hint => input_hint(:title)
@@ -26,7 +26,7 @@
   %fieldset
     %legend Google Account
     = s.input :google_email, :hint => input_hint(:google_email)
-    = s.input :google_password, :hint => input_hint(:google_password)
+    = s.input :google_password, :hint => input_hint(:google_password), :input_html => {:value => Settings.google_password}
     = s.input :google_calendar, :hint => input_hint(:google_calendar)
   %fieldset
     %legend

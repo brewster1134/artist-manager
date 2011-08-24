@@ -9,6 +9,7 @@ gem "sqlite3"
 
 gem "acts-as-taggable-on"
 gem "carrierwave"
+gem "coffee-rails"
 gem "gcal4ruby"
 gem "haml"
 gem "jquery-rails"
@@ -22,7 +23,6 @@ gem "simple_form"
 # in production environments by default.
 group :assets do
   gem "sass-rails", :git => "git://github.com/rails/sass-rails.git", :branch => "3-1-stable"
-  gem "coffee-rails"
   gem "uglifier"
   gem "compass", :git => "git://github.com/chriseppstein/compass.git", :branch => "rails31"
 end

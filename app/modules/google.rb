@@ -8,10 +8,10 @@ module Google
         if calendar.exists?
           return calendar.events
         else
-          flash.now.alert = "No events were found on the calendar." if current_user
+          raise "No events were found on the calendar."
         end 
       else
-        flash.now.alert = "No calendar with the name '#{Settings.google_calendar}' could be found." if current_user
+        raise "No calendar with the name '#{Settings.google_calendar}' could be found."
       end 
     end
     return []
@@ -23,7 +23,7 @@ module Google
       service.authenticate(Settings.google_email, Settings.google_password)
       return service
     rescue GData4Ruby::HTTPRequestFailed
-      flash.now.alert = "There was a problem authenticating your google account" if current_user
+      raise "There was a problem authenticating your google account"
       return nil
     end
   end

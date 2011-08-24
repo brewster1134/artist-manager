@@ -24,6 +24,7 @@ ArtistManager::Application.routes.draw do
   get 'settings' => 'settings#edit', :as => :edit_settings
   put 'settings' => 'settings#update'
 
+  get 'events' => 'home#events'
   get 'home' => 'home#show'
   root :to => 'home#splash'
   

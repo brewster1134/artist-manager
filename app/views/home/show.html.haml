@@ -1,9 +1,15 @@
+- content_for :js do
+  :coffee
+    events_path = "#{events_path}"
+
 %fieldset#events
   %legend Events
-  - if @events.present?
-    = render "events_accordion", :events => @events
-  - else
-    No Events Found 
+  .accordion
+    %h4.center LOADING EVENTS...
+    -# - if @events.present?
+      -# = render "events_accordion", :events => @events
+    -# - else
+      -# No Events Found 
 
 %fieldset#tags
   %legend Work

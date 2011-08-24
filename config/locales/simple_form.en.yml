@@ -15,7 +15,10 @@ en:
         new:
           login: 
       settings:
-        home_show_tag_view: Home Page Tag Style
+        use_logo: Use Logo?
+        home_show_tag_view: Home Page Work Style
+        series_show_view: Series Style
+        work_show_view: Work Style
         email_no_reply: No Reply Email
       work:
         for_sale: For Sale?
@@ -28,13 +31,15 @@ en:
         new:
           login: Username or E-mail
       settings:
-        home_show_tag_view: Style of 'Work' on the Home page.
+        use_logo: If checked, the header will show the uploaded image.  Otherwise it will show the Title as regulat text. 
+        home_show_tag_view: Style of the Work section on the Home page.
         title:  This appears in the browser toolbar, when the site is bookmarked, and in search-engine results
         splash_page: Enables or Disables showing a splash page 
         google_password: If you use 2-step authorization, create an app specific password, and use that.
         google_calendar: Name of the calendar you want to show events from.
         email_interceptor: In development, all emails sent from the site will be intercepted, and sent here.
         email_no_reply: The FROM address for any emails sent by the site that you dont want anyone replying to.
+        splash_page_featured: If checked, the splash page will only show images from featured work
       series:
         view: To override the default view for this series
       work:

@@ -74,6 +74,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.2)
+    coffeebeans (1.0.1)
+      actionpack (>= 3.0.0)
+      coffee-script
     colorize (0.5.8)
     diff-lcs (1.1.2)
     erubis (2.7.0)
@@ -201,6 +204,7 @@ DEPENDENCIES
   capybara
   carrierwave
   coffee-rails
+  coffeebeans
   colorize
   compass!
   factory_girl_rails

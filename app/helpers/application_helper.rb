@@ -100,7 +100,7 @@ module ApplicationHelper
 
   def footer
     footer_html = "Site by "
-    footer_html << link_to("Man Alive!", "http://www.wearemanalive.com")
+    footer_html << link_to("Man Alive!", "http://www.wearemanalive.com", :target => "_blank")
     return footer_html.html_safe
   end
   

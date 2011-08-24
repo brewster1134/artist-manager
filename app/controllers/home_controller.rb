@@ -17,7 +17,12 @@ class HomeController < ApplicationController
 
   def show
     @tags = Work.tags
+  end
+  
+  def events
     @events = calendar_events.select{ |e| e.start_time.to_date > Date.today}.sort_by(&:start_time)
+  rescue => e
+    @events = e
   end
 
 end
