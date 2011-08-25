@@ -3,6 +3,6 @@
 //= require lightbox
 
 $ ->
-  $('.slideshow').nivoSlider()
-  $('.image_scroller').thumbnailScroller
+  $('.slideshow').slideshow()
+  $('.image_scroller').imageScroller
     scrollerType: "clickButtons"

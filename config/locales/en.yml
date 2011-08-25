@@ -24,3 +24,8 @@ en:
       header:
         one: There was an error.
         other: "There were %{count} errors."
+
+  # views
+  settings:
+    edit:
+      image_size_notice: If image sizes are changed, all images will have to be rebuilt.  This can take awhile depending on how many images you have uploaded.  It will run in the background and the resized images will appear on the site as soon as they are finsihed being rebuilt.

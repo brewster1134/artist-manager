@@ -23,7 +23,7 @@
 #slideshow_view
   .slideshow
     +slideshow
-    height: <%= Settings.image_sizes[:series][:show][:slideshow][1] %>px
+    height: <%= Settings.image_sizes[:series][:show][:slideshow][:height] %>px
 
   .series_title
     margin: 0 0 5px
@@ -39,7 +39,7 @@
   .description
     margin-bottom: 15px
   .image_scroller
-    height: <%= Settings.image_sizes[:series][:show][:image_scroller_height] %>px
+    height: <%= Settings.image_sizes[:series][:show][:scroller][:height] %>px
   a.jTscrollerNextButton,
   a.jTscrollerPrevButton
     top: 18px

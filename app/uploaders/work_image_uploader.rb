@@ -32,55 +32,68 @@ class WorkImageUploader < CarrierWave::Uploader::Base
     end
   end
 
+  @@sizes = Settings.image_sizes
+
   # home#splash page
   version :home_splash_slideshow do
-    process :resize_to_fill => Settings.image_sizes[:home][:splash][:slideshow]
+    size = @@sizes[:home][:splash][:slideshow]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
   version :home_splash_random do
-    process :resize_to_fill => Settings.image_sizes[:home][:splash][:random]
+    size = @@sizes[:home][:splash][:random]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
 
   # home#show accordion
   version :home_show_series do
-    process :resize_to_fill => Settings.image_sizes[:home][:show][:series]
+    size = @@sizes[:home][:show][:series]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
   version :home_show_work do
-    process :resize_to_fill => Settings.image_sizes[:home][:show][:work]
+    size = @@sizes[:home][:show][:work]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
 
   # series#show
   version :series_show_work do
-    process :resize_to_fill => Settings.image_sizes[:series][:show][:work]
+    size = @@sizes[:series][:show][:work]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
   version :series_show_slideshow do
-    process :resize_to_fill => Settings.image_sizes[:series][:show][:slideshow]
+    size = @@sizes[:series][:show][:slideshow]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
-  version :series_show_image_scroller do
-    process :resize_by_height => Settings.image_sizes[:series][:show][:image_scroller_height]
+  version :series_show_scroller do
+    process :resize_by_height => @@sizes[:series][:show][:scroller][:height]
   end
 
   # work#edit
-  version :work_edit do
-    process :resize_and_pad => Settings.image_sizes[:work][:edit]
+  version :work_edit_work do
+    size = @@sizes[:work][:edit][:work]
+    process :resize_and_pad => [size[:width], size[:height]]
   end
 
   # work#index
   version :work_index_series do
-    process :resize_to_fill => Settings.image_sizes[:work][:index][:series]
+    size = @@sizes[:work][:index][:series]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
   version :work_index_work do
-    process :resize_to_fill => Settings.image_sizes[:work][:index][:work]
+    size = @@sizes[:work][:index][:work]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
 
   # work#show
   version :work_show_slideshow do
-    process :resize_to_fill => Settings.image_sizes[:work][:show][:slideshow]
+    size = @@sizes[:work][:show][:slideshow]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
-  version :work_show_image_scroller do
-    process :resize_by_height => Settings.image_sizes[:work][:show][:image_scroller_height]
+  version :work_show_scroller do
+    process :resize_by_height => @@sizes[:work][:show][:scroller][:height]
   end
   version :work_show_plain do
-    process :resize_to_fill => Settings.image_sizes[:work][:show][:plain]
+    size = @@sizes[:work][:show][:plain]
+    process :resize_to_fill => [size[:width], size[:height]]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

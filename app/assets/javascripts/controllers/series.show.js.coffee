@@ -2,7 +2,7 @@
 //= require image_scroller
 
 $ ->
-  $('.slideshow').nivoSlider
+  $('.slideshow').slideshow
     captionOpacity: 0.6
-  $('.image_scroller').thumbnailScroller
+  $('.image_scroller').imageScroller
     scrollerType: "clickButtons"

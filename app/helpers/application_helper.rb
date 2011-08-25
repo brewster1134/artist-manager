@@ -5,7 +5,7 @@ module ApplicationHelper
     case type
     when :javascript, :js
       dir = "javascripts"
-      ext = [".js.coffee", ".js.coffee.haml"]
+      ext = [".js.coffee", ".js.coffee.erb"]
       helper = "javascript_include_tag" 
     when :stylesheet, :css
       dir = "stylesheets"

@@ -7,7 +7,7 @@
 $ ->
 
   $("a.lightbox").livequery ->
-    $(@).fancybox
+    $(@).lightbox
       padding: 1,
       cyclic: true,
       overlayColor: '#000000',

@@ -14,7 +14,7 @@
 .image_scroller
   .jThumbnailScroller
     border-width: 0 0 2px 0
-  height: <%= Settings.image_sizes[:work][:show][:image_scroller_height] %>px
+  height: <%= Settings.image_sizes[:work][:show][:scroller][:height] %>px
   a.jTscrollerNextButton,
   a.jTscrollerPrevButton
     top: 18px
@@ -63,7 +63,7 @@
     +clearfix
     +single-box-shadow($grey_04, 0px, 1px, 5px, 0px)
     +full_site_width
-    border-width: 2px 0
+    border-width: 3px 1px
     border-style: solid
     border-color: $grey_01
     img

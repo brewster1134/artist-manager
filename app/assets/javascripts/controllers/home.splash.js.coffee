@@ -1,7 +1,7 @@
 //= require slideshow
 
 $ ->
-  $('.slideshow').nivoSlider
+  $('.slideshow').slideshow
     directionNav: false,
     controlNav: false,
     captionOpacity: "0.3"

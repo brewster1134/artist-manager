@@ -1,12 +1,10 @@
 require 'yaml'
 
 class Settings < ActiveRecord::Base
-  attr_accessor :logo
-
   CUSTOM_FILE = Rails.root.join("config", "settings_#{Rails.env}.yml")
   after_initialize :populate_instance_accessors
-
-  cattr_accessor :site, :defaults
+  attr_accessor :logo, :resize_images
+  cattr_accessor :site, :defaults, 
   @@site = {
     :splash_page_views =>   ["slideshow", "random"],
     :home_show_tag_views => ["accordion", "plain"],
@@ -31,42 +29,78 @@ class Settings < ActiveRecord::Base
     :image_sizes =>           {
       :home => {
         :show => {
-          :series => [160, 75],
-          :work => [75, 75],
+          :series => {
+            :width => 160,
+            :height => 75
+          },
+          :work => {
+            :width => 75,
+            :height => 75
+          }
         },
         :splash => {
-          :slideshow => [966, 402],
-          :random => [966, 402]
+          :slideshow => {
+            :width => 966,
+            :height => 402
+          },
+          :random => {
+            :width => 966,
+            :height => 402
+          }
         }
       },
       :series => {
         :show => {
-          :work => [145, 145],
-          :slideshow => [962, 400],
-          :image_scroller_height => 75 
-          
+          :work => {
+            :width => 145,
+            :height => 145
+          },
+          :slideshow => {
+            :width => 962,
+            :height => 400
+          },
+          :scroller => {
+            :height => 75
+          }
         }
       },
       :work => {
-        :edit => [80, 80],
+        :edit => {
+          :work => {
+            :width => 80,
+            :height => 80
+          }
+        },
         :index => {
-          :series => [300, 145],
-          :work => [145, 145]
+          :series => {
+            :width => 300,
+            :height => 145
+          },
+          :work => {
+            :width => 145,
+            :height => 145
+          }
         },
         :show => {
-          :slideshow => [962, 400],
-          :image_scroller_height => 75,
-          :plain => [150,150]
+          :slideshow => {
+            :width => 962,
+            :height => 400
+          },
+          :scroller => {
+            :height => 75
+          },
+          :plain => {
+            :width => 160,
+            :height => 160
+          }
         }
       }
     }
   }.with_indifferent_access
-  # If changes are made to :image_sizes, the following needs to be run to resize all existing imags to the new sizes.
-  # WorkImage.all.each{|w| w.image.recreate_versions!}
   
   @@custom = File.exists?(CUSTOM_FILE) ? YAML::load(File.open(CUSTOM_FILE, 'r')) : {}
   @@custom.delete_if{ |k,v| !@@defaults.keys.include?(k) || v == "" }
-  @@defaults.merge(@@custom).each do |k,v|
+  @@merged = @@defaults.merge(@@custom).each do |k,v|
     cattr_accessor k
     attr_accessor k
     self.send("#{k}=", v)
@@ -88,6 +122,7 @@ class Settings < ActiveRecord::Base
   
   def save
     if self.valid?
+
       # Save Logo
       if self.logo && self.logo.content_type =~ /image/
         File.open(self.logo.open, 'rb') do |l|
@@ -95,7 +130,7 @@ class Settings < ActiveRecord::Base
         end
       end
 
-      # Save settings
+      # Prepare settings
       hash = {}
       @@defaults.each do |k,v|
         value = self.send(k)
@@ -105,17 +140,22 @@ class Settings < ActiveRecord::Base
         when Symbol
           value.to_sym
         when Hash
-          value.with_indifferent_access
+          if k == "image_sizes"
+            value = convert_image_sizes_hash_to_integers(value)
+            self.resize_images = true if value != @@merged[:image_sizes]
+            value
+          end
         else
           value
         end
         hash[k.to_s] = value if !value.nil? && value != "" && value != v
       end
-      puts hash.inspect
+
+      # Save changed settings to file
       File.open(CUSTOM_FILE, 'w+') { |f| f.write hash.to_yaml }
     end
   end
-
+  
   def populate_instance_accessors
     @@defaults.merge(@@custom).each do |k,v|
       self.send("#{k}=", v) if self.send(k).nil?
@@ -123,4 +163,16 @@ class Settings < ActiveRecord::Base
   end
   private :populate_instance_accessors
   
+  def convert_image_sizes_hash_to_integers(hash)
+    hash.inject({}) do |h, (k,v)|
+      if v.is_a? Hash
+        h[k] = convert_image_sizes_hash_to_integers(v)
+      else
+        h[k] = v.to_i
+      end
+      h
+    end
+  end
+  private :convert_image_sizes_hash_to_integers
+
 end

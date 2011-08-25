@@ -34,5 +34,12 @@
       = toggle_link :developer_settings, :state => :hide
     #developer_settings.hide
       = s.input :email_interceptor, :hint => input_hint(:email_interceptor)
+  %fieldset
+    %legend
+      Image Sizes
+      = toggle_link :image_sizes, :state => :hide
+    #image_sizes.hide
+      %p.notice= t('.image_size_notice') 
+      = image_sizes_inputs
   .actions
     = s.button :submit, "Save Settings"

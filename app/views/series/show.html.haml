@@ -13,7 +13,7 @@
       - @series.images.shuffle.each do |i|
         = link_to image_tag(i.image.series_show_slideshow.url, :title => i.work.title), work_path(i.work)
   - elsif @view == :scroller
-    = render 'shared/image_scroller', :images => @series.images(false), :image_version => "series_show_image_scroller"
+    = render 'shared/image_scroller', :images => @series.images(false), :image_version => "series_show_scroller"
   .description= markup @series.description
   - unless @view == :scroller
     .series_work

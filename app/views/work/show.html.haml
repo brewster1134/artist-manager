@@ -13,7 +13,7 @@
     = embed_video(@work.video_link)
 
   - if [:video_link, :scroller].include?(@view) && @work.images.present?
-    = render 'shared/image_scroller', :images => @work.images, :image_version => "work_show_image_scroller"
+    = render 'shared/image_scroller', :images => @work.images, :image_version => "work_show_scroller"
 
   - if [:slideshow].include?(@view) && @work.images.present? 
     .slideshow
