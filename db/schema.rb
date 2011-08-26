@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110823184220) do
+ActiveRecord::Schema.define(:version => 20110825230239) do
 
   create_table "series", :force => true do |t|
     t.string   "title"
@@ -65,15 +65,17 @@ ActiveRecord::Schema.define(:version => 20110823184220) do
     t.string   "video_link"
     t.string   "dimensions"
     t.integer  "completion_year"
-    t.boolean  "for_sale",        :default => true
-    t.integer  "price_cents",     :default => 0
-    t.string   "price_currency",  :default => "usd"
-    t.integer  "quantity",        :default => 1
+    t.boolean  "for_sale",          :default => true
+    t.integer  "price_cents",       :default => 0
+    t.string   "price_currency",    :default => "usd"
+    t.integer  "quantity",          :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "series_id"
     t.string   "view"
     t.boolean  "featured"
+    t.integer  "shipping_cents",    :default => 0
+    t.string   "shipping_currency", :default => "usd"
   end
 
   create_table "work_images", :force => true do |t|
