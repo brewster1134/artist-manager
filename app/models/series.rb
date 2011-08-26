@@ -2,9 +2,11 @@ class Series < ActiveRecord::Base
   has_many :works
   attr_accessible :title, :description, :view
 
-  validates :title,       :presence => true,
-                          :uniqueness => true
-  validates :view,        :inclusion => {:in => ["slideshow", "scroller", "plain"]}
+  validates :title, :presence => true,
+                    :uniqueness => true
+  validates :view,  :inclusion => {:in => Settings.site[:series_show_views]},
+                    :allow_blank => true
+  
 
   def url
     self.title.parameterize

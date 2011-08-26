@@ -7,9 +7,14 @@ ArtistManager::Application.routes.draw do
   get   "edit_account" => "passwords#edit"
   put   "change_password" => "passwords#update"
 
+  # payments
+  get  "payments/checkout"
+  get  "payments/confirm"
+  post "payments/complete"
+
   resources :series, :only => [:show, :new, :create, :edit, :update, :destroy]
 
-  resources :sessions, :only => [:create]
+  resources :sessions, :only => :create
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
 

@@ -10,6 +10,7 @@ class WorkController < ApplicationController
   end
   
   def show
+    flash.now.alert = "Payment Cancelled" if params[:payment_cancelled]
     @work = Work.find_by_url(params[:id])
     @view = (params[:view] || (:video_link if @work.video_link.present?) || @work.view || Settings.work_show_view).to_sym
   end

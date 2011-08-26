@@ -62,5 +62,9 @@ module ArtistManager
       g.helper false
       g.assets false
     end
+    
+    config.after_initialize do
+      ActiveMerchant::Billing::Base.mode = :test
+    end
   end
 end

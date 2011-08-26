@@ -6,6 +6,7 @@ class Settings < ActiveRecord::Base
   attr_accessor :logo, :resize_images
   cattr_accessor :site, :defaults, 
   @@site = {
+    :payment_modules =>     ["Paypal"],
     :splash_page_views =>   ["slideshow", "random"],
     :home_show_tag_views => ["accordion", "plain"],
     :series_show_views =>   ["slideshow", "scroller", "plain"],
@@ -21,8 +22,13 @@ class Settings < ActiveRecord::Base
     :google_email =>          "email@gmail.com",
     :google_password =>       "password",
     :google_calendar =>       "My Calendar",
+    :payment_module =>        "Paypal",
+    :paypal_api_username =>   "email_api.gmail.com",
+    :paypal_api_password =>   "password",
+    :paypal_api_signature =>  "A1B2C3D4E5F6G7H8I9",
     :email_interceptor =>     "developer@domain.com",
     :email_no_reply =>        "noreply@domain.com",
+    :email_general =>         "email@domain.com",
     :home_show_tag_view =>    :accordion,
     :series_show_view =>      :slideshow,
     :work_show_view =>        :slideshow,
@@ -114,6 +120,8 @@ class Settings < ActiveRecord::Base
   validates :currency,              :inclusion => { :in => Money::Currency::TABLE.stringify_keys.keys }
   validates :google_email,          :email => true,
                                     :allow_blank => true
+  validates :payment_module,        :inclusion => { :in => @@site[:payment_modules] }
+  validates :email_general,         :email => true
   validates :email_interceptor,     :email => true
   validates :email_no_reply,        :email => true
   validates :home_show_tag_view,    :inclusion => { :in => @@site[:home_show_tag_views] }

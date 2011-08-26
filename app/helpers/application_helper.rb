@@ -46,10 +46,10 @@ module ApplicationHelper
 
   def logo
     logo_path = File.join(Rails.root, 'public', 'uploads')
-    logo = Dir.glob(File.join(logo_path, 'logo.*')).first
-    logo_filename = File.basename(logo)
+    logo = Dir.glob(File.join(logo_path, 'logo.*')).first || ""
     
     content = if Settings.use_logo && File.exists?(logo)
+      logo_filename = File.basename(logo)
       image_tag(File.join("/uploads/#{logo_filename}"))
     else
       Settings.title
@@ -75,8 +75,9 @@ module ApplicationHelper
       :space_header =>      false,
       :xhtml =>             true
     )
+    div_class = options.delete(:class)
     options.reject! { |k, v| !v }
-    content_tag(:div, Redcarpet.new(text.to_s, *options.keys).to_html.html_safe, :class => "markup")
+    content_tag(:div, Redcarpet.new(text.to_s, *options.keys).to_html.html_safe, :class => "markup #{div_class}")
   end
   
   def currency_select_array
@@ -87,15 +88,16 @@ module ApplicationHelper
   # #element_id
   # = toggle_link :hidden_element, :state => :hide
   # #hidden_element.hide
-  def toggle_link(name, options = {})
+  def toggle_link(element_id, options = {})
     options.reverse_merge!({
-      :element_id =>  name,
-      :state =>       :show
+      :element_id =>  element_id,
+      :state      =>  :show,
+      :show_name  =>  options[:name] || "Show #{element_id.to_s.titleize}",
+      :hide_name  =>  options[:name] || "Hide #{element_id.to_s.titleize}"
     })
     state_opposite = {:show => :hide, :hide => :show}
-    initial_text = "#{state_opposite[options[:state]]}_#{name}".titleize
-    toggled_text = "#{options[:state]}_#{name}".titleize
-    link_to_function initial_text, "$(this).toggle('#{options[:element_id]}', '#{options[:state]}', 'Show #{options[:element_id].to_s.titleize}', 'Hide #{options[:element_id].to_s.titleize}')", :class => :toggle_link, :id => "toggle_#{options[:element_id]}_link", "data-default-state" => options[:state]
+    initial_text = options[:name] || "#{state_opposite[options[:state]]}_#{element_id}".titleize
+    link_to_function initial_text, "$(this).toggle('#{options[:element_id]}', '#{options[:state]}', '#{options[:show_name]}', '#{options[:hide_name]}')", :class => :toggle_link, :id => "toggle_#{options[:element_id]}_link", "data-default-state" => options[:state]
   end
 
   def footer

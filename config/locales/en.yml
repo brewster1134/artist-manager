@@ -28,4 +28,13 @@ en:
   # views
   settings:
     edit:
+      paypal_notice: |
+        The paypal information here is NOT your usual PayPal login.  It is your API credentials.  To find this information...
+
+        + Login to Paypal
+        + Go to 'Profile' > 'My Selling Tools' > 'API Access: Update'
+        + Follow the instructions to create or view your API signature.
+        
+        *For Development, use your Sandbox credentials!*
       image_size_notice: If image sizes are changed, all images will have to be rebuilt.  This can take awhile depending on how many images you have uploaded.  It will run in the background and the resized images will appear on the site as soon as they are finsihed being rebuilt.
+      

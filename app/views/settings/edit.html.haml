@@ -22,12 +22,23 @@
     = s.input :work_show_view, :collection => Settings.site[:work_show_views], :include_blank => false, :hint => input_hint(:work_show_view)
   %fieldset
     %legend Email
+    = s.input :email_general, :hint => input_hint(:email_general)
     = s.input :email_no_reply, :hint => input_hint(:email_no_reply)
   %fieldset
     %legend Google Account
     = s.input :google_email, :hint => input_hint(:google_email)
     = s.input :google_password, :hint => input_hint(:google_password), :input_html => {:value => Settings.google_password}
     = s.input :google_calendar, :hint => input_hint(:google_calendar)
+
+  -# Only 1 paypment module available
+  -# = s.input :payment_module, :collection => Settings.site[:payment_modules], :include_blank => false, :hint => input_hint(:payment_module)
+
+  %fieldset
+    %legend Paypal Account
+    = markup(t('.paypal_notice'), :class => :notice)
+    = s.input :paypal_api_username, :hint => input_hint(:paypal_api_username)
+    = s.input :paypal_api_password, :hint => input_hint(:paypal_api_password), :input_html => {:value => Settings.paypal_api_password}
+    = s.input :paypal_api_signature, :hint => input_hint(:paypal_api_signature)
   %fieldset
     %legend
       Developer

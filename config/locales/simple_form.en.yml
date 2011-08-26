@@ -41,9 +41,9 @@ en:
         email_no_reply: The FROM address for any emails sent by the site that you dont want anyone replying to.
         splash_page_featured: If checked, the splash page will only show images from featured work
       series:
-        view: To override the default view for this series
+        view: Leave blank to use the Site Default
       work:
-        view: To override the default view for this work
+        view: Leave blank to use the Site Default
         tag_list: Any keywords or categories seperated by comma e.g. Paintings, Photography, Video 
         media: e.g. Oil on Canvas
         dimensions: e.g. 5ft x 10ft

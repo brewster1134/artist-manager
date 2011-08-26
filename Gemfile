@@ -7,6 +7,7 @@ gem "rails", "3.1.0.rc6"
 
 gem "sqlite3"
 
+gem "activemerchant"
 gem "acts-as-taggable-on"
 gem "carrierwave"
 gem "coffee-rails"

@@ -19,7 +19,8 @@ class Work < ActiveRecord::Base
   validates :shipping,          numericality: { greater_than_or_equal_to: 0 }
   validates :shipping_currency, inclusion:    { in: Money::Currency::TABLE.stringify_keys.keys }
   validates :quantity,          numericality: { greater_than_or_equal_to: 0 }
-  validates :view,              inclusion:    { in: ["slideshow", "scroller", "plain"] }
+  validates :view,              inclusion:    { in: Settings.site[:work_show_views] },
+                                allow_blank: true
   validates :featured,          inclusion:    { in: [true, false] }
   
   def url
@@ -66,6 +67,12 @@ class Work < ActiveRecord::Base
   end
   def can_request_price?
     self.for_sale && !self.sold_out? && !self.price?
+  end
+  def total_price
+    self.price + self.shipping
+  end
+  def name
+    [(self.series.title if self.series), self.title].compact * ": "
   end
     
 end

@@ -21,17 +21,6 @@ ActiveRecord::Schema.define(:version => 20110825230239) do
     t.string   "view"
   end
 
-  create_table "settings", :force => true do |t|
-    t.string   "var",                       :null => false
-    t.text     "value"
-    t.integer  "target_id"
-    t.string   "target_type", :limit => 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
-
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -65,15 +54,15 @@ ActiveRecord::Schema.define(:version => 20110825230239) do
     t.string   "video_link"
     t.string   "dimensions"
     t.integer  "completion_year"
-    t.boolean  "for_sale",          :default => true
+    t.boolean  "for_sale",          :default => false
     t.integer  "price_cents",       :default => 0
     t.string   "price_currency",    :default => "usd"
-    t.integer  "quantity",          :default => 1
+    t.integer  "quantity",          :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "series_id"
     t.string   "view"
-    t.boolean  "featured"
+    t.boolean  "featured",          :default => false
     t.integer  "shipping_cents",    :default => 0
     t.string   "shipping_currency", :default => "usd"
   end

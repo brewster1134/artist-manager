@@ -1,0 +1,17 @@
+%h1.center Please Confirm Your Payment Details
+
+.center
+  %fieldset
+    %legend Address
+    %p= [@response.address['name'], @response.address['company']].reject(&:blank?) * " @ "
+    %p= @response.address['address1']
+    %p= @response.address['address2']
+    %p= [@response.address['city'], @response.address['state'], @response.address['country'], @response.address['zip']].reject(&:blank?) * ", "
+
+  %fieldset
+    %legend Amount
+    = Money.parse(@response.params['order_total'], @response.params['order_total_currency_id']).format
+  
+  = form_tag :action => :complete, :token => params[:token], :payer_id => params[:PayerID] do
+    = hidden_field_tag :work_id, @response.params["number"]
+    = submit_tag 'Complete Payment'

@@ -6,7 +6,10 @@
     %li= link_to "Edit #{@work.title}", edit_work_path(@work)
 
 %div{:id => "#{@view.to_s}_view"}
-  %h1.work_title= @work.title
+  %h1.work_title
+    = @work.title
+    - if @work.series
+      = link_to "from #{@work.series.title} series", @work.series
   = render 'shared/tags', :tags => @work.tags
 
   - if [:video_link].include? @view
@@ -28,15 +31,21 @@
     = content_tag(:span, @work.completion_year) if @work.completion_year.present? 
     = content_tag(:span, @work.media) if @work.media.present? 
     = content_tag(:span, @work.dimensions) if @work.dimensions.present?
+  #price_request.hide
+    FORM GOES HERE
+  
   .details{:class => ("for_sale" if @work.for_sale)}
     .description= markup @work.description
     - if @work.for_sale
       .for_sale
-        - if @work.can_buy_on_site? 
-          = @work.price.format
-          PAYMENT BUTTON HERE
-        - elsif @work.can_request_price?
-          REQUEST PRICE
-        - elsif @work.sold_out?
-          SOLD OUT
-
+        .price= @work.price.format
+        - if @work.shipping > 0
+          .shipping= "Shipping #{@work.shipping.format}"
+        .option
+          = toggle_link :price_request, :state => :hide, :name => "Price Request"
+          -# - if @work.can_buy_on_site? 
+            -# = link_to "Buy Now", payments_checkout_path(:work_id => @work.id), :class => "buy_now"
+          -# - elsif @work.can_request_price?
+            -# REQUEST PRICE
+          -# - elsif @work.sold_out?
+            -# %span.sold_out Sold Out

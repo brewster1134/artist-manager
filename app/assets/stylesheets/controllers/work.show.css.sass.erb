@@ -10,6 +10,11 @@
 .work_title
   text-align: center
   border: none
+  >a
+    font-size: 0.7em
+    text-decoration: none
+    color: $grey_05
+    display: block
 
 .image_scroller
   .jThumbnailScroller
@@ -42,7 +47,23 @@
     .for_sale
       float: right
       width: $for_sale_width
-
+      text-align: center
+      .price
+        font-size: 2em
+        border-bottom: 1px solid $grey_02
+        padding-bottom: 5px
+      .shipping
+        padding: 2px
+      .option
+        padding: 10px 0
+        border-bottom: 1px solid $grey_02
+        a, span
+          display: block
+          font-size: 1.5em
+          text-decoration: none
+          padding: 4px
+          &:hover
+            background: white
 #video_link_view
   iframe.video
     +full_site_width

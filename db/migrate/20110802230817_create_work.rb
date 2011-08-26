@@ -7,10 +7,10 @@ class CreateWork < ActiveRecord::Migration
       t.string  :video_link
       t.string  :dimensions
       t.integer :completion_year
-      t.boolean :for_sale,        :default => true
+      t.boolean :for_sale,        :default => false
       t.integer :price_cents,     :default => 0
       t.string  :price_currency,  :default => :usd
-      t.integer :quantity,        :default => 1
+      t.integer :quantity,        :default => 0
       t.timestamps
     end
   end
