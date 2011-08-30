@@ -58,12 +58,20 @@ body
                   background: $grey_04
     >#flash
       font-family: 'Shanti', sans-serif
-      margin: -5px 0 20px 0
-      padding: 5px
-      border: 2px solid $grey_06
       text-align: center
       font-weight: bold
-      background: white
+      >div
+        background: white
+        padding: 5px
+        border-width: 0 2px
+        border-style: solid
+        border-color: $grey_06
+        &:first-child
+          border-top: 2px solid $grey_06
+          margin-top: -5px
+        &:last-child
+          border-bottom: 2px solid $grey_06
+          margin-bottom: 20px
       >.notice
         color: green
       >.alert

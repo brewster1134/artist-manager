@@ -31,8 +31,15 @@
     = content_tag(:span, @work.completion_year) if @work.completion_year.present? 
     = content_tag(:span, @work.media) if @work.media.present? 
     = content_tag(:span, @work.dimensions) if @work.dimensions.present?
-  #price_request.hide
-    FORM GOES HERE
+  - if @work.can_request_price?
+    #price_request.hide
+      %fieldset
+        %legend Price Request
+        = simple_form_for Email.new, :url => work_price_request_path(@work), :remote => true do |pr|
+          = pr.input :from, :label => "Email", :required => true
+          = pr.input :message, :as => :text, :input_html => {:size => '80x5'}
+          .actions
+            = pr.submit "Send Request"
   
   .details{:class => ("for_sale" if @work.for_sale)}
     .description= markup @work.description
@@ -42,10 +49,9 @@
         - if @work.shipping > 0
           .shipping= "Shipping #{@work.shipping.format}"
         .option
-          = toggle_link :price_request, :state => :hide, :name => "Price Request"
-          -# - if @work.can_buy_on_site? 
-            -# = link_to "Buy Now", payments_checkout_path(:work_id => @work.id), :class => "buy_now"
-          -# - elsif @work.can_request_price?
-            -# REQUEST PRICE
-          -# - elsif @work.sold_out?
-            -# %span.sold_out Sold Out
+          - if @work.can_buy_on_site? 
+            = link_to "Buy Now", payments_checkout_path(:work_id => @work.id), :class => "buy_now"
+          - elsif @work.can_request_price?
+            = toggle_link :price_request, :state => :hide, :name => "Price Request"
+          - elsif @work.sold_out?
+            %span.sold_out Sold Out

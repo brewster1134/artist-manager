@@ -1,0 +1,9 @@
+- type ||= "notice"
+- if messages.is_a? ActionDispatch::Flash::FlashHash
+  - messages.each do |type, msg|
+    = content_tag :div, msg, :class => type
+- elsif messages.is_a? Array
+  - messages.each do |msg|
+    = content_tag :div, msg, :class => type
+- else
+  = content_tag :div, messages, :class => type

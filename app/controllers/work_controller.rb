@@ -43,4 +43,11 @@ class WorkController < ApplicationController
     end
   end
   
+  def price_request
+    @work = Work.find_by_url(params[:work_id])
+    @email = Email.new(params[:email])
+    logger.info @email.inspect
+    @email.skip = [:to, :subject, :message]
+  end
+  
 end

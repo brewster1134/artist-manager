@@ -1,10 +1,12 @@
 require 'yaml'
 
-class Settings < ActiveRecord::Base
+class Settings
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
+
   CUSTOM_FILE = Rails.root.join("config", "settings_#{Rails.env}.yml")
-  after_initialize :populate_instance_accessors
   attr_accessor :logo, :resize_images
-  cattr_accessor :site, :defaults, 
+  cattr_accessor :site, :defaults, :custom
   @@site = {
     :payment_modules =>     ["Paypal"],
     :splash_page_views =>   ["slideshow", "random"],
@@ -15,10 +17,10 @@ class Settings < ActiveRecord::Base
   @@defaults = {
     :title =>                 "Artist Manager",
     :use_logo =>              true,
-    :splash_page =>           true,
-    :splash_page_view =>      :slideshow,
-    :splash_page_featured =>  false,
     :currency =>              :usd,
+    :email_general =>         "email@domain.com",
+    :email_no_reply =>        "noreply@domain.com",
+    :email_interceptor =>     "developer@domain.com",
     :google_email =>          "email@gmail.com",
     :google_password =>       "password",
     :google_calendar =>       "My Calendar",
@@ -26,9 +28,9 @@ class Settings < ActiveRecord::Base
     :paypal_api_username =>   "email_api.gmail.com",
     :paypal_api_password =>   "password",
     :paypal_api_signature =>  "A1B2C3D4E5F6G7H8I9",
-    :email_interceptor =>     "developer@domain.com",
-    :email_no_reply =>        "noreply@domain.com",
-    :email_general =>         "email@domain.com",
+    :splash_page =>           true,
+    :splash_page_view =>      :slideshow,
+    :splash_page_featured =>  false,
     :home_show_tag_view =>    :accordion,
     :series_show_view =>      :slideshow,
     :work_show_view =>        :slideshow,
@@ -163,13 +165,12 @@ class Settings < ActiveRecord::Base
       File.open(CUSTOM_FILE, 'w+') { |f| f.write hash.to_yaml }
     end
   end
-  
-  def populate_instance_accessors
-    @@defaults.merge(@@custom).each do |k,v|
-      self.send("#{k}=", v) if self.send(k).nil?
+
+  def initialize(attributes = @@merged)
+    attributes.each do |k,v|
+      self.send("#{k}=", v)
     end
   end
-  private :populate_instance_accessors
   
   def convert_image_sizes_hash_to_integers(hash)
     hash.inject({}) do |h, (k,v)|
@@ -183,4 +184,5 @@ class Settings < ActiveRecord::Base
   end
   private :convert_image_sizes_hash_to_integers
 
+  def persisted?; false; end
 end

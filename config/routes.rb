@@ -22,6 +22,7 @@ ArtistManager::Application.routes.draw do
   
   resources :work do
     get :autocomplete_tag_name, :on => :collection
+    post :price_request
     resources :work_images, :shallow => true, :only => [:index, :create, :destroy]
   end
 

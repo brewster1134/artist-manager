@@ -15,10 +15,7 @@
       #header
         = render 'layouts/menu'
         = logo
-      - if flash.present?
-        #flash
-          - flash.each do |type, msg|
-            = content_tag :div, msg, :class => type
+      #flash= render 'shared/flash', :messages => flash
       - if page_title
         #page_title= page_title 
       #content= yield
