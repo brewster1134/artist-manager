@@ -17,7 +17,9 @@ rake db:migrate
 rake db:seed
 ```
 
-For development (or any non-production environment), you can instead run `rake dev_db:seed` to populate the site with some sample data.  **THIS WILL DROP YOUR DATABASE AND DELETE ANY FILES YOU UPLOADED THROUGH THE SITE!**
+For development (or any non-production environment), you can instead run `rake dev_db:seed` to populate the site with some sample data.
+
+**THIS WILL DROP YOUR DATABASE AND DELETE ANY FILES YOU UPLOADED THROUGH THE SITE!**
 
 ## Customizing
 
@@ -25,7 +27,9 @@ For development (or any non-production environment), you can instead run `rake d
 
 All assets are located in `app/assets`
 
-Controller & Controller/View specific CSS and JAVASCRIPT files are automatically loaded from the `controllers` subdirectory if the files exists.  For example...
+Controller & Controller/View specific CSS and JAVASCRIPT files are automatically loaded from the `controllers` subdirectory if the files exists.
+
+For example...
 
 When visiting the work#index view, the following files will be looked for...
 
@@ -36,7 +40,10 @@ When visiting the work#index view, the following files will be looked for...
 
 It will also find these assets with an additional `.erb` extension, if ruby parsing is neccessary.
 
-3rd party add-ons have generic asset wrappers for easily swapping them out. For example...
+3rd party add-ons have generic asset wrappers for easily swapping them out.
+
+For example...
+
 + By default the site uses nivoslider for the slideshow
 + Any view using the slider (eg `work#show`), loads the file `work.index.js.coffee` & `work.index.css.sass` 
 + `work.index.js.coffee` requires `slideshow.js.coffee` and `work.index.css.sass` requires `slideshow.css.sass` 
