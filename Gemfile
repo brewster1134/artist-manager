@@ -39,8 +39,8 @@ group :development do
 end
 
 # Testing
-gem "rspec-rails", group: [:test, :development]
-gem "factory_girl_rails", group: [:test, :development]
+gem "rspec-rails", :groups => [:test, :development]
+gem "factory_girl_rails", :groups => [:test, :development]
 group :test do
   gem "turn", :require => false
   gem "capybara"

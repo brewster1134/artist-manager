@@ -1,16 +1,9 @@
 #!ruby
+require 'rubygems'
+require 'fcgi'
 
-# require 'rubygems'
-# require 'fcgi'
-# 
-# ENV['RAILS_ENV'] ||= 'production' 
-# 
-# # Set GEM_PATH and GEM_HOME ("user" is your dreamhost user)
-# ENV['GEM_HOME'] ||= '/home/user/.gems'
-# require 'rubygems'
-# Gem.clear_paths
-# 
-# require File.join(File.dirname(__FILE__), '../config/environment')
+ENV['RAILS_ENV'] ||= 'production' 
+Gem.clear_paths
 
 require_relative './config/environment'
 
