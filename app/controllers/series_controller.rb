@@ -27,9 +27,10 @@ class SeriesController < ApplicationController
   
   def update
     @series = Series.find_by_url(params[:id])
-    if @series.update_attributes(params[:work])
-      redirect_to work_path(@series), :notice => "#{@series.title} was successfully updated."
+    if @series.update_attributes(params[:series])
+      redirect_to edit_series_path(@series), :notice => "#{@series.title} was successfully updated."
     else
+      @series.title = @series.title_was if @series.title_changed?
       flash.alert = t('update.failure', :x => "Series")
       render :edit
     end

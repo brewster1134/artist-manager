@@ -30,9 +30,9 @@
     = s.input :google_password, :hint => input_hint(:google_password), :input_html => {:value => Settings.google_password}
     = s.input :google_calendar, :hint => input_hint(:google_calendar)
 
-  -# Only 1 paypment module available
-  -# = s.input :payment_module, :collection => Settings.site[:payment_modules], :include_blank => false, :hint => input_hint(:payment_module)
-
+  %fieldset
+    %legend Payments
+    = s.input :payment_module, :collection => Settings.site[:payment_modules], :include_blank => false, :hint => input_hint(:payment_module)
   %fieldset
     %legend Paypal Account
     = markup(t('.paypal_notice'), :class => :notice)

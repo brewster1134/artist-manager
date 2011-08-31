@@ -36,8 +36,9 @@ class WorkController < ApplicationController
   def update
     @work = Work.find_by_url(params[:id])
     if @work.update_attributes(params[:work])
-      redirect_to work_path(@work), :notice => "#{@work.title} was successfully updated."
+      redirect_to @work, :notice => "#{@work.title} was successfully updated."
     else
+      @work.title = @work.title_was if @work.title_changed?
       flash.alert = t('update.failure', :x => "Work")
       render :edit
     end

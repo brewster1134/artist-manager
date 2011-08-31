@@ -8,11 +8,11 @@ class Settings
   attr_accessor :logo, :resize_images
   cattr_accessor :site, :defaults, :custom
   @@site = {
-    :payment_modules =>     ["Paypal"],
-    :splash_page_views =>   ["slideshow", "random"],
-    :home_show_tag_views => ["accordion", "plain"],
-    :series_show_views =>   ["slideshow", "scroller", "plain"],
-    :work_show_views =>     ["slideshow", "scroller", "plain"]
+    :payment_modules =>     [:paypal],
+    :splash_page_views =>   [:slideshow, :random],
+    :home_show_tag_views => [:accordion, :plain],
+    :series_show_views =>   [:slideshow, :scroller, :plain],
+    :work_show_views =>     [:slideshow, :scroller, :plain]
   }
   @@defaults = {
     :title =>                 "Artist Manager",
@@ -24,7 +24,7 @@ class Settings
     :google_email =>          "email@gmail.com",
     :google_password =>       "password",
     :google_calendar =>       "My Calendar",
-    :payment_module =>        "Paypal",
+    :payment_module =>        :paypal,
     :paypal_api_username =>   "email_api.gmail.com",
     :paypal_api_password =>   "password",
     :paypal_api_signature =>  "A1B2C3D4E5F6G7H8I9",
@@ -106,20 +106,12 @@ class Settings
     }
   }.with_indifferent_access
   
-  @@custom = File.exists?(CUSTOM_FILE) ? YAML::load(File.open(CUSTOM_FILE, 'r')) : {}
-  @@custom.delete_if{ |k,v| !@@defaults.keys.include?(k) || v == "" }
-  @@merged = @@defaults.merge(@@custom).each do |k,v|
-    cattr_accessor k
-    attr_accessor k
-    self.send("#{k}=", v)
-  end
-
   validates :title,                 :presence => true
-  validates :use_logo,              :inclusion => { :in => ["0", "1"] }
-  validates :splash_page,           :inclusion => { :in => ["0", "1"] }
+  validates :use_logo,              :inclusion => { :in => [true, false] }
+  validates :splash_page,           :inclusion => { :in => [true, false] }
   validates :splash_page_view,      :inclusion => { :in => @@site[:splash_page_views] }
-  validates :splash_page_featured,  :inclusion => { :in => ["0", "1"] }
-  validates :currency,              :inclusion => { :in => Money::Currency::TABLE.stringify_keys.keys }
+  validates :splash_page_featured,  :inclusion => { :in => [true, false] }
+  validates :currency,              :inclusion => { :in => Money::Currency::TABLE.keys }
   validates :google_email,          :email => true,
                                     :allow_blank => true
   validates :payment_module,        :inclusion => { :in => @@site[:payment_modules] }
@@ -130,8 +122,42 @@ class Settings
   validates :series_show_view,      :inclusion => { :in => @@site[:series_show_views] }
   validates :work_show_view,        :inclusion => { :in => @@site[:work_show_views] }
   
+  def self.load_custom_file
+    @@custom = File.exists?(CUSTOM_FILE) ? YAML::load(File.open(CUSTOM_FILE, 'r')).with_indifferent_access : {}
+    @@custom.delete_if{ |k,v| !@@defaults.keys.include?(k) || v == "" }
+    @@merged = @@defaults.merge(@@custom).each do |k,v|
+      cattr_accessor k
+      attr_accessor k
+      self.send("#{k}=", v)
+    end
+  end
+  load_custom_file
+
   def save
-    if self.valid?
+
+    # Prepare settings
+    hash = {}
+    @@defaults.each do |k,v|
+      value = self.send(k)
+      value = case v
+      when TrueClass, FalseClass
+        value.respond_to?(:to_i) ? value.to_i > 0 : value
+      when Symbol
+        value.downcase.to_sym
+      when Hash
+        if k == "image_sizes"
+          value = convert_image_sizes_hash_to_integers(value)
+          self.resize_images = true if value != @@merged[:image_sizes] && value === @@defaults[:image_sizes]
+        end
+        value.with_indifferent_access
+      else
+        value
+      end
+      self.send("#{k}=", value)
+      hash[k.to_s] = value if !value.nil? && value != "" && value != v
+    end
+
+    if self.valid? 
 
       # Save Logo
       if self.logo && self.logo.content_type =~ /image/
@@ -140,29 +166,11 @@ class Settings
         end
       end
 
-      # Prepare settings
-      hash = {}
-      @@defaults.each do |k,v|
-        value = self.send(k)
-        value = case v
-        when TrueClass, FalseClass
-          value.to_i > 0
-        when Symbol
-          value.to_sym
-        when Hash
-          if k == "image_sizes"
-            value = convert_image_sizes_hash_to_integers(value)
-            self.resize_images = true if value != @@merged[:image_sizes]
-            value
-          end
-        else
-          value
-        end
-        hash[k.to_s] = value if !value.nil? && value != "" && value != v
-      end
-
       # Save changed settings to file
-      File.open(CUSTOM_FILE, 'w+') { |f| f.write hash.to_yaml }
+      File.open(CUSTOM_FILE, 'w+') { |f| f.write hash.with_indifferent_access.to_yaml }
+      return true
+    else
+      return false
     end
   end
 

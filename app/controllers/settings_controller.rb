@@ -6,6 +6,7 @@ class SettingsController < ApplicationController
   def update
     @settings = Settings.new(params[:settings])
     if @settings.save
+      Settings.load_custom_file
       notice = "Settings Saved."
       if @settings.resize_images
         system "rake recreate_images &"

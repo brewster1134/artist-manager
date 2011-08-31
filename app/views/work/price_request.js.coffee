@@ -1,8 +1,8 @@
 :plain
   price_request = $('div#price_request')
-  fieldset = price_request.find('fieldset')
-  form = fieldset.find('form#new_email')
-  errors = fieldset.find('div#form_errors')
+  fieldset = price_request.find 'fieldset'
+  form = fieldset.find 'form#new_email'
+  errors = fieldset.find 'div#form_errors'
 
 - if @email.valid?
   - SiteMailer.price_request(@work, @email).deliver

@@ -34,7 +34,9 @@
   - if @work.can_request_price?
     #price_request.hide
       %fieldset
-        %legend Price Request
+        %legend
+          Price Request
+          = toggle_link :price_request, :name => "Close"
         = simple_form_for Email.new, :url => work_price_request_path(@work), :remote => true do |pr|
           = pr.input :from, :label => "Email", :required => true
           = pr.input :message, :as => :text, :input_html => {:size => '80x5'}

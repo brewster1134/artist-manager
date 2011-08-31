@@ -5,7 +5,8 @@ class Work < ActiveRecord::Base
   attr_accessible :title, :series_id, :tag_list, :description, :media, :dimensions, :completion_year, :video_link, :for_sale, :price, :price_currency, :quantity, :view, :featured, :shipping, :shipping_currency
   
   validates :title,             presence:   true,
-                                uniqueness: true
+                                uniqueness: true,
+                                format: { with: /^[a-zA-Z0-9]+[a-zA-Z0-9\s\-_]/ }
   validates :completion_year,   numericality: {
                                   greater_than_or_equal_to: 100.years.ago.year,
                                   less_than_or_equal_to:    Date.today.year

@@ -36,9 +36,13 @@ Spork.prefork do
     }
   end
 
+  def login(user = nil)
+    @user = user || Factory(:user, :password => "password", :password_confirmation => "password")
+    page.driver.post sessions_path, :session => {:login => @user.username, :password => 'password'}
+  end
+
 end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-
 end

@@ -50,6 +50,6 @@ en:
         price: If no price is listed, there will show a price request form instead of a purchasing option
         quantity: If you sell this work outside the site, remember to update this to the current quantity!
         new:
-          title: The title will also be used for the url i.e. "My New Peice" will have a url of '/work/my-new-peice'
+          title: The title will also be used for the url i.e. "My New Piece" will have a url of '/work/my-new-piece'
         edit:
           title: The url for this work is based on the title.  If you change it, so will the URL!
