@@ -12,7 +12,7 @@
 # 
 # require File.join(File.dirname(__FILE__), '../config/environment')
 
-require_relative '../config/environment'
+require_relative './config/environment'
 
 class Rack::PathInfoRewriter
   def initialize(app)
@@ -28,4 +28,4 @@ class Rack::PathInfoRewriter
   end
 end
 
-Rack::Handler::FastCGI.run  Rack::PathInfoRewriter.new(YOURAPPNAME::Application)
+Rack::Handler::FastCGI.run  Rack::PathInfoRewriter.new(ArtistManager::Application)

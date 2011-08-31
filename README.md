@@ -3,7 +3,7 @@
 ## Install
 
 ```
-git clone git://github.com/brewster1134/Artist-Manager.git [APP NAME]
+git clone git://github.com/brewster1134/artist_manager.git [APP NAME]
 cd [APP NAME]
 bundle install
 ```
@@ -45,11 +45,13 @@ It will also find these assets with an additional `.erb` extension, if ruby pars
 For example...
 
 + By default the site uses nivoslider for the slideshow
-+ Any view using the slider (eg `work#show`), loads the file `work.index.js.coffee` & `work.index.css.sass` 
-+ `work.index.js.coffee` requires `slideshow.js.coffee` and `work.index.css.sass` requires `slideshow.css.sass` 
++ Any view using the slider (eg `work#show`), loads the file `work.show.js.coffee` & `work.show.css.sass` 
++ `work.show.js.coffee` requires `slideshow.js.coffee` and `work.show.css.sass` requires `slideshow.css.sass` 
 + `slideshow.js.coffee` & `slideshow.css.sass` contain all the nivoslider requirements and code
 
-This allows you to replace the contents of `slideshow.js.coffee` && `slideshow.css.sass` with a slideshow of your choosing... however you **WILL** have to update any views that use the slideshow to use the proper markup, and and any view-specific assets to pass any neccessary options to your new slideshow.
+This allows you to replace the contents of `slideshow.js.coffee` && `slideshow.css.sass` with a slideshow of your choosing...
+
+However you **WILL** have to update any views that use the slideshow to have the proper markup for your new slideshow.  And any view-specific assets might need updated to pass any JS parameters to your new slideshow.
 
 ### CSS 
 
