@@ -1,5 +1,10 @@
 # Artist Manager
 
+## Requirements
+
++ RVM: http://beginrescueend.com
++ Bundler Gem: `gem install bundler`
+
 ## Install
 
 ```
@@ -20,6 +25,27 @@ rake db:seed
 For development (or any non-production environment), you can instead run `rake dev_db:seed` to populate the site with some sample data.
 
 **THIS WILL DROP YOUR DATABASE AND DELETE ANY FILES YOU UPLOADED THROUGH THE SITE!**
+
+## Deployment
+
+### WEBrick (OSX)
+
+For `development` or 'test` environments, from app directory...
+
++ `rails s`
+
+### Passenger
+
+From app directory...
+
++ `mkdir tmp`
++ `touch tmp/restart.txt`
+
+### FastCGI
+
+Refer to: https://github.com/dre3k/rails3_fcgi for setup.
+
+For DreamHost: http://wiki.dreamhost.com/Ruby_on_Rails
 
 ## Customizing
 
