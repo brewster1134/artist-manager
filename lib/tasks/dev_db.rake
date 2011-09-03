@@ -1,13 +1,13 @@
 namespace :dev_db do
 
-  desc "Raise an error if RAILS_ENV is production"
-  task :not_production do
-    return true if ENV['FORCE'] == true
-    raise "Not on production you dingus!" if Rails.env.production? 
-  end
-
   desc "Drop, create, migrate then seed the development database"
-  task :seed => [ 'environment', 'dev_db:not_production', 'db:drop', 'db:migrate', 'db:seed'] do
+  task :seed, :force do |t, args|
+    raise "Not on production you dingus!" if Rails.env.production? && args[:force] != "true"
+    Rake::Task[:environment].invoke
+    Rake::Task['db:drop'].invoke
+    Rake::Task['db:migrate'].invoke
+    Rake::Task['db:seed'].invoke
+
     divider = "--------------------------".blue
 
     # Delete directories
