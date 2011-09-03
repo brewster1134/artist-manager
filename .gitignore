@@ -7,3 +7,4 @@ tmp/
 .project
 public/uploads
 config/settings_*.yml
+vendor/bundle/

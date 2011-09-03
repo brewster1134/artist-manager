@@ -2,8 +2,8 @@
 
 ## Requirements
 
-+ RVM: http://beginrescueend.com
-+ Bundler Gem: `gem install bundler`
++ RVM:          `http://beginrescueend.com`
++ Bundler Gem:  `gem install bundler`
 
 ## Install
 
@@ -30,7 +30,7 @@ For development (or any non-production environment), you can instead run `rake d
 
 ### WEBrick (OSX)
 
-For `development` or 'test` environments, from app directory...
+For development environment, from app directory...
 
 + `rails s`
 
@@ -41,11 +41,27 @@ From app directory...
 + `mkdir tmp`
 + `touch tmp/restart.txt`
 
-### FastCGI
+### FastCGI (Not actually tested)
 
 Refer to: https://github.com/dre3k/rails3_fcgi for setup.
 
 For DreamHost: http://wiki.dreamhost.com/Ruby_on_Rails
+
+## Web Server
+
+### Apache
+
+should be ready to go!
+
+### Nginx
+
+in `config/environmnets/production.rb` change:
+
+`config.action_dispatch.x_sendfile_header = "X-Sendfile"`
+
+to
+
+`config.action_dispatch.x_sendfile_header = "X-Accel-Redirect"`
 
 ## Customizing
 

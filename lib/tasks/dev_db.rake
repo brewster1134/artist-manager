@@ -2,7 +2,8 @@ namespace :dev_db do
 
   desc "Raise an error if RAILS_ENV is production"
   task :not_production do
-    raise "Not on production you dingus!" if Rails.env.production?
+    return true if ENV['FORCE'] == true
+    raise "Not on production you dingus!" if Rails.env.production? 
   end
 
   desc "Drop, create, migrate then seed the development database"
