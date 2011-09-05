@@ -4,4 +4,4 @@ $ ->
   $('.slideshow').slideshow
     directionNav: false,
     controlNav: false,
-    captionOpacity: "0.3"
+    captionOpacity: "0.5"
