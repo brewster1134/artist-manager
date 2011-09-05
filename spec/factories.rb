@@ -12,3 +12,8 @@ end
 Factory.define :work do |w|
   w.sequence(:title)  { |n| "Title #{n}" }
 end
+
+Factory.define :work_image do |wi|
+  wi.work   { Factory(:work) }
+  wi.image  { File.open(Dir.glob("#{Rails.root}/vendor/assets/images/stock/*").sample) }
+end

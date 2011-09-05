@@ -23,7 +23,7 @@ gem "simple_form"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem "sass-rails", :git => "git://github.com/rails/sass-rails.git", :branch => "3-1-stable"
+  gem "sass-rails"
   gem "uglifier"
   gem "compass", :git => "git://github.com/chriseppstein/compass.git", :branch => "rails31"
 end

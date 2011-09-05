@@ -8,16 +8,6 @@ GIT
       fssm (>= 0.2.7)
       sass (~> 3.1)
 
-GIT
-  remote: git://github.com/rails/sass-rails.git
-  revision: cfb287a9ac646ead9dda3c499d13a84c362a9b75
-  branch: 3-1-stable
-  specs:
-    sass-rails (3.1.0)
-      actionpack (~> 3.1.0)
-      railties (~> 3.1.0)
-      sass (>= 3.1.4)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -174,6 +164,10 @@ GEM
       rspec (~> 2.6.0)
     rubyzip (0.9.4)
     sass (3.1.7)
+    sass-rails (3.1.0)
+      actionpack (~> 3.1.0)
+      railties (~> 3.1.0)
+      sass (>= 3.1.4)
     selenium-webdriver (2.5.0)
       childprocess (>= 0.2.1)
       ffi (>= 1.0.7)
@@ -229,7 +223,7 @@ DEPENDENCIES
   rails3-jquery-autocomplete
   redcarpet
   rspec-rails
-  sass-rails!
+  sass-rails
   simple_form
   spork (= 0.9.0.rc9)
   sqlite3

@@ -2,7 +2,6 @@ namespace :dev_db do
 
   desc "Raise an error if RAILS_ENV is production"
   task :not_production do
-    return true if ENV['FORCE'] == true
     raise "Not on production you dingus!" if Rails.env.production? 
   end
 
@@ -12,7 +11,7 @@ namespace :dev_db do
 
     # Delete directories
     FileUtils.rm_rf "#{Rails.root}/public/uploads"
-    puts "UPLOAD IMAGES DELETED".green
+    puts "UPLOADED IMAGES DELETED".green
     puts divider
 
     work_attributes = {
@@ -47,6 +46,24 @@ namespace :dev_db do
       w = Factory(:work, work_attributes)
       puts "  #{w.title}".green
     end
+    puts divider
+    
+    puts "Would you like to add images? This can take a few minutes... (y/n)"
+    add_images = STDIN.gets.chomp
+    
+    if add_images == 'y'
+      puts "UPLOADING RANDOM IMAGES".green
+      
+      Work.all.each do |w|
+        images = (1..3).to_a.sample
+        images.times do
+          Factory(:work_image, :work => w)
+        end
+        puts "#{images} Images added to #{w.title}"
+      end
+    end
+    puts divider
+    puts "DONE!".blue
     puts divider
 
   end
