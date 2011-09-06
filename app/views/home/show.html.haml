@@ -1,6 +1,8 @@
 - content_for :js do
   :coffee
-    events_path = "#{events_path}"
+    events_path = "#{ events_path }"
+    login_path = "#{ login_path }"
+    enable_hotkey = "#{ current_user ? false : true }"
 
 %fieldset#events
   %legend Events

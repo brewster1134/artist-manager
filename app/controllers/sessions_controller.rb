@@ -3,9 +3,7 @@ class SessionsController < ApplicationController
   include Rails.application.routes.url_helpers
 
   def new
-    if current_user
-      redirect_to home_path, :alert => "Already logged in.  <a href='#{logout_path}'>Logout</a> first to login with a different account.".html_safe
-    end
+    redirect_to home_path, :alert => "You are already logged in." if current_user 
   end
 
   def create

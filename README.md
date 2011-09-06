@@ -14,6 +14,13 @@
 + Choose default views for your series and work (slideshow, image scroller, plain), and even series/work specific settings if needed.
 + Flexible CSS Theme framework for customization (see below for more info)
 
+## Logging In
+
+Since logging into the site is not a feature intended for the public, there is no link to the login page.  You can access it by...
+
++ From the 'Home' page, press `Ctrl + l`
++ Go to `http://[site_name]/login`
+
 ## Demo
 
 A demo is available at [am.wearemanalive.com](http://an.wearemanalive.com)
@@ -90,8 +97,6 @@ to
 ### Settings
 
 To edit the site settings, you must first login with the credentials provided in the seeds.rb file.
-
-Since logging into the site is not a feature the public should be using, you must manually visit the login page by adding `/login` to your url.
 
 ### Assets
 
