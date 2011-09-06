@@ -1,5 +1,27 @@
 # Artist Manager
 
+## Features
+
+### A universal platform for any type of artist to showcase their work
+
++ Add/Edit your work
++ Add multiple images all at once with jquery-file-upload
++ Group work into Series
++ Embed YouTube videos
++ Adjust Site Settings including uploading a logo, changing the site name, setting a splash page, updating account information, etc.
++ Use a Google Calendar to show upcoming events
++ Accept payments with Paypal 
++ Choose default views for your series and work (slideshow, image scroller, plain), and even series/work specific settings if needed.
++ Flexible CSS Theme framework for customization (see below for more info)
+
+## Demo
+
+A demo is available at [am.wearemanalive.com](http://an.wearemanalive.com)
+
+You can login from [am.wearemanalive.com/login](http://am.wearemanalive.com/login) with the username and password `username` and `password` as an administrator with full control over settings and modifying work.
+
+The demo site will be reset back to the defaults every Saturday at midnight, so dont be afraid of breaking anything :) 
+
 ## Requirements
 
 + RVM:          `http://beginrescueend.com`
@@ -64,6 +86,12 @@ to
 `config.action_dispatch.x_sendfile_header = "X-Accel-Redirect"`
 
 ## Customizing
+
+### Settings
+
+To edit the site settings, you must first login with the credentials provided in the seeds.rb file.
+
+Since logging into the site is not a feature the public should be using, you must manually visit the login page by adding `/login` to your url.
 
 ### Assets
 

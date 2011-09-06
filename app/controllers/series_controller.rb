@@ -3,7 +3,7 @@ class SeriesController < ApplicationController
 
   def show
     @series = Series.find_by_url(params[:id])
-    @view = (params[:view] || @series.view || Settings.series_show_view).to_sym
+    @view = (params[:view] || (@series.view if @series.view.present?) || Settings.series_show_view).to_sym
   end
 
   def new

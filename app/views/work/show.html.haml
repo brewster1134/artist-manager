@@ -9,7 +9,7 @@
   %h1.work_title
     = @work.title
     - if @work.series
-      = link_to "from #{@work.series.title} series", @work.series
+      = link_to "from #{@work.series.title}", @work.series
   = render 'shared/tags', :tags => @work.tags
 
   - if [:video_link].include? @view

@@ -7,6 +7,7 @@ namespace :dev_db do
 
   desc "Drop, create, migrate then seed the development database"
   task :seed => [ 'environment', 'dev_db:not_production', 'db:drop', 'db:migrate', 'db:seed'] do
+    require 'timeout'
     divider = "--------------------------".blue
 
     # Delete directories
@@ -49,7 +50,8 @@ namespace :dev_db do
     puts divider
     
     puts "Would you like to add images? This can take a few minutes... (y/n)"
-    add_images = STDIN.gets.chomp
+    
+    add_images = Timeout::timeout( 5 ) { STDIN.gets.chomp } rescue 'y'
     
     if add_images == 'y'
       puts "UPLOADING RANDOM IMAGES".green

@@ -3,8 +3,8 @@ class HomeController < ApplicationController
   include Google
 
   def splash
-    if Settings.splash_page
-      images = Settings.splash_page_featured ? Work.where(:featured => true).collect{|w| w.images} : WorkImage.all
+    images = Settings.splash_page_featured ? Work.where(:featured => true).collect{|w| w.images} : WorkImage.all
+    if Settings.splash_page && images.present?
       @view = (params[:view] || Settings.splash_page_view).to_sym
       @images = case @view
       when :slideshow
