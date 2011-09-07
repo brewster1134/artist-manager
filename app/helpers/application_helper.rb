@@ -89,15 +89,15 @@ module ApplicationHelper
   # = toggle_link :hidden_element, :state => :hide
   # #hidden_element.hide
   def toggle_link(element_id, options = {})
+    state_opposite = {:show => :hide, :hide => :show}
     options.reverse_merge!({
       :element_id =>  element_id,
       :state      =>  :show,
-      :show_name  =>  options[:name] || "Show #{element_id.to_s.titleize}",
-      :hide_name  =>  options[:name] || "Hide #{element_id.to_s.titleize}"
+      :name       =>  [state_opposite[options[:state]], element_id] * " ".to_s.titleize
     })
-    state_opposite = {:show => :hide, :hide => :show}
-    initial_text = options[:name] || "#{state_opposite[options[:state]]}_#{element_id}".titleize
-    link_to_function initial_text, "$(this).toggle('#{options[:element_id]}', '#{options[:state]}', '#{options[:show_name]}', '#{options[:hide_name]}')", :class => :toggle_link, :id => "toggle_#{options[:element_id]}_link", "data-default-state" => options[:state]
+    options[:show_name] ||= (options[:name] ? "Show #{element_id.to_s.titleize}" : "Show")
+    options[:hide_name] ||= (options[:name] ? "Hide #{element_id.to_s.titleize}" : "Hide")
+    link_to_function (options[:name] || state_opposite[options[:state]]).to_s.titleize, "$(this).toggle('#{options[:element_id]}', '#{options[:state]}', '#{options[:show_name]}', '#{options[:hide_name]}')", :class => :toggle_link, :id => "toggle_#{options[:element_id]}_link", "data-default-state" => options[:state]
   end
 
   def footer

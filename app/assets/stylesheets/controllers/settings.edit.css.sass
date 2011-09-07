@@ -1,22 +1,39 @@
 @import compass/utilities
 @import settings
 
-fieldset
-  .notice
-    color: $grey_09
-    background: $grey_06
-    padding: 10px
-    margin: 10px 10px 20px
-
-  #image_sizes
-    +clearfix
-    >div
-      float: left
-      margin-right: 20px
-      table
-        th, td
-          text-align: center
-          &:first-child
-            text-align: right
-          input
+form
+  .left
+    float: left
+    width: 50%
+  .right
+    float: right
+    width: 50%
+  fieldset
+    margin: 10px
+    .notice
+      color: $grey_09
+      background: $grey_06
+      padding: 10px
+      margin: 10px 10px 20px
+    input[type=text],
+    input[type=email],
+    input[type=password]
+      width: 300px  
+    #image_sizes
+      +clearfix
+      >div
+        float: left
+        margin-right: 20px
+        table
+          th, td
+            input[type=text]
+              width: inherit
             text-align: center
+            &:first-child
+              text-align: right
+            input
+              text-align: center
+  div.actions
+    +clearfix
+    text-align: center
+    padding: 15px
