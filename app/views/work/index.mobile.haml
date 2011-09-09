@@ -22,6 +22,6 @@
         - @work.each do |w|
           %li
             %a{:href => url_for(w)}
-              = image_tag w.image.image.mobile_thumb.url
+              = image_tag w.image.image.mobile_thumb.url if w.image
               %h3= w.title
               %p= w.description
