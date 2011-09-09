@@ -1,0 +1,27 @@
+- title = params[:tag] ? params[:tag].titleize : "Work"
+
+%div{"data-role" => "page", "data-title" => title}
+  %div{"data-role" => "header"}
+    = link_to "Home", home_path, "data-icon" => "home"
+    %h1= title
+  %div{"data-role" => "content"}
+    %ul{"data-role" => "listview"}
+      %li{:style => "text-align: center"}= select_tag :tag, options_for_select(tag_select_array, params[:tag]), :id => "tag_select"
+      - if @series.present?
+        %li{"data-role" => "list-divider"} Series
+        - @series.each do |s|
+          %li
+            %a{:href => url_for(s)}
+              = image_tag s.image.image.mobile_thumb.url
+              %h3= s.title
+              %p= s.description
+              .ui-li-count= s.works.count 
+
+      - if @work.present?
+        %li{"data-role" => "list-divider"} Work
+        - @work.each do |w|
+          %li
+            %a{:href => url_for(w)}
+              = image_tag w.image.image.mobile_thumb.url
+              %h3= w.title
+              %p= w.description

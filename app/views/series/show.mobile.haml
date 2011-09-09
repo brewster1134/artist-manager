@@ -1,0 +1,19 @@
+%div{"data-role" => "page", "data-title" => @series.title}
+  %div{"data-role" => "header"}
+    = link_to "Work", work_index_path, "data-icon" => "back"
+    %h1= @series.title
+    %div{"data-role" => "navbar"}
+      %ul
+        - @series.tags.each do |t|
+          %li= link_to t.name, work_index_path(:tag => t.name)
+  %div{"data-role" => "content"}
+    %div{"data-role" => "collapsible", "data-collapsed" => "true"}
+      %h3 Description
+      = markup @series.description
+    %ul{"data-role" => "listview"}
+      - @series.works.each do |w|
+        %li
+          %a{:href => url_for(w)}
+            = image_tag w.image.image.mobile_thumb.url
+            %h3= w.title
+            %p= w.description

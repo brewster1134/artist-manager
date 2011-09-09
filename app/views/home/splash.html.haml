@@ -5,4 +5,5 @@
         = link_to image_tag(i.image.home_splash_slideshow.url, :title => i.work.title), home_path
 
   - elsif @view == :random
-    = link_to image_tag(@images.image.home_splash_random.url, :title => @images.work.title), home_path
+    - image = @images.first
+    = link_to image_tag(image.image.home_splash_random.url, :title => image.work.title), home_path

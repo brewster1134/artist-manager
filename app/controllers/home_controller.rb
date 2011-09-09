@@ -4,14 +4,9 @@ class HomeController < ApplicationController
 
   def splash
     images = Settings.splash_page_featured ? Work.where(:featured => true).collect{|w| w.images} : WorkImage.all
-    if Settings.splash_page && images.present?
+    if Settings.splash_page && images.present? && !mobile?
       @view = (params[:view] || Settings.splash_page_view).to_sym
-      @images = case @view
-      when :slideshow
-        images.shuffle.first(15)
-      when :random
-        images.sample
-      end
+      @images = images.shuffle.first(15)
       render :layout => "splash"
     else
       redirect_to home_path

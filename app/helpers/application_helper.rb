@@ -44,7 +44,7 @@ module ApplicationHelper
     return content_for(:page_title) if content_for?(:page_title)
   end
 
-  def logo
+  def logo(link = true)
     logo_path = File.join(Rails.root, 'public', 'uploads')
     logo = Dir.glob(File.join(logo_path, 'logo.*')).first || ""
     
@@ -52,9 +52,9 @@ module ApplicationHelper
       logo_filename = File.basename(logo)
       image_tag(File.join("/uploads/#{logo_filename}"))
     else
-      Settings.title
+      Settings.title 
     end
-    return link_to content, home_path, :alt => Settings.title, :id => "logo"
+    link ? link_to(content, home_path, :alt => Settings.title, :id => "logo") : content
   end
     
   def markup(text, options = {})

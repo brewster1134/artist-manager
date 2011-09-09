@@ -1,0 +1,12 @@
+!!! 5
+%html
+  %head
+    %title= site_title
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"} 
+    = stylesheet_link_tag "mobile/application.mobile.css.sass"
+    = stylesheet_link_tag "http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css"
+    = javascript_include_tag "mobile/application.mobile.js.coffee"
+    = javascript_include_tag "http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js"
+    = csrf_meta_tags
+  %body
+    = yield

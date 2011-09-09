@@ -3,7 +3,7 @@
     work_index_path = "#{work_index_path}"
 
 - content_for :title do
-  - ["Work", params[:tag]].compact * ": "
+  - (["Work", params[:tag]].compact * ": ").titleize
     
 - content_for :page_title do
   = "Currently Showing:" 

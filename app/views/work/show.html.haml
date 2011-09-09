@@ -45,15 +45,14 @@
   
   .details{:class => ("for_sale" if @work.for_sale)}
     .description= markup @work.description
-    - if @work.for_sale
-      .for_sale
+    .for_sale
+      - if @work.can_buy_on_site?
         .price= @work.price.format
-        - if @work.shipping > 0
+        - if @work.shipping?
           .shipping= "Shipping #{@work.shipping.format}"
+        .option= link_to "Buy Now", payments_checkout_path(:work_id => @work.id)
+      - elsif @work.can_request_price?
+        .option= toggle_link :price_request, :state => :hide, :name => "Price Request"
+      - elsif @work.sold_out?
         .option
-          - if @work.can_buy_on_site? 
-            = link_to "Buy Now", payments_checkout_path(:work_id => @work.id), :class => "buy_now"
-          - elsif @work.can_request_price?
-            = toggle_link :price_request, :state => :hide, :name => "Price Request"
-          - elsif @work.sold_out?
-            %span.sold_out Sold Out
+          %span Sold Out

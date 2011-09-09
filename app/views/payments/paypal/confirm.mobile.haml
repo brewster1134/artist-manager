@@ -1,0 +1,16 @@
+%div{"data-role" => "page", "data-title" => "Confirm Payment"}
+  %div{"data-role" => "header"}
+    %h1 Please Confirm Your Payment Details
+    %div{"data-role" => "navbar"}
+      %ul
+        %li= link_to_function "Total: " << Money.parse(@response.params['order_total'], @response.params['order_total_currency_id']).format, nil
+
+  %div{"data-role" => "content", :style => "text-align: center"}
+    %p= [@response.address['name'], @response.address['company']].reject(&:blank?) * " @ "
+    %p= @response.address['address1']
+    %p= @response.address['address2']
+    %p= [@response.address['city'], @response.address['state'], @response.address['country'], @response.address['zip']].reject(&:blank?) * ", "
+  
+  = form_tag :action => :complete, :token => params[:token], :payer_id => params[:PayerID] do
+    = hidden_field_tag :work_id, @response.params["number"]
+    = submit_tag 'Complete Payment'

@@ -1,0 +1,42 @@
+%div{"data-role" => "page", "data-title" => @work.title}
+  %div{"data-role" => "header"}
+    = link_to "Work", work_index_path, "data-icon" => "back"
+    %h1= @work.title
+    = link_to "#{@work.series.title}", @work.series, "data-icon" => "back", :style => "max-width: 150px" if @work.series
+    - @work.tags.in_groups_of(5, false) do |tags|
+      %div{"data-role" => "navbar"}
+        %ul
+          - tags.each do |t|
+            %li= link_to t.name, work_index_path(:tag => t.name)
+    %div{"data-role" => "navbar"}
+      %ul
+        - if @work.completion_year.present?
+          %li= link_to_function @work.completion_year, nil 
+        - if @work.media.present?
+          %li= link_to_function @work.media, nil
+        - if @work.dimensions.present?
+          %li= link_to_function @work.dimensions, nil
+  %div{"data-role" => "content"}
+    %div{"data-role" => "collapsible", "data-collapsed" => "true"}
+      %h3 Description
+      = markup @work.description
+    %ul{"data-role" => "listview"}
+      - if valid_video? @work.video_link
+        %li= link_to "Video", @work.video_link, :target => "_blank"
+    %p
+      - @work.images.each do |i|
+        = link_to image_tag(i.image.mobile_thumb.url), i.image.url, "data-ajax" => "false", "data-rel" => "dialog"
+  %div{"data-role" => "footer"}
+    %div{"data-role" => "navbar"}
+      %ul
+        - if @work.can_buy_on_site?
+          - buy_now_link = payments_checkout_path(:work_id => @work.id)
+          %li= link_to "Price: " << @work.price.format, buy_now_link, :target => "_blank"
+          - if @work.shipping?
+            %li= link_to "Shipping: " << @work.shipping.format, buy_now_link, :target => "_blank"
+        - elsif @work.can_request_price?
+          %li= mail_to Settings.email_general, "Email for Price Request", :encode => "hex"
+        - elsif @work.sold_out?
+          %li= link_to_function "Sold Out", nil
+        - else
+          %li= link_to_function " ", nil

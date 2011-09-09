@@ -1,0 +1,15 @@
+%div#home{"data-role" => "page"}
+  %div{"data-role" => "header"}
+    %h1= logo false
+    %div{"data-role" => "navbar"}
+      %ul
+        %li= link_to "Events", events_path, "data-transition" => "slide"
+        %li= link_to "Work", work_index_path, "data-transition" => "slide"
+  %div{"data-role" => "content"}
+    %ul{"data-role" => "listview"}
+      - tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class|
+        %li= link_to tag.name, work_index_path(:tag => tag.name)
+  %div{"data-role" => "footer"}
+    %h4
+      Site by
+      = link_to "Man Alive!", "http://www.wearemanalive.com", :target => "_blank"

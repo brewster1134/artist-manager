@@ -76,8 +76,12 @@ class Work < ActiveRecord::Base
     self.price > 0
   end
 
+  def shipping?
+    self.shipping > 0
+  end
+
   def can_buy_on_site?
-    self.for_sale && !self.sold_out? && self.price?
+    self.for_sale && !self.sold_out? && self.price? && [Settings.paypal_api_username, Settings.paypal_api_password, Settings.paypal_api_signature].all?
   end
 
   def can_request_price?

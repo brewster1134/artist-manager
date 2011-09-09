@@ -31,7 +31,8 @@ en:
         new:
           login: Username or E-mail
       settings:
-        use_logo: If checked, the header will show the uploaded image.  Otherwise it will show the Title as regulat text. 
+        use_logo: If checked, the header will show the uploaded image.  Otherwise it will show the Title as regulat text.
+        logo: If you upload a large image, it may be slow to load.  A good guideline for a logo is no larger than 400px x 100px @ 72dpi. 
         home_show_tag_view: Style of the Work section on the Home page.
         title:  This appears in the browser toolbar, when the site is bookmarked, and in search-engine results
         splash_page: Enables or Disables showing a splash page 
@@ -49,6 +50,7 @@ en:
         dimensions: e.g. 5ft x 10ft
         price: If no price is listed, there will show a price request form instead of a purchasing option
         quantity: If you sell this work outside the site, remember to update this to the current quantity!
+        featured: If 'Splash Page Featured' settings is enabled, then the splash page will only show featured work. Set this work as featured here.
         new:
           title: The title will also be used for the url i.e. "My New Piece" will have a url of '/work/my-new-piece'
         edit:
