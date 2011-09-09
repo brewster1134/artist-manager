@@ -8,11 +8,12 @@
 + Add multiple images all at once with jquery-file-upload
 + Group work into Series
 + Embed YouTube videos
-+ Adjust Site Settings including uploading a logo, changing the site name, setting a splash page, updating account information, etc.
++ Site Settings to modify logo, background, colors, site name, splash page, account information, and more...
 + Use a Google Calendar to show upcoming events
 + Accept payments with Paypal 
 + Choose default views for your series and work (slideshow, image scroller, plain), and even series/work specific settings if needed.
-+ Flexible CSS Theme framework for customization (see below for more info)
++ Flexible CSS Theme framework for advanced customization (see below for more info)
++ Mobile Site included
 
 ## Logging In
 
@@ -55,6 +56,10 @@ For development (or any non-production environment), you can instead run `rake d
 
 **THIS WILL DROP YOUR DATABASE AND DELETE ANY FILES YOU UPLOADED THROUGH THE SITE!**
 
+If the image sizes are changed in the site settings, the image versions are recreated.  If changes were made manually, or images arent showing properly, you can manually recreate them with the following rake command
+
+`rake recreate_images` 
+
 ## Deployment
 
 ### WEBrick (OSX)
@@ -92,11 +97,11 @@ to
 
 `config.action_dispatch.x_sendfile_header = "X-Accel-Redirect"`
 
-## Customizing
-
-### Settings
+## Settings
 
 To edit the site settings, you must first login with the credentials provided in the seeds.rb file.
+
+## Advanced Customizing
 
 ### Assets
 

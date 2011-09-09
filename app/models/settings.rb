@@ -4,8 +4,8 @@ class Settings
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  CUSTOM_FILE = Rails.root.join("config", "settings_#{Rails.env}.yml")
-  attr_accessor :logo, :resize_images
+  CUSTOM_SETTINGS = Rails.root.join("config", "settings_#{Rails.env}.yml")
+  attr_accessor :resize_images
   cattr_accessor :site, :defaults, :custom
   @@site = {
     :payment_modules =>     [:paypal],
@@ -17,6 +17,10 @@ class Settings
   @@defaults = {
     :title =>                 "Artist Manager",
     :use_logo =>              true,
+    :logo =>                  Rails.root.join("public", "logo.png"),
+    :use_background_image =>  true,
+    :background_image =>      Rails.root.join("public", "background_image.png"),
+    :background_color =>      "grey",
     :currency =>              :usd,
     :email_general =>         "email@domain.com",
     :email_no_reply =>        "noreply@domain.com",
@@ -108,6 +112,7 @@ class Settings
   
   validates :title,                 :presence => true
   validates :use_logo,              :inclusion => { :in => [true, false] }
+  validates :use_background_image,  :inclusion => { :in => [true, false] }
   validates :splash_page,           :inclusion => { :in => [true, false] }
   validates :splash_page_view,      :inclusion => { :in => @@site[:splash_page_views] }
   validates :splash_page_featured,  :inclusion => { :in => [true, false] }
@@ -123,7 +128,7 @@ class Settings
   validates :work_show_view,        :inclusion => { :in => @@site[:work_show_views] }
   
   def self.load_custom_file
-    @@custom = File.exists?(CUSTOM_FILE) ? YAML::load(File.open(CUSTOM_FILE, 'r')).with_indifferent_access : {}
+    @@custom = File.exists?(CUSTOM_SETTINGS) ? YAML::load(File.open(CUSTOM_SETTINGS, 'r')).with_indifferent_access : {}
     @@custom.delete_if{ |k,v| !@@defaults.keys.include?(k) || v == "" }
     @@merged = @@defaults.merge(@@custom).each do |k,v|
       cattr_accessor k
@@ -139,35 +144,37 @@ class Settings
     hash = {}
     @@defaults.each do |k,v|
       value = self.send(k)
-      value = case v
-      when TrueClass, FalseClass
-        value.respond_to?(:to_i) ? value.to_i > 0 : value
-      when Symbol
-        value.downcase.to_sym
-      when Hash
-        if k == "image_sizes"
-          value = convert_image_sizes_hash_to_integers(value)
-          self.resize_images = true if value != @@merged[:image_sizes] && value === @@defaults[:image_sizes]
+      if value
+        value = case v
+        when TrueClass, FalseClass
+          value.respond_to?(:to_i) ? value.to_i > 0 : value
+        when Symbol
+          value.downcase.to_sym
+        when Pathname
+          if value.is_a?(ActionDispatch::Http::UploadedFile) && value.content_type =~ /image/
+            new_file = Rails.root.join('public', 'uploads', value.original_filename)
+            FileUtils.mv value.tempfile.path, new_file.to_s, :force => true
+            new_file
+          elsif Settings.custom[k.to_sym]
+            Settings.custom[k.to_sym]
+          end
+        when Hash
+          if k == "image_sizes"
+            value = convert_image_sizes_hash_to_integers(value)
+            self.resize_images = true if value != @@merged[:image_sizes] && value === @@defaults[:image_sizes]
+          end
+          value.with_indifferent_access
+        else
+          value
         end
-        value.with_indifferent_access
-      else
-        value
+        self.send("#{k}=", value)
+        hash[k.to_s] = value if !value.nil? && value != "" && value != v
       end
-      self.send("#{k}=", value)
-      hash[k.to_s] = value if !value.nil? && value != "" && value != v
     end
 
     if self.valid? 
-
-      # Save Logo
-      if self.logo && self.logo.content_type =~ /image/
-        File.open(self.logo.open, 'rb') do |l|
-          File.open(Dir.glob(File.join(Rails.root, 'public', 'uploads', 'logo.*')).first, 'w+b') {|out| out.write(l.read) }
-        end
-      end
-
       # Save changed settings to file
-      File.open(CUSTOM_FILE, 'w+') { |f| f.write hash.with_indifferent_access.to_yaml }
+      File.open(CUSTOM_SETTINGS, 'w+') { |f| f.write hash.with_indifferent_access.to_yaml }
       return true
     else
       return false

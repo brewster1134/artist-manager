@@ -45,16 +45,25 @@ module ApplicationHelper
   end
 
   def logo(link = true)
-    logo_path = File.join(Rails.root, 'public', 'uploads')
-    logo = Dir.glob(File.join(logo_path, 'logo.*')).first || ""
-    
-    content = if Settings.use_logo && File.exists?(logo)
-      logo_filename = File.basename(logo)
-      image_tag(File.join("/uploads/#{logo_filename}"))
+    html = ""
+    if Settings.use_logo && File.exists?(Settings.logo)
+      logo = File.join(Settings.logo.basename == Settings.defaults[:logo].basename ? '' : '/uploads', Settings.logo.basename.to_s )
+      html << image_tag(logo)
     else
-      Settings.title 
+      html << Settings.title 
     end
-    link ? link_to(content, home_path, :alt => Settings.title, :id => "logo") : content
+    html = html.html_safe
+    link ? link_to(html, home_path, :alt => Settings.title, :id => "logo") : html
+  end
+  
+  def background
+    css = ""
+    if Settings.use_background_image && File.exists?(Settings.background_image)
+      bg_image = File.join(Settings.background_image.basename == Settings.defaults[:background_image].basename ? '' : '/uploads', Settings.background_image.basename.to_s )
+      css << "background-image: url(#{bg_image});"
+    end
+    css << "background-color: #{Settings.background_color};"
+    return css
   end
     
   def markup(text, options = {})

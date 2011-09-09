@@ -34,13 +34,25 @@ en:
         use_logo: If checked, the header will show the uploaded image.  Otherwise it will show the Title as regulat text.
         logo: If you upload a large image, it may be slow to load.  A good guideline for a logo is no larger than 400px x 100px @ 72dpi. 
         home_show_tag_view: Style of the Work section on the Home page.
-        title:  This appears in the browser toolbar, when the site is bookmarked, and in search-engine results
+        title:  This appears in the browser toolbar when the site is bookmarked and in search-engine results.  Also wil be shown if the logo is disabled.
         splash_page: Enables or Disables showing a splash page 
         google_password: If you use 2-step authorization, create an app specific password, and use that.
         google_calendar: Name of the calendar you want to show events from.
         email_interceptor: In development, all emails sent from the site will be intercepted, and sent here.
         email_no_reply: The FROM address for any emails sent by the site that you dont want anyone replying to.
         splash_page_featured: If checked, the splash page will only show images from featured work
+        background_image: |
+          The background image will be repeated and tiled.
+          
+          You can make repeating images [here](http://bgpatterns.com).
+        background_color: |
+          If you use a color name, make sure to use a standard one.
+          (e.g. red)
+
+          If you want a specific color, you can use a 6-digit hex value.
+          (e.g. #ffffff) Remember to include the #
+
+          Here is a [guide](http://www.w3schools.com/cssref/css_colornames.asp) to acceptable color values.
       series:
         view: Leave blank to use the Site Default
       work:

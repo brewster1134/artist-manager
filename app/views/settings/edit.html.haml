@@ -2,81 +2,110 @@
   Settings
 = simple_form_for @settings, :url => settings_path, :method => :put do |s|
   = render 'shared/form_errors', instance: @settings
-  .clearfix
-    .left
-      %fieldset
+  #tabs
+    %ul
+      %li= link_to "General", "#general"
+      %li= link_to "Accounts", "#accounts"
+      %li= link_to "Theme", "#theme"
+      %li= link_to "Developer", "#developer"
+    #general
+      .clearfix
+        .left
+          %fieldset
+            #general_settings
+              = s.input :title, :hint => input_hint(:title)
+              = s.input :currency, :collection => currency_select_array, :hint => input_hint(:currency)
+        .right
+          %fieldset
+            %legend
+              Email
+              = toggle_link :email_settings, :name => false
+            #email_settings
+              = s.input :email_general, :hint => input_hint(:email_general)
+              = s.input :email_no_reply, :hint => input_hint(:email_no_reply)
+      .actions
+        = s.button :submit, "Save Settings"
+    #accounts
+      .clearfix
+        .left
+          %fieldset
+            %legend
+              Payment Settings
+              = toggle_link :payment_settings, :name => false
+            #payment_settings
+              = s.input :payment_module, :collection => Settings.site[:payment_modules], :include_blank => false, :hint => input_hint(:payment_module)
+          %fieldset
+            %legend
+              Paypal Account
+              = toggle_link :paypal_settings, :name => false
+            #paypal_settings
+              = markup(t('.paypal_notice'), :class => :notice)
+              = s.input :paypal_api_username, :hint => input_hint(:paypal_api_username)
+              = s.input :paypal_api_password, :hint => input_hint(:paypal_api_password), :input_html => {:value => Settings.paypal_api_password}
+              = s.input :paypal_api_signature, :hint => input_hint(:paypal_api_signature)
+        .right
+          %fieldset
+            %legend
+              Google Account
+              = toggle_link :google_settings, :name => false
+            #google_settings
+              = s.input :google_email, :hint => input_hint(:google_email)
+              = s.input :google_password, :hint => input_hint(:google_password), :input_html => {:value => Settings.google_password}
+              = s.input :google_calendar, :hint => input_hint(:google_calendar)
+      .actions
+        = s.button :submit, "Save Settings"
+    #theme
+      .clearfix
+        .left
+          %fieldset
+            %legend
+              Logo
+              = toggle_link :logo_settings, :name => false
+            #logo_settings
+              = s.input :use_logo, :as => :boolean, :hint => input_hint(:use_logo)
+              = s.input :logo, :as => :file
+          %fieldset
+            %legend
+              Background
+              = toggle_link :background_settings, :name => false
+            #background_settings
+              = s.input :use_background_image, :as => :boolean, :hint => input_hint(:use_background_image)
+              = s.input :background_image, :as => :file, :hint => input_hint(:background_image, :default => false, :markup => true)
+              = s.input :background_color, :hint => input_hint(:background_color, :markup => true)
+        .right
+          %fieldset
+            %legend
+              Splash Page
+              = toggle_link :splash_settings, :name => false
+            #splash_settings
+              = s.input :splash_page, :as => :boolean, :hint => input_hint(:splash_page)
+              = s.input :splash_page_featured, :as => :boolean, :hint => input_hint(:splash_page_featured)
+              = s.input :splash_page_view, :collection => Settings.site[:splash_page_views], :include_blank => false, :hint => input_hint(:splash_page_view)
+          %fieldset
+            %legend
+              Default Views
+              = toggle_link :default_settings, :name => false
+            #default_settings
+              = s.input :home_show_tag_view, :collection => Settings.site[:home_show_tag_views], :include_blank => false, :hint => input_hint(:home_show_tag_view)
+              = s.input :series_show_view, :collection => Settings.site[:series_show_views], :include_blank => false, :hint => input_hint(:series_show_view)
+              = s.input :work_show_view, :collection => Settings.site[:work_show_views], :include_blank => false, :hint => input_hint(:work_show_view)
+      .actions
+        = s.button :submit, "Save Settings"
+    #developer
+      .clearfix
+        .left
+          %fieldset
+            %legend
+              Developer Settings
+              = toggle_link :developer_settings, :name => false
+            #developer_settings
+              = s.input :email_interceptor, :hint => input_hint(:email_interceptor)
+      %fieldset.clearfix
         %legend
-          Logo
-          = toggle_link :logo_settings, :name => false
-        #logo_settings
-          = s.input :use_logo, :as => :boolean, :hint => input_hint(:use_logo)
-          = s.input :logo, :as => :file
-      %fieldset
-        %legend
-          Splash Page
-          = toggle_link :splash_settings, :name => false
-        #splash_settings
-          = s.input :splash_page, :as => :boolean, :hint => input_hint(:splash_page)
-          = s.input :splash_page_featured, :as => :boolean, :hint => input_hint(:splash_page_featured)
-          = s.input :splash_page_view, :collection => Settings.site[:splash_page_views], :include_blank => false, :hint => input_hint(:splash_page_view)
-      %fieldset
-        %legend
-          General
-          = toggle_link :general_settings, :name => false
-        #general_settings
-          = s.input :title, :hint => input_hint(:title)
-          = s.input :currency, :collection => currency_select_array, :hint => input_hint(:currency)
-      %fieldset
-        %legend
-          Default Views
-          = toggle_link :default_settings, :name => false
-        #default_settings
-          = s.input :home_show_tag_view, :collection => Settings.site[:home_show_tag_views], :include_blank => false, :hint => input_hint(:home_show_tag_view)
-          = s.input :series_show_view, :collection => Settings.site[:series_show_views], :include_blank => false, :hint => input_hint(:series_show_view)
-          = s.input :work_show_view, :collection => Settings.site[:work_show_views], :include_blank => false, :hint => input_hint(:work_show_view)
-      %fieldset
-        %legend
-          Email
-          = toggle_link :email_settings, :name => false
-        #email_settings
-          = s.input :email_general, :hint => input_hint(:email_general)
-          = s.input :email_no_reply, :hint => input_hint(:email_no_reply)
-    .right
-      %fieldset
-        %legend
-          Payment Settings
-          = toggle_link :payment_settings, :name => false
-        #payment_settings
-          = s.input :payment_module, :collection => Settings.site[:payment_modules], :include_blank => false, :hint => input_hint(:payment_module)
-      %fieldset
-        %legend
-          Paypal Account
-          = toggle_link :paypal_settings, :name => false
-        #paypal_settings
-          = markup(t('.paypal_notice'), :class => :notice)
-          = s.input :paypal_api_username, :hint => input_hint(:paypal_api_username)
-          = s.input :paypal_api_password, :hint => input_hint(:paypal_api_password), :input_html => {:value => Settings.paypal_api_password}
-          = s.input :paypal_api_signature, :hint => input_hint(:paypal_api_signature)
-      %fieldset
-        %legend
-          Google Account
-          = toggle_link :google_settings, :name => false
-        #google_settings
-          = s.input :google_email, :hint => input_hint(:google_email)
-          = s.input :google_password, :hint => input_hint(:google_password), :input_html => {:value => Settings.google_password}
-          = s.input :google_calendar, :hint => input_hint(:google_calendar)
-      %fieldset
-        %legend
-          Developer Settings
-          = toggle_link :developer_settings, :name => false
-        #developer_settings
-          = s.input :email_interceptor, :hint => input_hint(:email_interceptor)
-  %fieldset.clearfix
-    %legend
-      Image Sizes
-      = toggle_link :image_sizes, :name => false, :state => :hide
-    #image_sizes.hide
-      = markup(t('.image_size_notice'), :class => "notice") 
-      = image_sizes_inputs
-  .actions
-    = s.button :submit, "Save Settings"
+          Image Sizes
+          = toggle_link :image_sizes, :name => false, :state => :hide
+        #image_sizes.hide
+          = markup(t('.image_size_notice'), :class => "notice") 
+          = image_sizes_inputs
+      .actions
+        = s.button :submit, "Save Settings"

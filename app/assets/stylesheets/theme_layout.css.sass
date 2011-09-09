@@ -3,21 +3,18 @@
 
 body
   font-family: 'Abel', sans-serif
-  background: asset-url('body_bg.png', image)
-  
   >#container
     width: $site_width
     margin: 0 auto
     position: relative
-    
     >#header
       +border-radius(0 0 $default-border-radius $default-border-radius)
-      +single-box-shadow($grey_04, 10px, 10px)
+      +single-box-shadow
       font-family: 'Shanti', sans-serif
       padding: 0 15px 15px 15px
       border-width: 0 $content_border_width $content_border_width
       border-style: solid
-      border-color: $grey_02
+      border-color: $color_02
       background: white
       margin-bottom: 30px
       >#logo
@@ -33,44 +30,47 @@ body
           white-space: nowrap
           position: relative
           display: inline-block
-          background: $grey_08
           text-transform: uppercase
           >a // main category
+            background: $color_08
+            +border-radius(0 0 3px 3px)
             padding: 5px 10px
             display: block
             text-decoration: none
             &:hover
               color: white
-              background: $grey_04
+              background: $color_04
           >ul
             position: absolute
             display: none
             z-index: 1
+            border: 1px solid white
             >li
               >a // sub category
                 display: block
                 padding: 5px 10px
-                background: $grey_07
+                background: $color_07
                 text-decoration: none
                 text-align: left
                 &:hover
                   color: white
-                  background: $grey_04
+                  background: $color_04
     >#flash
+      +single-box-shadow
       font-family: 'Shanti', sans-serif
       text-align: center
       font-weight: bold
       >div
         background: white
         padding: 5px
-        border-width: 0 2px
+        border-width: 0 $content_border_width
         border-style: solid
-        border-color: $grey_06
+        border-color: $color_02
         &:first-child
-          border-top: 2px solid $grey_06
+          border-top: $content_border_width solid $color_02
           margin-top: -5px
         &:last-child
-          border-bottom: 2px solid $grey_06
+          border-bottom: $content_border_width solid $color_02
           margin-bottom: 20px
       >.notice
         color: green
@@ -80,8 +80,8 @@ body
       position: relative
       top: 10px
       color: black
-      background: $grey_08
-      border: 2px solid $grey_02
+      background: $color_08
+      border: 2px solid $color_02
       margin: -10px auto 0
       padding: 2px
       width: 50%
@@ -91,21 +91,21 @@ body
       >a
         font-size: 0.8em
         text-decoration: none
-        color: $grey_01
+        color: $color_01
         margin: 0 10px
         padding: 10px
         background: white
         &:hover
-          color: $grey_02
-          background: $grey_09
+          color: $color_02
+          background: $color_09
     >#content
       +clearfix
       +border-radius
-      +single-box-shadow($grey_04, 10px, 10px)
+      +single-box-shadow
       position: relative
       font-size: 0.8em
       padding: $content_padding
-      border: $content_border_width solid $grey_02
+      border: $content_border_width solid $color_02
       background: white
       margin-bottom: 30px
     >#footer

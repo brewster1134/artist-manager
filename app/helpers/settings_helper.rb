@@ -1,9 +1,18 @@
 module SettingsHelper
 
-  def input_hint(key)
-    translation = t("simple_form.hints.settings.#{key}")
-    translation = nil if translation.index("translation missing")
-    ([translation, "Default: #{Settings.defaults[key]}"].compact * '<br />').html_safe
+  def input_hint(key, options = {})
+    options.reverse_merge!(
+      :default => true,
+      :markup => false
+    )
+    hint = t("simple_form.hints.settings.#{key}")
+    default = "Default: #{Settings.defaults[key]}" if options[:default] 
+    
+    hint = nil if hint =~ /translation missing/
+    hint = if hint 
+      options[:markup] ? markup(hint) : content_tag(:div, hint)
+    end
+    ([hint, (content_tag(:p, default, :class => "default") if default)].compact * '').html_safe
   end
   
   def image_sizes_inputs

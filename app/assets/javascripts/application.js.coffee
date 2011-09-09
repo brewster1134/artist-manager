@@ -1,6 +1,7 @@
 //= require jquery.min
 //= require jquery-ui.min
 //= require jquery_ujs
+//= require jquery.cookie
 # require_tree .
 
 $ = jQuery

@@ -10,7 +10,7 @@
     = yield :js
     = include_controller_assets :js, controller_name, action_name
     = csrf_meta_tags
-  %body
+  %body{:style => background}
     #logo= logo
     #container
       = yield

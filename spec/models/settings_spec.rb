@@ -3,9 +3,16 @@ require 'yaml'
 include ActiveModel::Lint::Tests
 
 describe Settings do
+
+  before :all do
+    FileUtils.cp Rails.root.join("vendor", "assets", "images", "stock", "stock01.jpg").to_s, Rails.root.join("public", "stock01.jpg").to_s
+    Settings.load_custom_file
+  end
+
   custom_settings = {
     :title        => "Custom Title",
     :use_logo     => false,
+    :logo         => Rails.root.join("public", "stock01.jpg"),
     :currency     => :eur,
     :image_sizes  => {
       :home => {
@@ -18,9 +25,9 @@ describe Settings do
     }
   }.with_indifferent_access
 
-  CUSTOM_FILE = Rails.root.join("config", "settings_#{Rails.env}.yml")
+  CUSTOM_SETTINGS = Rails.root.join("config", "settings_#{Rails.env}.yml")
   before :each do
-    File.open(CUSTOM_FILE, 'w+') { |f| f.write(custom_settings.to_yaml) }
+    File.open(CUSTOM_SETTINGS, 'w+') { |f| f.write(custom_settings.to_yaml) }
     Settings.load_custom_file
     @settings = Settings.new
   end
@@ -32,7 +39,6 @@ describe Settings do
   end
 
   it 'should have the correct instance methods' do
-    @settings.should respond_to :logo
     @settings.should respond_to :resize_images
   end
   
@@ -55,7 +61,7 @@ describe Settings do
     Settings.use_logo.should == custom_settings[:use_logo]
     Settings.use_logo.should be_an_instance_of FalseClass
 
-    @settings.use_logo = true
+    @settings.use_logo = "1"
     @settings.save
     Settings.load_custom_file
     Settings.use_logo.should == true
@@ -68,7 +74,7 @@ describe Settings do
     Settings.currency == custom_settings[:currency]
     Settings.currency.should be_an_instance_of Symbol
 
-    @settings.currency = :gbp
+    @settings.currency = "gbp"
     @settings.save
     Settings.load_custom_file
     Settings.currency.should == :gbp
@@ -80,15 +86,28 @@ describe Settings do
     Settings.image_sizes.should == custom_settings[:image_sizes]
     Settings.image_sizes.should be_an_instance_of HashWithIndifferentAccess
 
-    @settings.image_sizes = {:image_sizes => {:size => "1"}}
+    @settings.image_sizes = {"image_sizes" => {"size" => "1"}}
     @settings.save
     Settings.load_custom_file
     Settings.image_sizes.should == {:image_sizes => {:size => 1}}.with_indifferent_access
     Settings.image_sizes.should be_an_instance_of HashWithIndifferentAccess
   end
 
+  it 'should handle uploaded files' do
+    Settings.defaults[:logo].should be_an_instance_of Pathname
+    Settings.logo.should == custom_settings[:logo]
+    Settings.logo.should be_an_instance_of Pathname
+
+    @settings.logo = ActionDispatch::Http::UploadedFile.new({ :tempfile => File.new(custom_settings[:logo].to_s), :filename => "stock01.jpg", :type => "image/jpg" })
+    @settings.save
+    Settings.load_custom_file
+    Settings.logo.should == Rails.root.join("public", "uploads", "stock01.jpg")
+    Settings.logo.should be_an_instance_of Pathname
+  end
+
   after :all do
-    FileUtils.rm_rf CUSTOM_FILE
+    FileUtils.rm_rf CUSTOM_SETTINGS
+    FileUtils.rm Rails.root.join("public", "uploads", "stock01.jpg")
     Settings.load_custom_file
   end
   
