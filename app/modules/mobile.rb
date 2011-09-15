@@ -9,6 +9,7 @@ module Mobile
     case params[:m]
     when "0"
       session[:m] = nil
+      return false
     when "1"
       session[:m] = nil
       return true

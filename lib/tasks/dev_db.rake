@@ -8,7 +8,7 @@ namespace :dev_db do
   desc "Drop, create, migrate then seed the development database"
   task :seed => [ 'environment', 'dev_db:not_production', 'db:drop', 'db:migrate', 'db:seed'] do
     require 'timeout'
-    divider = "--------------------------".blue
+    puts divider = "--------------------------".blue
 
     # Delete directories
     FileUtils.rm_rf "#{Rails.root}/public/uploads"
@@ -17,12 +17,12 @@ namespace :dev_db do
 
     work_attributes = {
       description: Lorem::Base.new(:paragraphs, 3).output,
-      video_link: ["http://www.youtube.com", ""].sample,
+      video_link: ["http://www.youtube.com/watch?v=kYgIlZCYClw", ""].sample,
       dimensions: ["1' x 2' x 3'", ""].sample,
       completion_year: [Date.today.year, ""].sample,
       for_sale: [true, false].sample,
-      price: 1.38,
-      price_currency: "usd",
+      price: [1.38, 0].sample,
+      price_currency: :usd,
       quantity: (0..10).to_a.sample,
       tag_list: ["Paintings", "Pictures", "Video", "Sculptures"].sample
     }

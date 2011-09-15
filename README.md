@@ -32,6 +32,7 @@ The demo site will be reset back to the defaults every Saturday at midnight, so 
 
 ## Requirements
 
++ Git:          `http://git-scm.com`
 + RVM:          `http://beginrescueend.com`
 + Bundler Gem:  `gem install bundler`
 
@@ -52,13 +53,19 @@ rake db:migrate
 rake db:seed
 ```
 
-For development (or any non-production environment), you can instead run `rake dev_db:seed` to populate the site with some sample data.
+## Development
 
+For any non-production environment, you can run `rake dev_db:seed` to populate the site with some sample data.
 **THIS WILL DROP YOUR DATABASE AND DELETE ANY FILES YOU UPLOADED THROUGH THE SITE!**
 
-If the image sizes are changed in the site settings, the image versions are recreated.  If changes were made manually, or images arent showing properly, you can manually recreate them with the following rake command
+If image sizes are changed from the 'Edit Settings' page, the images will be automatically recreated.
+However, if changes were NOT made form the 'Edit Settings' page, or something went wrong with image resizing, you can manually recreate them with `rake recreate_images`
 
-`rake recreate_images` 
+For Mobile testing, you can pass a parameter in the url to control viewing the mobile site.
+
++ `?m=0` will force the NON-mobile layout temporarily 
++ `?m=1` will force the mobile layout temporarily
++ `?m=2` will force the mobile permanently
 
 ## Deployment
 
@@ -75,10 +82,10 @@ From app directory...
 + `mkdir tmp`
 + `touch tmp/restart.txt`
 
-### FastCGI (Not actually tested)
+### FastCGI
+#### not personally tested
 
 Refer to: https://github.com/dre3k/rails3_fcgi for setup.
-
 For DreamHost: http://wiki.dreamhost.com/Ruby_on_Rails
 
 ## Web Server
@@ -89,7 +96,7 @@ should be ready to go!
 
 ### Nginx
 
-in `config/environmnets/production.rb` change:
+in `config/environments/production.rb` change:
 
 `config.action_dispatch.x_sendfile_header = "X-Sendfile"`
 
@@ -120,7 +127,7 @@ When visiting the work#index view, the following files will be looked for...
 
 It will also find these assets with an additional `.erb` extension, if ruby parsing is neccessary.
 
-3rd party add-ons have generic asset wrappers for easily swapping them out.
+#### 3rd party add-ons have generic asset wrappers for easily swapping them out.
 
 For example...
 
@@ -131,7 +138,7 @@ For example...
 
 This allows you to replace the contents of `slideshow.js.coffee` && `slideshow.css.sass` with a slideshow of your choosing...
 
-However you **WILL** have to update any views that use the slideshow to have the proper markup for your new slideshow.  And any view-specific assets might need updated to pass any JS parameters to your new slideshow.
+However you **WILL** have to update any views that use the slideshow to have the proper markup for your new slideshow.  And any view-specific assets might need updated to pass the proper JS parameters to your new slideshow.
 
 ### CSS 
 
