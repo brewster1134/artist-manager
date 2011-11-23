@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "3.1"
+gem "rails", "3.1.3"
 
 # Bundle edge Rails instead:
 # gem "rails",     :git => "git://github.com/rails/rails.git"
@@ -9,6 +9,7 @@ gem "sqlite3"
 
 gem "activemerchant"
 gem "acts-as-taggable-on"
+gem "bcrypt-ruby"
 gem "carrierwave"
 gem "coffee-rails"
 gem "gcal4ruby"
@@ -25,11 +26,15 @@ gem "simple_form"
 group :assets do
   gem "sass-rails"
   gem "uglifier"
-  gem "compass", :git => "git://github.com/chriseppstein/compass.git", :branch => "rails31"
+  gem "compass", '~> 0.12.alpha'
 end
 
 # To use debugger
 # gem "ruby-debug19", :require => "ruby-debug"
+
+group :development, :test do
+  gem 'rspec-rails'
+end
 
 # Development
 group :development do
@@ -39,11 +44,10 @@ group :development do
 end
 
 # Testing
-gem "rspec-rails", :groups => [:test, :development]
-gem "factory_girl_rails", :groups => [:test, :development]
 group :test do
   gem "turn", :require => false
   gem "capybara"
+  gem "factory_girl_rails"
   gem "guard-rspec"
   gem 'guard-spork'
   gem "spork", "0.9.0.rc9"

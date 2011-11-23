@@ -4,7 +4,7 @@ class Series < ActiveRecord::Base
 
   validates :title, :presence => true,
                     :uniqueness => true
-  validates :view,  :inclusion => {:in => Settings.site[:series_show_views]},
+  validates :view,  :inclusion => { :in => Settings.site[:series_show_views].collect{ |v| v.to_s} },
                     :allow_blank => true
 
   def url

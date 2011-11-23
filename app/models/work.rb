@@ -20,7 +20,7 @@ class Work < ActiveRecord::Base
   validates :shipping,          numericality: { greater_than_or_equal_to: 0 }
   validates :shipping_currency, inclusion:    { in: Money::Currency::TABLE.stringify_keys.keys }
   validates :quantity,          numericality: { greater_than_or_equal_to: 0 }
-  validates :view,              inclusion:    { in: Settings.site[:work_show_views] },
+  validates :view,              inclusion:    { in: Settings.site[:work_show_views].collect{ |v| v.to_s} },
                                 allow_blank: true
   validates :featured,          inclusion:    { in: [true, false] }
   
