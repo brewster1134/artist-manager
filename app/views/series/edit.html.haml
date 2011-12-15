@@ -4,9 +4,10 @@
 - content_for :page_title do
   = "Edit #{@series.title}"
   = link_to "Preview", @series
+  = link_to "Delete", @series, :method => :delete, :confirm => [t('destroy.confirm', :x => @series.title), t('series.destroy')] * "  "
   
 = simple_form_for @series do |s|
   = render 'shared/form_errors', :instance => @series
-  = render 'form_fields', :series => s
+  = render 'form_fields', :instance => @series, :series => s
   .actions
     = s.button :submit  

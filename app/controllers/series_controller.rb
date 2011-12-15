@@ -13,7 +13,7 @@ class SeriesController < ApplicationController
   def create
     @series = Series.new(params[:series])
     if @series.save
-      redirect_to edit_series_path(@series), :notice => "#{@series.title} was created!  You can now add work to it."
+      redirect_to edit_series_path(@series), :notice => [t('create.success', :x => @series.title), t('series.create')] * "  " 
     else
       flash.alert = t('create.failure', :x => "Series")
       render :new
@@ -28,16 +28,22 @@ class SeriesController < ApplicationController
   def update
     @series = Series.find_by_url(params[:id])
     if @series.update_attributes(params[:series])
-      redirect_to edit_series_path(@series), :notice => "#{@series.title} was successfully updated."
+      redirect_to edit_series_path(@series), :notice => t('update.success', :x => @series.title)
     else
       @series.title = @series.title_was if @series.title_changed?
-      flash.alert = t('update.failure', :x => "Series")
+      flash.alert = t('update.failure', :x => @series.title)
       render :edit
     end
   end
   
   def destroy
-    
+    @series = Series.find_by_url(params[:id])
+    if @series.destroy
+      redirect_to work_index_path, :notice => t('destroy.success', :x => @series.title)
+    else
+      flash.alert = t('destroy.failure', :x => @series.title)
+      render :edit
+    end
   end
 
 end

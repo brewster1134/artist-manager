@@ -1,3 +1,10 @@
 = series.input :title
 = series.input :description, wrapper_html: { class: "markup_edit" }
 = series.input :view, :collection => Settings.site[:series_show_views], :include_blank => true
+
+%fieldset
+  %legend
+    Work
+    = toggle_link :work, :state => instance.new_record? ? :show : :hide
+  #work{:class => instance.new_record? ? "show" : "hide"}
+    = series.association :works, :as => :select, :input_html => {:size => 10}, :hint => markup(t('simple_form.hints.series.works'))

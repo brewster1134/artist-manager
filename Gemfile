@@ -18,7 +18,7 @@ gem "jquery-rails"
 gem "mini_magick"
 gem "money"
 gem "rails3-jquery-autocomplete"
-gem "redcarpet"
+gem "redcarpet", "> 2.0"
 gem "simple_form"
 
 # Gems used only for assets and not required
@@ -50,5 +50,5 @@ group :test do
   gem "factory_girl_rails"
   gem "guard-rspec"
   gem 'guard-spork'
-  gem "spork", "0.9.0.rc9"
+  gem "spork", "> 0.9.0.rc"
 end

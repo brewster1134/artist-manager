@@ -92,8 +92,8 @@ class Work < ActiveRecord::Base
     self.price + self.shipping
   end
 
-  def name
-    [(self.series.title if self.series), self.title].compact * ": "
+  def name(show_series = true)
+    [(self.series.title if self.series && show_series), self.title].compact * ": "
   end
     
 end

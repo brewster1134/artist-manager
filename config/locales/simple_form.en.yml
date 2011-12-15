@@ -1,4 +1,8 @@
 en:
+  helpers:
+    submit:
+      work:
+        create: Create %{model} & Add Images
   simple_form:
     "yes": 'Yes'
     "no": 'No'
@@ -55,6 +59,10 @@ en:
           Here is a [guide](http://www.w3schools.com/cssref/css_colornames.asp) to acceptable color values.
       series:
         view: Leave blank to use the Site Default
+        works: |
+          Use Command + Click (Mac) or Control + Click (Windows) to select multiple works.
+          
+          Careful! If you add work that is already in a different series, it will be removed from that series and put into this one.
       work:
         view: Leave blank to use the Site Default
         tag_list: Any keywords or categories seperated by comma e.g. Paintings, Photography, Video 

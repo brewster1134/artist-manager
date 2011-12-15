@@ -1,6 +1,6 @@
 class Series < ActiveRecord::Base
-  has_many :works
-  attr_accessible :title, :description, :view
+  has_many :works, :dependent => :nullify
+  attr_accessible :title, :description, :view, :work_ids
 
   validates :title, :presence => true,
                     :uniqueness => true

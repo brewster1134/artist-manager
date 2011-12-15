@@ -3,6 +3,6 @@
 
 = simple_form_for @series do |s|
   = render 'shared/form_errors', :instance => @series
-  = render 'form_fields', :series => s
+  = render 'form_fields', :instance => @series, :series => s
   .actions
     = s.button :submit  

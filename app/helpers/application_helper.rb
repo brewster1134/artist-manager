@@ -12,11 +12,13 @@ module ApplicationHelper
       ext = [".css.sass", ".css.sass.erb"]
       helper = "stylesheet_link_tag" 
     end
+
     action_name = case action_name
     when "create" then "new"  
     when "update" then "edit"
     else action_name
     end  
+
     sub_directory = "controllers"
     names = [ controller_name, "#{controller_name}.#{action_name}"]
     files = []
@@ -67,26 +69,30 @@ module ApplicationHelper
   end
     
   def markup(text, options = {})
-    # http://rdoc.info/github/tanoku/redcarpet/master/Redcarpet
+    # https://github.com/tanoku/redcarpet
     options.reverse_merge!(
-      :autolink =>          false,
-      :filter_html =>       true,
-      :filter_styles =>     true,
-      :generate_toc =>      false,
-      :gh_blockcode =>      true,
-      :hard_wrap =>         true,
-      :lax_htmlblock =>     false,
-      :no_image =>          true,
-      :no_intraemphasis =>  false,
-      :no_links =>          false,
-      :safelink =>          true,
-      :smart =>             false,
-      :space_header =>      false,
-      :xhtml =>             true
+      :no_intra_emphasis =>   false,
+      :tables =>              false,
+      :fenced_code_blocks =>  false,
+      :autolink =>            true,
+      :strikethrough =>       true,
+      :lax_html_blocks =>     false,
+      :space_after_headers => false,
+      :superscript =>         true,
+
+      :filter_html =>         true,
+      :no_images =>           true,
+      :no_links =>            false,
+      :no_styles =>           true,
+      :safe_links_only =>     true,
+      :with_toc_data =>       false,
+      :hard_wrap =>           true,
+      :xhtml =>               true
     )
     div_class = options.delete(:class)
-    options.reject! { |k, v| !v }
-    content_tag(:div, Redcarpet.new(text.to_s, *options.keys).to_html.html_safe, :class => "markup #{div_class}")
+    rndr = Redcarpet::Render::HTML.new(options)
+    markdown = Redcarpet::Markdown.new(rndr, options)
+    content_tag(:div, markdown.render(text.to_s).html_safe, :class => "markup #{div_class}")
   end
   
   def currency_select_array

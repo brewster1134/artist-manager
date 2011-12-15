@@ -12,6 +12,13 @@ en:
   destroy:
     success: "%{x} was successfully deleted."
     failure: "%{x} failed to be deleted."
+    confirm: "Are you sure you want to delete %{x}?"
+    
+  series:
+    create: You can now add work to it.
+    destroy: Any work in this series will NOT be deleted, but it will no longer be a part of a series.
+  work:
+    create: You can now add images to it.
 
   # mailers
   user_mailer:
@@ -42,4 +49,3 @@ en:
         **These settings are to be used in conjunction with css/theme updates. Modifying the image sizes without changing the theme can cause weird problems!**
         
         If image sizes are changed, all images will have to be rebuilt.  This can take awhile depending on how many images you have uploaded.  It will run in the background and the resized images will appear on the site as soon as they are finsihed being rebuilt.
-      

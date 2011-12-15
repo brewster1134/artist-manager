@@ -22,7 +22,7 @@ class WorkController < ApplicationController
   def create
     @work = Work.new(params[:work])
     if @work.save
-      redirect_to edit_work_path(@work), :notice => "#{@work.title} was created!  Now add some images!"
+      redirect_to edit_work_path(@work), :notice => [t('create.success', :x => @work.title), t('work.create')] * "  "
     else
       flash.alert = t('create.failure', :x => "Work")
       render :new
@@ -36,7 +36,7 @@ class WorkController < ApplicationController
   def update
     @work = Work.find_by_url(params[:id])
     if @work.update_attributes(params[:work])
-      redirect_to @work, :notice => "#{@work.title} was successfully updated."
+      redirect_to @work, :notice => t('update.success', :x => @work.title)
     else
       @work.title = @work.title_was if @work.title_changed?
       flash.alert = t('update.failure', :x => "Work")
@@ -44,6 +44,16 @@ class WorkController < ApplicationController
     end
   end
   
+  def destroy
+    @work = Work.find_by_url(params[:id])
+    if @work.destroy
+      redirect_to work_index_path, :notice => t('destroy.success', :x => @work.title)
+    else
+      flash.alert = t('destroy.failure', :x => @work.title)
+      render :edit
+    end
+  end
+
   def price_request
     @work = Work.find_by_url(params[:work_id])
     @email = Email.new(params[:email])
