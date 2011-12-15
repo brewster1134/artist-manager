@@ -67,6 +67,10 @@ For Mobile testing, you can pass a parameter in the url to control viewing the m
 + `?m=1` will force the mobile layout temporarily
 + `?m=2` will force the mobile permanently
 
+## Production
+
+The defaults for production are setup for Heroku using PostgreSQL.  If you need to change this, update the Gemfile to reflect that.
+
 ## Deployment
 
 ### WEBrick (OSX)
