@@ -5,12 +5,7 @@ gem "rails", "3.1.3"
 # Bundle edge Rails instead:
 # gem "rails",     :git => "git://github.com/rails/rails.git"
 
-group :production do
-  gem 'pg'
-end
-group :development, :test do
-  gem 'sqlite3'
-end
+gem 'sqlite3'
 
 gem "activemerchant"
 gem "acts-as-taggable-on"
@@ -56,11 +51,4 @@ group :test do
   gem "guard-rspec"
   gem 'guard-spork'
   gem "spork", "> 0.9.0.rc"
-end
-
-# For Heroku Production Demo
-group :production do
-  gem "colorize"
-  gem "lorem"
-  gem "factory_girl_rails"
 end
