@@ -1,12 +1,12 @@
 namespace :dev_db do
 
-  desc "Raise an error if RAILS_ENV is production"
-  task :not_production do
-    raise "Not on production you dingus!" if Rails.env.production? 
+  desc "Raise an error if in production environment."
+  task :not_production, [:override] do |t, args|
+    raise "Not on production you dingus! #{args[:override].inspect}" if Rails.env.production? && args[:override] != "true" 
   end
 
-  desc "Drop, create, migrate then seed the development database"
-  task :seed => [ 'environment', 'dev_db:not_production', 'db:drop', 'db:migrate', 'db:seed'] do
+  desc "Drop, create, migrate then seed the development database."
+  task :seed, [:override] => [ 'environment', 'dev_db:not_production', 'db:drop', 'db:migrate', 'db:seed'] do |t, args|
     require 'timeout'
     puts divider = "--------------------------".blue
 
@@ -22,7 +22,7 @@ namespace :dev_db do
       completion_year: [Date.today.year, ""].sample,
       for_sale: [true, false].sample,
       price: [1.38, 0].sample,
-      price_currency: :usd,
+      price_currency: "usd",
       quantity: (0..10).to_a.sample,
       tag_list: ["Paintings", "Pictures", "Video", "Sculptures"].sample
     }
@@ -69,4 +69,12 @@ namespace :dev_db do
     puts divider
 
   end
+
+  desc "This task is called by the Heroku cron add-on"
+  task :cron => :environment do
+  if Date.today.wday == 0 && Time.now.hour == 0 # Runs every sunday at midnight
+    Rake::Task['dev_dv:seed'].invoke(true)
+  end
+end
+  
 end

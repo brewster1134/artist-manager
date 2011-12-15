@@ -41,8 +41,8 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
-# Development (and production for heroku demo)
-group :development, :production do
+# Development
+group :development do
   gem "colorize"
   gem "haml-rails"
   gem "lorem"
@@ -56,4 +56,11 @@ group :test do
   gem "guard-rspec"
   gem 'guard-spork'
   gem "spork", "> 0.9.0.rc"
+end
+
+# For Heroku Production Demo
+group :production do
+  gem "colorize"
+  gem "lorem"
+  gem "factory_girl_rails"
 end
