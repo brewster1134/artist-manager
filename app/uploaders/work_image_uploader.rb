@@ -113,4 +113,9 @@ class WorkImageUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
+  # for use with heroku
+  def cache_dir
+    "#{Rails.root}/tmp/uploads"
+  end
+
 end

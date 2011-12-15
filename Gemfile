@@ -39,6 +39,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem "factory_girl_rails"
 end
 
 # Development
@@ -52,7 +53,6 @@ end
 group :test do
   gem "turn", :require => false
   gem "capybara"
-  gem "factory_girl_rails"
   gem "guard-rspec"
   gem 'guard-spork'
   gem "spork", "> 0.9.0.rc"
