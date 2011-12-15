@@ -5,11 +5,11 @@ module ApplicationHelper
     case type
     when :javascript, :js
       dir = "javascripts"
-      ext = [".js.coffee", ".js.coffee.erb"]
+      ext = "js"
       helper = "javascript_include_tag" 
     when :stylesheet, :css
       dir = "stylesheets"
-      ext = [".css.sass", ".css.sass.erb"]
+      ext = "css"
       helper = "stylesheet_link_tag" 
     end
 
@@ -23,10 +23,9 @@ module ApplicationHelper
     names = [ controller_name, "#{controller_name}.#{action_name}"]
     files = []
     names.each do |n|
-      ext.each do |e|
-        file_exists = File.exists?(File.join(Rails.root, "app", "assets", dir, sub_directory, n + e))
-        files << send(helper, File.join(sub_directory, n + e)) if file_exists
-      end
+      # file_exists = File.exists?(File.join(Rails.root, "app", "assets", dir, sub_directory, n + e))
+      file_exists = Dir.glob(File.join(Rails.root, "app", "assets", dir, sub_directory, "#{n}.#{ext}*")).present?
+      files << send(helper, File.join(sub_directory, "#{n}.#{ext}")) if file_exists
     end
     return (files * "").html_safe
   end
