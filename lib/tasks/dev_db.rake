@@ -6,7 +6,7 @@ namespace :dev_db do
   end
 
   desc "Drop, create, migrate then seed the development database."
-  task :seed, [:override] => [ 'environment', 'dev_db:not_production', 'db:drop', 'db:migrate', 'db:seed'] do |t, args|
+  task :seed, [:override] => [ 'environment', 'dev_db:not_production', 'db:migrate', 'db:seed'] do |t, args|
     require 'timeout'
     puts divider = "--------------------------".blue
 
@@ -72,7 +72,9 @@ namespace :dev_db do
 
   desc "This task is called by the Heroku cron add-on"
   task :cron => :environment do
-    if Date.today.wday == 0 && Time.now.hour == 0 # Runs every sunday at midnight
+    if Date.today.wday == 0 # Runs every sunday
+      Series.destroy_all
+      Work.destroy_all
       Rake::Task['dev_dv:seed'].invoke(true)
     end
   end
