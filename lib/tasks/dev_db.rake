@@ -9,6 +9,8 @@ namespace :dev_db do
   task :seed, [:override] => [ 'environment', 'dev_db:not_production', 'db:migrate', 'db:seed'] do |t, args|
     require 'timeout'
     puts divider = "--------------------------".blue
+    Series.destroy_all
+    Work.destroy_all
 
     # Delete directories
     FileUtils.rm_rf "#{Rails.root}/public/uploads"
@@ -72,8 +74,6 @@ namespace :dev_db do
   desc "This task is called by the Heroku cron add-on"
   task :cron => :environment do
     if Date.today.wday == 0 # Runs every sunday
-      Series.destroy_all
-      Work.destroy_all
       Rake::Task['dev_dv:seed'].invoke(true)
     end
   end
