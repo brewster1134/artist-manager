@@ -94,19 +94,19 @@ For DreamHost: http://wiki.dreamhost.com/Ruby_on_Rails
 
 ## Web Server
 
-### Nginx
+### Apache
 
 should be ready to go!
 
-### Apache
+### Nginx
 
 in `config/environments/production.rb` change:
 
-`config.action_dispatch.x_sendfile_header = "X-Accel-Redirect"`
+`config.action_dispatch.x_sendfile_header = "X-Sendfile"`
 
 to
 
-`config.action_dispatch.x_sendfile_header = "X-Sendfile"`
+`config.action_dispatch.x_sendfile_header = "X-Accel-Redirect"`
 
 ## Settings
 
