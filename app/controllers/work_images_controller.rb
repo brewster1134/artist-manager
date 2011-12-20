@@ -17,7 +17,7 @@ class WorkImagesController < ApplicationController
     if @image.save
       render :json => [ @image.to_jq_upload ].to_json
     else 
-      render :json => [ @image.to_jq_upload.merge({ :error => "custom_failure" }) ].to_json
+      render :json => [ @image.to_jq_upload.merge({ :error => "Image not saved." }) ].to_json
     end
   end
   

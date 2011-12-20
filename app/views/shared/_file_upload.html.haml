@@ -1,66 +1,76 @@
-- show_files ||= false
-%script{ :id => "template-upload", :type => "text/x-jquery-tmpl" }
-  %tr{ class: "template-upload{{if error}} ui-state-error{{/if}}" }
-    %td.preview
-    %td.name
-      ${name}
-    %td.size
-      ${sizef}
-    {{if error}}
-    %td.error{ colspan: 2 }
-      Error:
-      {{if error === 'custom_failure'}}Error!
-      {{else}}${error}
-      {{/if}}
-    {{else}}
-    %td.progress
-      %div
-    %td.start
-      %button Start
-    %td.cancel
-      %button Cancel
-    {{/if}}
-      
-%script{ :id => "template-download", :type => "text/x-jquery-tmpl" }
-  %tr{ class: "template-download{{if error}} ui-state-error{{/if}}" }
-    {{if error}}
-    %td
-    %td.name
-      ${name}
-    %td.size
-      ${sizef}
-    %td.error{ colspan: 2 }
-      {{if error === 1}}File exceeds maximum size
-      {{else}}${error}
-      {{/if}}
-    {{else}}
-    %td.preview
-      {{if thumbnail_path}}
-      %a.lightbox{ href: "${url}", target: "_blank", rel: "${work_id}" }
-        %img{ src: "${thumbnail_path}" }
-      {{/if}}
-    %td.name
-      %a.lightbox{ href: "${url}", target: "{{if thumbnail_path}}_blank{{/if}}", rel: "${work_id}" }
-        ${name}
-    %td.size
-      ${sizef}
-    %td{ colspan: 2 }
-    {{/if}}
-    %td.delete
-      %button.delete{ "data-type" => "${delete_type}", "data-url" => "${delete_path}" }Delete
+= form_tag path, :multipart => true, :id => 'fileupload' do
+  .topbar
+    %span.fileinput-button.ui-button{"data-button-type" => 'plus'}
+      %span= "Upload #{label}"
+      = file_field_tag :image, multiple: true
+    %button.ui-button.image_toggle{:type => "button", "data-button-type" => 'triangle-1-s'}= "Show Images"
+  .content.hide
+    .progressbar.fileupload-progressbar
+      %div{:style => "width:0%;"}
+    .files
 
-#fileupload
-  .fileupload-buttonbar
-    = form_tag path, :html => { :multipart => true } do
-      %button.start.toggle_files.show{ style: "display: #{show_files ? 'none' : 'inline'}" }= "Show #{label}"
-      %button.start.toggle_files.hide{ style: "display: #{show_files ? 'inline' : 'none'}" }= "Hide #{label}"
-      %label.fileinput-button
-        %span
-          = "Upload #{label}"
-          = file_field_tag :image, multiple: true
-      -# %button.start{ type: "submit" }= "Upload #{label}"
-      -# %button.cancel{ type: "reset" }Cancel Uploads
-      -# %button.delete{ type: "button" }= "Delete All #{label}"
-  .fileupload-content{ style: "display: #{show_files ? 'block' : 'none'}" }
-    %table.files
-    .fileupload-progressbar
+%script{ :id => "template-upload", :type => "text/html" }
+  {% for (var i=0, files=o.files, l=files.length, file=files[0]; i<l; file=files[++i]) { %}
+  %table.template-upload.fade
+    %tr
+      %td.preview
+        %span.fade
+      %td.name
+        {%=file.name%}
+      %td.size
+        {%=o.formatFileSize(file.size)%}
+      {% if (file.error) { %}
+      %td.error{:colspan => 2}
+        %span.label.important
+          Error
+          {%=fileUploadErrors[file.error] || file.error%}
+      {% } else if (o.files.valid && !i) { %}
+      %td.progress
+        .progressbar
+          %div{:style => "width:0%;"}
+      %td.start
+        {% if (!o.options.autoUpload) { %}
+        %button.ui-button.primary{"data-button-type" => 'play', 'data-disable-button-text' => "true"} 
+          Start
+        {% } %}
+      {% } else { %}
+      %td{:colspan => 2}
+      {% } %}
+      %td.cancel
+        {% if (!i) { %}
+        %button.ui-button.info{"data-button-type" => 'stop', 'data-disable-button-text' => "true"} 
+          Cancel
+        {% } %}
+    {% } %} 
+
+%script{ :id => "template-download", :type => "text/html" }
+  {% for (var i=0, files=o.files, l=files.length, file=files[0]; i<l; file=files[++i]) { %}
+  %table.template-download.fade
+    %tr
+      {% if (file.error) { %}
+      %td
+      %td.name
+        {%=file.name%}
+      %td.size
+        {%=o.formatFileSize(file.size)%}
+      %td.error{:colspan => 2}
+        %span.label.important
+          Error
+          {%=fileUploadErrors[file.error] || file.error%}
+      {% } else { %}
+      %td.preview
+        {% if (file.thumbnail_url) { %}
+        %a.lightbox{ :href => "{%=file.url%}", :title => "{%=file.name%}", :rel => "{%= file.work_id %}" }
+          %img{ src: "{%=file.thumbnail_url%}" }
+        {% } %}</td>
+      %td.name
+        %a.lightbox{ :href => "{%=file.url%}", :title => "{%=file.name%}", :rel => "{%= file.work_id %}" }
+          {%=file.name%}
+      %td.size
+        {%=o.formatFileSize(file.size)%}
+      %td{:colspan => 2}
+      {% } %}
+      %td.delete
+        %button.ui-button{"data-delete-confirm" => "{%=file.name%}", "data-button-type" => 'trash', 'data-disable-button-text' => "true", "data-type" => "{%=file.delete_type%}", "data-url" => "{%=file.delete_url%}"}
+          Delete
+    {% } %}

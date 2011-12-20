@@ -48,7 +48,7 @@ module ApplicationHelper
   def logo(link = true)
     html = ""
     if Settings.use_logo && File.exists?(Settings.logo)
-      logo = File.join(Settings.logo.basename == Settings.defaults[:logo].basename ? '' : '/uploads', Settings.logo.basename.to_s )
+      logo = File.join(Settings.logo.basename == Settings.defaults[:logo].basename ? '/assets' : '/uploads', Settings.logo.basename.to_s )
       html << image_tag(logo)
     else
       html << Settings.title 
@@ -60,7 +60,7 @@ module ApplicationHelper
   def background
     css = ""
     if Settings.use_background_image && File.exists?(Settings.background_image)
-      bg_image = File.join(Settings.background_image.basename == Settings.defaults[:background_image].basename ? '' : '/uploads', Settings.background_image.basename.to_s )
+      bg_image = File.join(Settings.background_image.basename == Settings.defaults[:background_image].basename ? '/assets' : '/uploads', Settings.background_image.basename.to_s )
       css << "background-image: url(#{bg_image});"
     end
     css << "background-color: #{Settings.background_color};"

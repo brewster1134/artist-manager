@@ -1,0 +1,26 @@
+//= require jquery.fileupload-ui
+
+@import compass/css3
+@import compass/utilities
+@import settings
+
+.files
+  width: auto
+  td.preview
+    width: 80px
+  td.progress
+    min-width: 150px
+  td.start,
+  td.cancel,
+  td.delete
+    width: 40px 
+.progressbar
+  float: none
+  div
+    background: url(/assets/fileupload-ui/progressbar.gif)
+
+.fade
+  +transition(opacity 0.15s linear)
+  opacity: 0
+.fade.in
+  opacity: 1

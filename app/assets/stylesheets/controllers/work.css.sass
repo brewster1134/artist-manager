@@ -1,7 +1,49 @@
-//= require fileupload
+//= require file_upload
 //= require markup
 //= require lightbox
+@import compass/css3
+@import compass/utilities
+@import settings
 @import mixins
 
 .items
   +items(145px)
+
+#fileupload
+  .topbar
+    +border-radius(3px 3px 0 0)
+    background: $color_06
+    padding: 5px
+  
+  .content
+    +border-radius(0 0 3px 3px)
+    +clearfix
+    border: none
+    background: white
+    clear: both
+    .files
+      +clearfix
+      table
+        float: left
+        border-width: 0 0 1px 0
+        border-style: solid
+        &.template-upload
+          width: 100%
+          margin: 10px 0
+          border-width: 2px 0
+          background: $color_08
+          &:hover
+            border-color: $color_06
+        &.template-download
+          border-color: $color_06
+          width: 50%
+          &:hover
+            background: $color_09
+        td.preview
+          img
+            width: auto
+            height: auto
+    .progressbar
+      clear: both
+      width: auto
+      margin: 5px

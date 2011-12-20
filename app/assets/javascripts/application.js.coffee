@@ -2,11 +2,12 @@
 //= require jquery-ui.min
 //= require jquery_ujs
 //= require jquery.cookie
-# require_tree .
+//= require jquery.livequery
+#// require_tree .
 
 $ = jQuery
 
-#// toggle plugin
+# toggle plugin
 $.fn.toggle = (id, currentState = "show", showText = "Show", hideText = "Hide") ->
   link = $(@)
   element = $('#' + id)
@@ -17,12 +18,24 @@ $.fn.toggle = (id, currentState = "show", showText = "Show", hideText = "Hide") 
   else
     link.html(hideText)
     element.slideDown()
-
+    
 $ ->
-
+  # hide all elements with hide class
   $('.hide').hide()
 
-  #// menu
+  # convert buttons with class 'ui-button' and optionally 'data-button-type' set to a jquery-ui icon name
+  # set 'data-disable-button-text' to any value to only show the icon
+  $(".ui-button").livequery ->
+    show_text = if $(@).data('disable-button-text') then false else true
+    if $(@).data('button-type')
+      $(@).button
+        text: show_text
+        icons:
+          primary: 'ui-icon-' + $(@).data('button-type')
+    else
+      $(@).button()
+
+  # menu
   main_cats = $('ul#menu>li')
   sub_cats = $('ul#menu>li>ul')
   main_cats.mouseenter ->

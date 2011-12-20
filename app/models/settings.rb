@@ -4,7 +4,7 @@ class Settings
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  CUSTOM_SETTINGS = Rails.root.join("config", "settings_#{Rails.env}.yml")
+  CUSTOM_SETTINGS = Rails.root.join("config", "settings", "#{Rails.env}.yml")
   attr_accessor :resize_images
   cattr_accessor :site, :defaults, :custom
   @@site = {
@@ -17,9 +17,9 @@ class Settings
   @@defaults = {
     :title =>                 "Artist Manager",
     :use_logo =>              true,
-    :logo =>                  Rails.root.join("public", "logo.png"),
+    :logo =>                  Rails.root.join("app", "assets", "images", "logo.png"),
     :use_background_image =>  true,
-    :background_image =>      Rails.root.join("public", "background_image.png"),
+    :background_image =>      Rails.root.join("app", "assets", "images", "background_image.png"),
     :background_color =>      "grey",
     :currency =>              :usd,
     :email_general =>         "email@domain.com",

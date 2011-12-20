@@ -1,10 +1,21 @@
-//= require jquery.livequery
 //= require file_upload
 //= require markup
 //= require jquery.autocomplete
 //= require lightbox
  
 $ ->
+  
+  $('button.image_toggle').click ->
+    if $('#fileupload .content').is(':visible')
+      $(@).find('.ui-icon').removeClass('ui-icon-triangle-1-n').addClass('ui-icon-triangle-1-s')
+      $(@).find('.ui-button-text').text('Show Images')
+    else
+      $(@).find('.ui-icon').removeClass('ui-icon-triangle-1-s').addClass('ui-icon-triangle-1-n')
+      $(@).find('.ui-button-text').text('Hide Images')
+    $('#fileupload .content').slideToggle()
+
+  $('#fileupload').bind 'fileuploadadd', ->
+      $('#fileupload .content').slideDown()
 
   $("a.lightbox").livequery ->
     $(@).lightbox
