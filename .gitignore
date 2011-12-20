@@ -6,5 +6,5 @@ tmp/
 .sass-cache/
 .project
 public/uploads
-config/settings/
+config/settings/*.yml
 vendor/bundle/
