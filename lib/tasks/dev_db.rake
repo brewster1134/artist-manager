@@ -9,7 +9,6 @@ namespace :dev_db do
   task :seed, [:override] => [ 'environment', 'dev_db:not_production', 'db:migrate', 'db:seed'] do |t, args|
     require 'timeout'
     puts divider = "--------------------------".blue
-    User.destroy_all
     Series.destroy_all
     Work.destroy_all
 
