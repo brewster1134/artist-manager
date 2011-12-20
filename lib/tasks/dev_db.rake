@@ -67,7 +67,6 @@ namespace :dev_db do
     puts divider
     puts "DONE!".blue
     puts divider
-
   end
 
 end

@@ -14,19 +14,19 @@
   border-width: 2px 0 2px 0
   border-style: solid
   border-color: $color_01
-  .jTscroller
-    a
-      +opacity(0.6)
-      margin: 0
-      border: none
-      float: left
-      &:first-child
+  padding: 0
+  .jTscrollerContainer
+    .jTscroller
+      a
+        +opacity(0.6)
         margin: 0
-      &:last-child
-        margin: 0
-      &:hover
-        +opacity(1)
-      img
+        border-width: 0
+        &:first-child
+          margin: 0
+        &:last-child
+          margin: 0
+        &:hover
+          +opacity(1)
   .jTscrollerNextButton
     background-image: url(/assets/thumbnail-scroller/nextArrow.png)
     right: 0

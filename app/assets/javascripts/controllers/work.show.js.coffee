@@ -1,8 +1,9 @@
 //= require slideshow
 //= require image_scroller
-//= require lightbox
 
 $ ->
   $('.slideshow').slideshow()
+
+window.onload = ->
   $('.image_scroller').imageScroller
     scrollerType: "clickButtons"

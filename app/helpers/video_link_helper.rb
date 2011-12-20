@@ -31,7 +31,7 @@ module VideoLinkHelper
     when /youtu.be/
       video_id = uri.path.delete("/")
     end
-    content_tag(:iframe, nil, :width => "100%", :height => "400px", :src => "http://www.youtube-nocookie.com/embed/#{video_id}?theme=dark&color=white&rel=0", :frameborder => "0", :allowfullscreen => true, :preserveAspectRatio => "align", :class => "video youtube") unless video_id.blank?
+    content_tag(:iframe, nil, :width => "100%", :height => "400px", :src => "http://www.youtube-nocookie.com/embed/#{video_id}?theme=dark&color=white&rel=0&wmode=opaque", :frameborder => "0", :allowfullscreen => true, :class => "video youtube") unless video_id.blank?
   end
   private :embed_youtube
   
