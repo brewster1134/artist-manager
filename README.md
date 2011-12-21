@@ -41,6 +41,7 @@ The demo site will be reset back to the defaults every Saturday at midnight, so 
 ```
 git clone git://github.com/brewster1134/artist_manager.git [APP NAME]
 cd [APP NAME]
+git checkout heroku
 bundle install
 ```
 
@@ -52,6 +53,18 @@ Modify `db/seeds.rb` with the information for you initial account
 rake db:migrate
 rake db:seed
 ```
+
+### Setup Environment Keys
+
+Since images cannot be uploaded and stored with Heroku, cloud storage is required.  It is currently setup to use Amazon S3, but other cloud services can be used.  You just need to update `config/initializers/carrierwave.rb` with the correct configuration.  See https://github.com/jnicklas/carrierwave/wiki/How-to:-Migrate-to-the-new-Fog-storage-provider for more details.
+
+To set environment variables on heroku, use the following command:
+
+```
+heroku config:add FOG_DIRECTORY=123 GOOGLE_KEY=456 GOOGLE_SECRET=789
+```
+
+To find this information, visit: https://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key and https://console.aws.amazon.com/s3/home?
 
 ## Development
 

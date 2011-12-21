@@ -6,9 +6,11 @@ namespace :dev_db do
   end
 
   desc "Drop, create, migrate then seed the development database."
-  task :seed, [:override] => [ 'environment', 'dev_db:not_production', 'db:drop', 'db:migrate', 'db:seed'] do |t, args|
+  task :seed, [:override] => [ 'environment', 'dev_db:not_production', 'db:migrate', 'db:seed'] do |t, args|
     require 'timeout'
     puts divider = "--------------------------".blue
+    Series.destroy_all
+    Work.destroy_all
 
     # Delete directories
     FileUtils.rm_rf "#{Rails.root}/public/uploads"
