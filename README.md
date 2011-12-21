@@ -61,7 +61,7 @@ Since images cannot be uploaded and stored with Heroku, cloud storage is require
 To set environment variables on heroku, use the following command:
 
 ```
-heroku config:add FOG_DIRECTORY=123 GOOGLE_KEY=456 GOOGLE_SECRET=789
+heroku config:add FOG_DIRECTORY=bucketname AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy
 ```
 
 To find this information, visit: https://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key and https://console.aws.amazon.com/s3/home?
