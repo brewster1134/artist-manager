@@ -7,7 +7,7 @@
 
 %div{:id => "#{@view.to_s}_view"}
   %h1.work_title
-    = @work.title
+    %div= @work.title
     - if @work.series
       = link_to "from #{@work.series.title}", @work.series
   = render 'shared/tags', :tags => @work.tags

@@ -2,8 +2,8 @@
   = "Edit #{@work.title}"
 
 - content_for :page_title do
-  = "Edit #{@work.title}"
   = link_to "Preview", @work
+  = "Edit #{@work.title}"
   = link_to "Delete", @work, :method => :delete, :confirm => t('destroy.confirm', :x => @work.title)
 
 %fieldset

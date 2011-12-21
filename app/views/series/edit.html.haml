@@ -2,8 +2,8 @@
   = "Edit #{@series.title}"
 
 - content_for :page_title do
-  = "Edit #{@series.title}"
   = link_to "Preview", @series
+  = "Edit #{@series.title}"
   = link_to "Delete", @series, :method => :delete, :confirm => [t('destroy.confirm', :x => @series.title), t('series.destroy')] * "  "
   
 = simple_form_for @series do |s|
