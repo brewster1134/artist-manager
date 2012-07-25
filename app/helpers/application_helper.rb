@@ -23,7 +23,6 @@ module ApplicationHelper
     names = [ controller_name, "#{controller_name}.#{action_name}"]
     files = []
     names.each do |n|
-      # file_exists = File.exists?(File.join(Rails.root, "app", "assets", dir, sub_directory, n + e))
       file_exists = Dir.glob(File.join(Rails.root, "app", "assets", dir, sub_directory, "#{n}.#{ext}*")).present?
       files << send(helper, File.join(sub_directory, "#{n}.#{ext}")) if file_exists
     end

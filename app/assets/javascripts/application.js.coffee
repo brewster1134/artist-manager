@@ -3,7 +3,8 @@
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.livequery
-#// require_tree .
+//= require_self
+// require_tree .
 
 $ = jQuery
 

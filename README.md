@@ -1,8 +1,7 @@
 # Artist Manager
+## A universal platform for any type of artist to showcase their work
 
-## Features
-
-### A universal platform for any type of artist to showcase their work
+### Features
 
 + Add/Edit your work
 + Add multiple images all at once with jquery-file-upload
@@ -15,28 +14,28 @@
 + Flexible CSS Theme framework for advanced customization (see below for more info)
 + Mobile Site included
 
-## Logging In
+### Logging In
 
 Since logging into the site is not a feature intended for the public, there is no link to the login page.  You can access it by...
 
 + From the 'Home' page, press `Ctrl + l`
 + Go to `http://[site_name]/login`
 
-## Demo
+### Demo
 
-A demo is available at [am.wearemanalive.com](http://an.wearemanalive.com)
+A demo is available at [am.wearemanalive.com](http://am.wearemanalive.com)
 
 You can login from [am.wearemanalive.com/login](http://am.wearemanalive.com/login) with the username and password `username` and `password` as an administrator with full control over settings and modifying work.
 
 The demo site will be reset back to the defaults every Saturday at midnight, so dont be afraid of breaking anything :) 
 
-## Requirements
+### Requirements
 
 + Git:          `http://git-scm.com`
 + RVM:          `http://beginrescueend.com`
 + Bundler Gem:  `gem install bundler`
 
-## Install
+### Install
 
 ```
 git clone git://github.com/brewster1134/artist_manager.git [APP NAME]
@@ -45,7 +44,7 @@ git checkout heroku
 bundle install
 ```
 
-## Setup
+### Setup
 
 Modify `db/seeds.rb` with the information for you initial account
 
@@ -54,7 +53,7 @@ rake db:migrate
 rake db:seed
 ```
 
-### Setup Environment Keys
+#### Setup Environment Keys
 
 Since images cannot be uploaded and stored with Heroku, cloud storage is required.  It is currently setup to use Amazon S3, but other cloud services can be used.  You just need to update `config/initializers/carrierwave.rb` with the correct configuration.  See https://github.com/jnicklas/carrierwave/wiki/How-to:-Migrate-to-the-new-Fog-storage-provider for more details.
 
@@ -66,7 +65,7 @@ heroku config:add FOG_DIRECTORY=bucketname AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCE
 
 To find this information, visit: https://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key and https://console.aws.amazon.com/s3/home?
 
-## Development
+### Development
 
 For any non-production environment, you can run `rake dev_db:seed` to populate the site with some sample data.
 **THIS WILL DROP YOUR DATABASE AND DELETE ANY FILES YOU UPLOADED THROUGH THE SITE!**
@@ -80,38 +79,38 @@ For Mobile testing, you can pass a parameter in the url to control viewing the m
 + `?m=1` will force the mobile layout temporarily
 + `?m=2` will force the mobile permanently
 
-## Production
+### Production
 
 The defaults for production are setup for Heroku using PostgreSQL.  If you need to change this, update the Gemfile to reflect that.
 
-## Deployment
+### Deployment
 
-### WEBrick (OSX)
+#### WEBrick (OSX)
 
 For development environment, from app directory...
 
 + `rails s`
 
-### Passenger
+#### Passenger
 
 From app directory...
 
 + `mkdir tmp`
 + `touch tmp/restart.txt`
 
-### FastCGI
-#### not personally tested
+#### FastCGI
+##### not personally tested
 
 Refer to: https://github.com/dre3k/rails3_fcgi for setup.
 For DreamHost: http://wiki.dreamhost.com/Ruby_on_Rails
 
-## Web Server
+### Web Server
 
-### Apache
+#### Apache
 
 should be ready to go!
 
-### Nginx
+#### Nginx
 
 in `config/environments/production.rb` change:
 
@@ -121,13 +120,13 @@ to
 
 `config.action_dispatch.x_sendfile_header = "X-Accel-Redirect"`
 
-## Settings
+### Settings
 
 To edit the site settings, you must first login with the credentials provided in the seeds.rb file.
 
-## Advanced Customizing
+### Advanced Customizing
 
-### Assets
+#### Assets
 
 All assets are located in `app/assets`
 
@@ -144,7 +143,7 @@ When visiting the work#index view, the following files will be looked for...
 
 It will also find these assets with an additional `.erb` extension, if ruby parsing is neccessary.
 
-#### 3rd party add-ons have generic asset wrappers for easily swapping them out.
+##### 3rd party add-ons have generic asset wrappers for easily swapping them out.
 
 For example...
 
@@ -157,7 +156,7 @@ This allows you to replace the contents of `slideshow.js.coffee` && `slideshow.c
 
 However you **WILL** have to update any views that use the slideshow to have the proper markup for your new slideshow.  And any view-specific assets might need updated to pass the proper JS parameters to your new slideshow.
 
-### CSS 
+#### CSS 
 
 All styles are located in `app/assets/stylesheets`
 
